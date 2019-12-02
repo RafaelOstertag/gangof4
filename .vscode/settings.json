@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "files.associations": {
+        "stdexcept": "cpp",
+        "iosfwd": "cpp",
+        "sstream": "cpp",
+        "system_error": "cpp"
+    }
+}
