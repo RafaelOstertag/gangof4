@@ -119,3 +119,52 @@ std::vector<Blocklet> Tetrimino::getBlocklets() const {
     }
     return returnValue;
 }
+
+std::shared_ptr<Tetrimino> createITetrimino() {
+    return std::shared_ptr<Tetrimino>{
+        new Tetrimino{0, 0,
+                      std::vector<Blocklet>{Blocklet{0, 0}, Blocklet{1, 0},
+                                            Blocklet{2, 0}, Blocklet{3, 0}}}};
+}
+
+std::shared_ptr<Tetrimino> createJTetrimino() {
+    return std::shared_ptr<Tetrimino>{
+        new Tetrimino{0, 0,
+                      std::vector<Blocklet>{Blocklet{0, 0}, Blocklet{0, 1},
+                                            Blocklet{1, 1}, Blocklet{2, 1}}}};
+}
+
+std::shared_ptr<Tetrimino> createLTetrimino() {
+    return std::shared_ptr<Tetrimino>{
+        new Tetrimino{0, 0,
+                      std::vector<Blocklet>{Blocklet{0, 1}, Blocklet{1, 1},
+                                            Blocklet{2, 1}, Blocklet{2, 0}}}};
+}
+
+std::shared_ptr<Tetrimino> createOTetrimino() {
+    return std::shared_ptr<Tetrimino>{
+        new Tetrimino{0, 0,
+                      std::vector<Blocklet>{Blocklet{0, 0}, Blocklet{1, 0},
+                                            Blocklet{0, 1}, Blocklet{1, 1}}}};
+}
+
+std::shared_ptr<Tetrimino> createTTetrimino() {
+    return std::shared_ptr<Tetrimino>{
+        new Tetrimino{0, 0,
+                      std::vector<Blocklet>{Blocklet{1, 0}, Blocklet{0, 1},
+                                            Blocklet{1, 1}, Blocklet{2, 1}}}};
+}
+
+std::shared_ptr<Tetrimino> createSTetrimino() {
+    return std::shared_ptr<Tetrimino>{
+        new Tetrimino{0, 0,
+                      std::vector<Blocklet>{Blocklet{1, 0}, Blocklet{2, 0},
+                                            Blocklet{0, 1}, Blocklet{1, 1}}}};
+}
+
+std::shared_ptr<Tetrimino> createZTetrimino() {
+    return std::shared_ptr<Tetrimino>{
+        new Tetrimino{0, 0,
+                      std::vector<Blocklet>{Blocklet{0, 0}, Blocklet{1, 0},
+                                            Blocklet{1, 1}, Blocklet{2, 1}}}};
+}

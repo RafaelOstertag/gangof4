@@ -2,6 +2,7 @@
 #define __TETRIMINO_HH
 
 #include "blocklet.hh"
+#include <memory>
 #include <vector>
 
 class Tetrimino {
@@ -31,5 +32,13 @@ class Tetrimino {
     int x;
     int y;
 };
+
+std::shared_ptr<Tetrimino> createITetrimino();
+std::shared_ptr<Tetrimino> createJTetrimino();
+std::shared_ptr<Tetrimino> createLTetrimino();
+std::shared_ptr<Tetrimino> createOTetrimino();
+std::shared_ptr<Tetrimino> createTTetrimino();
+std::shared_ptr<Tetrimino> createSTetrimino();
+std::shared_ptr<Tetrimino> createZTetrimino();
 
 #endif

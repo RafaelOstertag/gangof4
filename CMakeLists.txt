@@ -10,6 +10,8 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -pedantic -Werror")
 set(CMAKE_CXX_FLAGS_RELEASE "-g0 -O3 -Wall -pedantic -Werror -DNDEBUG")
 
 include(FindPkgConfig)
+pkg_check_modules(SDL2 REQUIRED sdl2 SDL2_ttf)
 
 add_subdirectory(src)
 add_subdirectory(tests)
+add_subdirectory(it)
