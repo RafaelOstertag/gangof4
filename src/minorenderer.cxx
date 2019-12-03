@@ -1,10 +1,10 @@
-#include "blockletrenderer.hh"
+#include "minorenderer.hh"
 
 #include <cassert>
 
-void BlockletRenderer::render(const Renderer& renderer) {
-    auto x = referenceX + blocklet.getX() * width;
-    auto y = referenceY + blocklet.getY() * width;
+void MinoRenderer::render(const Renderer& renderer) {
+    auto x = referenceX + mino.getX() * width;
+    auto y = referenceY + mino.getY() * width;
 
     SDL_Rect rectangle{x, y, width, width};
 

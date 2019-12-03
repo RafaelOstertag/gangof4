@@ -1,13 +1,13 @@
 #ifndef __TETRIMINO_HH
 #define __TETRIMINO_HH
 
-#include "blocklet.hh"
+#include "mino.hh"
 #include <memory>
 #include <vector>
 
 class Tetrimino {
   public:
-    Tetrimino(int x, int y, const std::vector<Blocklet>& blocklets);
+    Tetrimino(int x, int y, const std::vector<Mino>& minos);
     ~Tetrimino();
 
     Tetrimino(const Tetrimino&) = delete;
@@ -25,10 +25,10 @@ class Tetrimino {
     int maxX() const;
     int maxY() const;
 
-    std::vector<Blocklet> getBlocklets() const;
+    std::vector<Mino> getMinos() const;
 
   private:
-    std::vector<Blocklet*> blocklets;
+    std::vector<Mino*> minos;
     int x;
     int y;
 };

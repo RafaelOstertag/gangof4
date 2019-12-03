@@ -1,10 +1,10 @@
 #include "tetriminorenderer.hh"
-#include "blockletrenderer.hh"
+#include "minorenderer.hh"
 
 void TetriminoRenderer::render(const Renderer& renderer) {
-    for (auto blocklet : tetrimino->getBlocklets()) {
-        BlockletRenderer blockletRenderer{referenceX, referenceY, width, color,
-                                          blocklet};
-        blockletRenderer.render(renderer);
+    for (auto mino : tetrimino->getMinos()) {
+        MinoRenderer minoRenderer{referenceX, referenceY, width, color,
+                                          mino};
+        minoRenderer.render(renderer);
     }
 }
