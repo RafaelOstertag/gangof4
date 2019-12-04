@@ -7,6 +7,8 @@
 
 class TetriminoRenderer : public Renderable {
   public:
+    static constexpr int width = 20;
+
     TetriminoRenderer(int referenceX, int referenceY, const Color& color,
                       std::shared_ptr<Tetrimino> tetrimino)
         : referenceX{referenceX},
@@ -20,7 +22,6 @@ class TetriminoRenderer : public Renderable {
     int referenceY;
     Color color;
     std::shared_ptr<Tetrimino> tetrimino;
-    static constexpr int width = 20;
 };
 
 #endif

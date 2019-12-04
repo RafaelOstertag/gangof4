@@ -13,15 +13,11 @@ void MinoRenderer::render(const Renderer& renderer) {
 #endif
         SDL_SetRenderDrawColor(renderer, color.red(), color.green(),
                                color.blue(), color.alpha());
-#ifndef NDEBUG
     assert(result == 0);
-#endif
 
 #ifndef NDEBUG
     result =
 #endif
         SDL_RenderFillRect(renderer, &rectangle);
-#ifndef NDEBUG
     assert(result == 0);
-#endif
 }
