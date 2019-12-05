@@ -28,8 +28,11 @@ class Board {
     std::list<std::shared_ptr<Tetrimino>> tetrimios;
 
     bool drawTetrimino();
-    bool willCurrentTetriminoCollide() const;
-    bool willTetriminosCollide(std::shared_ptr<Tetrimino> tetrimino) const;
+    bool willCurrentTetriminoCollideBottom() const;
+    bool
+    willTetriminosCollideBottom(std::shared_ptr<Tetrimino> tetrimino) const;
+    bool willTetriminosCollideLeft() const;
+    bool willTetriminosCollideRight() const;
     void handleCollision();
 
     friend BoardRenderer;

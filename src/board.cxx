@@ -10,7 +10,7 @@ void Board::nextMove() {
         return;
     }
 
-    if (willCurrentTetriminoCollide()) {
+    if (willCurrentTetriminoCollideBottom()) {
         handleCollision();
         return;
     }
@@ -20,14 +20,15 @@ void Board::nextMove() {
 
 void Board::moveCurrentTetriminoLeft() {
     assert(currentTetrimino);
-    if (currentTetrimino->getX() > 0) {
+    if (currentTetrimino->getX() > 0 && !willTetriminosCollideLeft()) {
         currentTetrimino->moveLeft();
     }
 }
 
 void Board::moveCurrentTetriminoRight() {
     assert(currentTetrimino);
-    if (currentTetrimino->maxX() < width - 1) {
+    if (currentTetrimino->maxX() < (width - 1) &&
+        !willTetriminosCollideRight()) {
         currentTetrimino->moveRight();
     }
 }
@@ -48,21 +49,22 @@ bool Board::drawTetrimino() {
     return false;
 }
 
-bool Board::willCurrentTetriminoCollide() const {
+bool Board::willCurrentTetriminoCollideBottom() const {
     assert(currentTetrimino);
 
     if ((currentTetrimino->maxY() + 1) >= height)
         return true;
 
     for (auto tetrimino : tetrimios) {
-        if (willTetriminosCollide(tetrimino))
+        if (willTetriminosCollideBottom(tetrimino))
             return true;
     }
 
     return false;
 }
 
-bool Board::willTetriminosCollide(std::shared_ptr<Tetrimino> tetrimino) const {
+bool Board::willTetriminosCollideBottom(
+    std::shared_ptr<Tetrimino> tetrimino) const {
     assert(currentTetrimino);
 
     for (auto mino : currentTetrimino->getMinos()) {
@@ -70,6 +72,40 @@ bool Board::willTetriminosCollide(std::shared_ptr<Tetrimino> tetrimino) const {
             if (otherMino.getY() == (mino.getY() + 1) &&
                 otherMino.getX() == mino.getX()) {
                 return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+bool Board::willTetriminosCollideLeft() const {
+    assert(currentTetrimino);
+
+    for (auto tetrimino : tetrimios) {
+        for (auto mino : currentTetrimino->getMinos()) {
+            for (auto otherMino : tetrimino->getMinos()) {
+                if (otherMino.getX() == (mino.getX() - 1) &&
+                    (otherMino.getY() == mino.getY())) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+bool Board::willTetriminosCollideRight() const {
+    assert(currentTetrimino);
+
+    for (auto tetrimino : tetrimios) {
+        for (auto mino : currentTetrimino->getMinos()) {
+            for (auto otherMino : tetrimino->getMinos()) {
+                if (otherMino.getX() == (mino.getX() + 1) &&
+                    (otherMino.getY() == mino.getY())) {
+                    return true;
+                }
             }
         }
     }
