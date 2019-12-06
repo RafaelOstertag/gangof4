@@ -27,14 +27,16 @@ class TetriminoTest : public CppUnit::TestFixture {
         suiteOfTests->addTest(new CppUnit::TestCaller<TetriminoTest>{
             "Move Down", &TetriminoTest::move_down});
 
+        suiteOfTests->addTest(new CppUnit::TestCaller<TetriminoTest>{
+            "Remove Minos On Y-Axis", &TetriminoTest::remove_minos_on_y_axis});
+
         return suiteOfTests;
     }
 
     void rotate_clockwise() {
         Tetrimino tetrimino{
             0, 0,
-            std::vector<Mino>{Mino{0, 0}, Mino{1, 0},
-                                  Mino{1, 1}, Mino{2, 1}}};
+            std::vector<Mino>{Mino{0, 0}, Mino{1, 0}, Mino{1, 1}, Mino{2, 1}}};
         tetrimino.rotateClockwise();
 
         auto minos = tetrimino.getMinos();
@@ -55,8 +57,7 @@ class TetriminoTest : public CppUnit::TestFixture {
     void rotate_counterclockwise() {
         Tetrimino tetrimino{
             0, 0,
-            std::vector<Mino>{Mino{0, 0}, Mino{1, 0},
-                                  Mino{1, 1}, Mino{2, 1}}};
+            std::vector<Mino>{Mino{0, 0}, Mino{1, 0}, Mino{1, 1}, Mino{2, 1}}};
         tetrimino.rotateCounterclockwise();
 
         auto minos = tetrimino.getMinos();
@@ -77,8 +78,7 @@ class TetriminoTest : public CppUnit::TestFixture {
     void move_left() {
         Tetrimino tetrimino{
             0, 0,
-            std::vector<Mino>{Mino{0, 0}, Mino{1, 0},
-                                  Mino{1, 1}, Mino{2, 1}}};
+            std::vector<Mino>{Mino{0, 0}, Mino{1, 0}, Mino{1, 1}, Mino{2, 1}}};
 
         tetrimino.moveLeft();
 
@@ -97,8 +97,7 @@ class TetriminoTest : public CppUnit::TestFixture {
     void move_right() {
         Tetrimino tetrimino{
             0, 0,
-            std::vector<Mino>{Mino{0, 0}, Mino{1, 0},
-                                  Mino{1, 1}, Mino{2, 1}}};
+            std::vector<Mino>{Mino{0, 0}, Mino{1, 0}, Mino{1, 1}, Mino{2, 1}}};
 
         tetrimino.moveRight();
 
@@ -117,8 +116,7 @@ class TetriminoTest : public CppUnit::TestFixture {
     void move_down() {
         Tetrimino tetrimino{
             0, 0,
-            std::vector<Mino>{Mino{0, 0}, Mino{1, 0},
-                                  Mino{1, 1}, Mino{2, 1}}};
+            std::vector<Mino>{Mino{0, 0}, Mino{1, 0}, Mino{1, 1}, Mino{2, 1}}};
 
         tetrimino.moveDown();
 
@@ -132,6 +130,44 @@ class TetriminoTest : public CppUnit::TestFixture {
         CPPUNIT_ASSERT(Mino(1, 1) == minos[1]);
         CPPUNIT_ASSERT(Mino(1, 2) == minos[2]);
         CPPUNIT_ASSERT(Mino(2, 2) == minos[3]);
+    }
+
+    void remove_minos_on_y_axis() {
+        Tetrimino tetrimino1{
+            0, 0,
+            std::vector<Mino>{Mino{0, 0}, Mino{1, 0}, Mino{1, 1}, Mino{2, 1}}};
+
+        tetrimino1.removeMinosOnYAxis(1);
+
+        auto minos = tetrimino1.getMinos();
+        CPPUNIT_ASSERT(tetrimino1.getMinos().size() == 2);
+        CPPUNIT_ASSERT(Mino(0, 0) == minos[0]);
+        CPPUNIT_ASSERT(Mino(1, 0) == minos[1]);
+
+        Tetrimino tetrimino2{
+            0, 0,
+            std::vector<Mino>{Mino{0, 0}, Mino{1, 0}, Mino{1, 1}, Mino{2, 1}}};
+
+        tetrimino2.removeMinosOnYAxis(0);
+
+        minos = tetrimino2.getMinos();
+        CPPUNIT_ASSERT(tetrimino2.getMinos().size() == 2);
+        CPPUNIT_ASSERT(Mino(1, 1) == minos[0]);
+        CPPUNIT_ASSERT(Mino(2, 1) == minos[1]);
+
+        Tetrimino tetrimino3{
+            0, 0,
+            std::vector<Mino>{Mino{0, 0}, Mino{1, 0}, Mino{1, 1}, Mino{2, 1}}};
+
+        // It must not choke
+        tetrimino3.removeMinosOnYAxis(3);
+
+        minos = tetrimino3.getMinos();
+        CPPUNIT_ASSERT(tetrimino3.getMinos().size() == 4);
+        CPPUNIT_ASSERT(Mino(0, 0) == minos[0]);
+        CPPUNIT_ASSERT(Mino(1, 0) == minos[1]);
+        CPPUNIT_ASSERT(Mino(1, 1) == minos[2]);
+        CPPUNIT_ASSERT(Mino(2, 1) == minos[3]);
     }
 };
 

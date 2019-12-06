@@ -109,6 +109,13 @@ int Tetrimino::maxY() const {
     return (*max)->getY();
 }
 
+void Tetrimino::removeMinosOnYAxis(int yAxis) {
+    auto last = std::remove_if(minos.begin(), minos.end(), [yAxis](auto mino) {
+        return mino->getY() == yAxis;
+    });
+    minos.erase(last, minos.end());
+}
+
 std::vector<Mino> Tetrimino::getMinos() const {
     std::vector<Mino> returnValue{};
     for (auto mino : minos) {
