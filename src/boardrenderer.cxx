@@ -1,4 +1,5 @@
 #include "boardrenderer.hh"
+#include "minorenderer.hh"
 #include "tetriminorenderer.hh"
 
 #include <cassert>
@@ -17,10 +18,11 @@ void BoardRenderer::render(const Renderer& renderer) {
                                         board->currentTetrimino};
     tetriminoRenderer.render(renderer);
 
-    for (auto tetrimino : board->tetrimios) {
-        TetriminoRenderer tetriminoRenderer{referenceX, referenceY,
-                                            tetriminoColor, tetrimino};
-        tetriminoRenderer.render(renderer);
+    for (auto mino : board->minos) {
+        MinoRenderer minoRenderer{referenceX, referenceY,
+                                  TetriminoRenderer::width, *mino};
+
+        minoRenderer.render(renderer);
     }
 
 #ifndef NDEBUG

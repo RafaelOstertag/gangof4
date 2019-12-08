@@ -28,9 +28,7 @@ class Board {
   private:
     TetriminoStock tetriminoStock;
     std::shared_ptr<Tetrimino> currentTetrimino;
-    std::list<std::shared_ptr<Tetrimino>> tetrimios;
-    std::array<std::array<std::shared_ptr<Tetrimino>, width>, height>
-        reverseMap;
+    std::list<std::shared_ptr<Mino>> minos;
 
     bool drawTetrimino();
     bool willCurrentTetriminoCollideBottom() const;
@@ -39,6 +37,10 @@ class Board {
     bool willTetriminosCollideLeft() const;
     bool willTetriminosCollideRight() const;
     void handleCollision();
+    void compactBoard();
+    bool isRowFull(int row) const;
+    void removeRow(int row);
+    void moveMinosAboveRowDown(int row);
 
     friend BoardRenderer;
 };

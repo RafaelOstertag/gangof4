@@ -1,10 +1,10 @@
 #include "board.hh"
 
+#include <algorithm>
 #include <cassert>
 
 Board::Board(const TetriminoStock& tetriminoStock)
-    : tetriminoStock{tetriminoStock}, currentTetrimino{nullptr}, tetrimios{},
-      reverseMap{} {}
+    : tetriminoStock{tetriminoStock}, currentTetrimino{nullptr}, minos{} {}
 
 void Board::nextMove() {
     if (drawTetrimino()) {
@@ -13,6 +13,7 @@ void Board::nextMove() {
 
     if (willCurrentTetriminoCollideBottom()) {
         handleCollision();
+        compactBoard();
         return;
     }
 
@@ -37,6 +38,10 @@ void Board::moveCurrentTetriminoRight() {
 void Board::rotateCurrentTetrimino() {
     assert(currentTetrimino);
     currentTetrimino->rotateClockwise();
+    if (currentTetrimino->maxX() >= width || willTetriminosCollideLeft() ||
+        willTetriminosCollideRight()) {
+        currentTetrimino->rotateCounterclockwise();
+    }
 }
 
 bool Board::isGameOver() { assert(false); }
@@ -56,22 +61,10 @@ bool Board::willCurrentTetriminoCollideBottom() const {
     if ((currentTetrimino->maxY() + 1) >= height)
         return true;
 
-    for (auto tetrimino : tetrimios) {
-        if (willTetriminosCollideBottom(tetrimino))
-            return true;
-    }
-
-    return false;
-}
-
-bool Board::willTetriminosCollideBottom(
-    std::shared_ptr<Tetrimino> tetrimino) const {
-    assert(currentTetrimino);
-
     for (auto mino : currentTetrimino->getMinos()) {
-        for (auto otherMino : tetrimino->getMinos()) {
-            if (otherMino.getY() == (mino.getY() + 1) &&
-                otherMino.getX() == mino.getX()) {
+        for (auto otherMino : minos) {
+            if (otherMino->getY() == (mino.getY() + 1) &&
+                otherMino->getX() == mino.getX()) {
                 return true;
             }
         }
@@ -83,13 +76,11 @@ bool Board::willTetriminosCollideBottom(
 bool Board::willTetriminosCollideLeft() const {
     assert(currentTetrimino);
 
-    for (auto tetrimino : tetrimios) {
-        for (auto mino : currentTetrimino->getMinos()) {
-            for (auto otherMino : tetrimino->getMinos()) {
-                if (otherMino.getX() == (mino.getX() - 1) &&
-                    (otherMino.getY() == mino.getY())) {
-                    return true;
-                }
+    for (auto mino : currentTetrimino->getMinos()) {
+        for (auto otherMino : minos) {
+            if (otherMino->getX() == (mino.getX() - 1) &&
+                (otherMino->getY() == mino.getY())) {
+                return true;
             }
         }
     }
@@ -100,13 +91,11 @@ bool Board::willTetriminosCollideLeft() const {
 bool Board::willTetriminosCollideRight() const {
     assert(currentTetrimino);
 
-    for (auto tetrimino : tetrimios) {
-        for (auto mino : currentTetrimino->getMinos()) {
-            for (auto otherMino : tetrimino->getMinos()) {
-                if (otherMino.getX() == (mino.getX() + 1) &&
-                    (otherMino.getY() == mino.getY())) {
-                    return true;
-                }
+    for (auto mino : currentTetrimino->getMinos()) {
+        for (auto otherMino : minos) {
+            if (otherMino->getX() == (mino.getX() + 1) &&
+                (otherMino->getY() == mino.getY())) {
+                return true;
             }
         }
     }
@@ -117,9 +106,48 @@ bool Board::willTetriminosCollideRight() const {
 void Board::handleCollision() {
     assert(currentTetrimino);
 
-    // push_front will make collision detection encounter the latest
-    // tetriminos first
-    tetrimios.push_front(currentTetrimino);
+    for (auto mino : currentTetrimino->getMinos()) {
+        minos.push_front(std::shared_ptr<Mino>{new Mino{mino}});
+    }
     currentTetrimino = std::shared_ptr<Tetrimino>{nullptr};
     drawTetrimino();
+}
+
+void Board::compactBoard() {
+    for (int row = height - 1; row >= 0; row--) {
+        while (isRowFull(row)) {
+            removeRow(row);
+            moveMinosAboveRowDown(row);
+        }
+    }
+}
+
+bool Board::isRowFull(int row) const {
+    assert(row >= 0 && row < height);
+
+    int minosOnRow = 0;
+    for (auto mino : minos) {
+        if (mino->getY() == row)
+            minosOnRow++;
+    }
+    return minosOnRow == width;
+}
+
+void Board::removeRow(int row) {
+    assert(row >= 0 && row < height);
+
+    auto first = std::remove_if(minos.begin(), minos.end(), [row](auto mino) {
+        return mino->getY() == row;
+    });
+
+    minos.erase(first, minos.end());
+}
+
+void Board::moveMinosAboveRowDown(int row) {
+    assert(row > 0 && row < height);
+
+    for (auto mino : minos) {
+        if (mino->getY() < row)
+            mino->moveY(1);
+    }
 }
