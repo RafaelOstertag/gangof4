@@ -6,8 +6,6 @@
 #include <cassert>
 #include <iostream>
 
-const Color white{0xff, 0xff, 0xff, 0x0};
-
 int main() {
     if (!init_sdl()) {
         std::cerr << SDL_GetError() << std::endl;

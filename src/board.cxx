@@ -13,7 +13,6 @@ void Board::nextMove() {
 
     if (willCurrentTetriminoCollideBottom()) {
         handleCollision();
-        compactBoard();
         return;
     }
 
@@ -121,64 +120,6 @@ void Board::handleCollision() {
     // push_front will make collision detection encounter the latest
     // tetriminos first
     tetrimios.push_front(currentTetrimino);
-    addTetriminoToReverseMap(currentTetrimino);
     currentTetrimino = std::shared_ptr<Tetrimino>{nullptr};
     drawTetrimino();
-}
-
-void Board::addTetriminoToReverseMap(std::shared_ptr<Tetrimino> tetrimino) {
-    for (auto mino : tetrimino->getMinos()) {
-        assert(!reverseMap[mino.getY()][mino.getX()]);
-        reverseMap[mino.getY()][mino.getX()] = tetrimino;
-    }
-}
-
-void Board::compactBoard() {
-    bool boardChanged = false;
-    for (int y = height - 1; y >= 0; y--) {
-        if (isRowFull(y)) {
-            removeRow(y);
-            boardChanged = true;
-        }
-    }
-
-    if (boardChanged) {
-        rebuildBoard();
-    }
-}
-
-void Board::rebuildBoard() {
-    std::array<std::array<std::shared_ptr<Tetrimino>, width>, height>
-        newBoard{};
-
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            auto tetrimino = reverseMap[y][x];
-            if (!tetrimino || tetrimino->empty())
-                continue;
-
-            for (auto mino : tetrimino->getMinos()) {
-                newBoard[mino.getY()][mino.getX()] = tetrimino;
-            }
-        }
-    }
-
-    reverseMap = newBoard;
-}
-
-bool Board::isRowFull(int row) const {
-    assert(row >= 0 && row < height);
-    for (auto tetrimino : reverseMap[row]) {
-        if (!tetrimino)
-            return false;
-    }
-    return true;
-}
-
-void Board::removeRow(int row) {
-    assert(row >= 0 && row < height);
-    for (auto tetrimino : reverseMap[row]) {
-        if (tetrimino)
-            tetrimino->removeMinosOnYAxis(row);
-    }
 }

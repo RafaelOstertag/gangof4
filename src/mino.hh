@@ -1,9 +1,13 @@
 #ifndef __MINO_HH
 #define __MINO_HH
 
+#include "color.hh"
+
+class MinoRenderer;
+
 class Mino {
   public:
-    Mino(int x, int y) : x{x}, y{y} {}
+    Mino(int x, int y, const Color& color) : color{color}, x{x}, y{y} {}
 
     void setX(int newX) { x = newX; }
     void setY(int newY) { y = newY; }
@@ -15,10 +19,14 @@ class Mino {
     int getY() const { return y; }
 
     bool operator==(const Mino& o) const { return x == o.x && y == o.y; }
+    bool operator!=(const Mino& o) const { return x != o.x || y != o.y; }
 
   private:
+    Color color;
     int x;
     int y;
+
+    friend MinoRenderer;
 };
 
 #endif

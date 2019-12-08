@@ -3,16 +3,16 @@
 #include <cassert>
 
 void MinoRenderer::render(const Renderer& renderer) {
-    auto x = referenceX + mino.getX() * width;
-    auto y = referenceY + mino.getY() * width;
+    auto x = referenceX + mino.x * width;
+    auto y = referenceY + mino.y * width;
 
     SDL_Rect rectangle{x, y, width, width};
 
 #ifndef NDEBUG
     auto result =
 #endif
-        SDL_SetRenderDrawColor(renderer, color.red(), color.green(),
-                               color.blue(), color.alpha());
+        SDL_SetRenderDrawColor(renderer, mino.color.red(), mino.color.green(),
+                               mino.color.blue(), mino.color.alpha());
     assert(result == 0);
 
 #ifndef NDEBUG

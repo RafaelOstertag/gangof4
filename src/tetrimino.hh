@@ -25,10 +25,6 @@ class Tetrimino {
     int maxX() const;
     int maxY() const;
 
-    bool empty() { return minos.empty(); }
-
-    void removeMinosOnYAxis(int yAxis);
-
     std::vector<Mino> getMinos() const;
 
   private:
