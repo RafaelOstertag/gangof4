@@ -29,6 +29,7 @@ class Board {
     TetriminoStock tetriminoStock;
     std::shared_ptr<Tetrimino> currentTetrimino;
     std::list<std::shared_ptr<Mino>> minos;
+    bool gameOver;
 
     bool drawTetrimino();
     bool willCurrentTetriminoCollideBottom() const;

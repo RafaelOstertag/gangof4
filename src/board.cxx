@@ -4,9 +4,13 @@
 #include <cassert>
 
 Board::Board(const TetriminoStock& tetriminoStock)
-    : tetriminoStock{tetriminoStock}, currentTetrimino{nullptr}, minos{} {}
+    : tetriminoStock{tetriminoStock},
+      currentTetrimino{nullptr}, minos{}, gameOver{false} {}
 
 void Board::nextMove() {
+    if (gameOver)
+        return;
+
     if (drawTetrimino()) {
         return;
     }
@@ -21,6 +25,9 @@ void Board::nextMove() {
 }
 
 void Board::moveCurrentTetriminoLeft() {
+    if (gameOver)
+        return;
+
     assert(currentTetrimino);
     if (currentTetrimino->getX() > 0 && !willTetriminosCollideLeft()) {
         currentTetrimino->moveLeft();
@@ -28,6 +35,9 @@ void Board::moveCurrentTetriminoLeft() {
 }
 
 void Board::moveCurrentTetriminoRight() {
+    if (gameOver)
+        return;
+
     assert(currentTetrimino);
     if (currentTetrimino->maxX() < (width - 1) &&
         !willTetriminosCollideRight()) {
@@ -36,6 +46,9 @@ void Board::moveCurrentTetriminoRight() {
 }
 
 void Board::rotateCurrentTetrimino() {
+    if (gameOver)
+        return;
+
     assert(currentTetrimino);
     currentTetrimino->rotateClockwise();
     if (currentTetrimino->maxX() >= width || willTetriminosCollideLeft() ||
@@ -44,7 +57,7 @@ void Board::rotateCurrentTetrimino() {
     }
 }
 
-bool Board::isGameOver() { assert(false); }
+bool Board::isGameOver() { return gameOver; }
 
 bool Board::drawTetrimino() {
     if (!currentTetrimino) {
@@ -111,6 +124,9 @@ void Board::handleCollision() {
     }
     currentTetrimino = std::shared_ptr<Tetrimino>{nullptr};
     drawTetrimino();
+    if (willCurrentTetriminoCollideBottom()) {
+        gameOver = true;
+    }
 }
 
 void Board::compactBoard() {

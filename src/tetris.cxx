@@ -68,6 +68,10 @@ int main() {
             board->nextMove();
             counter = 0;
         }
+        if (board->isGameOver()) {
+            std::cout << "Game Over" << std::endl;
+            return 0;
+        }
         counter++;
 
         window.clear();
