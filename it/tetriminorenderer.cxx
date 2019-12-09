@@ -14,44 +14,51 @@ int main() {
     Color windowColor(0xff, 0xff, 0xff, 0x0);
     Window window{"Tetriminorenderer", 640, 480, windowColor};
 
-    Color tetriminoColor{0x7f, 0x7f, 0x7f, 0x0};
-
     std::vector<std::shared_ptr<Tetrimino>> tetriminos;
     auto iTetrimino{createITetrimino()};
     tetriminos.push_back(iTetrimino);
 
+    auto minoTextureStore = createMinoTextureStore(window.getRenderer());
+
     std::vector<TetriminoRenderer> renderers;
-    TetriminoRenderer iTetriminoRenderer{100, 100, tetriminoColor, iTetrimino};
+    TetriminoRenderer iTetriminoRenderer{100, 100, minoTextureStore,
+                                         iTetrimino};
     renderers.push_back(iTetriminoRenderer);
 
     auto jTetrimino{createJTetrimino()};
     tetriminos.push_back(jTetrimino);
-    TetriminoRenderer jTetriminoRenderer{200, 100, tetriminoColor, jTetrimino};
+    TetriminoRenderer jTetriminoRenderer{200, 100, minoTextureStore,
+                                         jTetrimino};
     renderers.push_back(jTetriminoRenderer);
 
     auto lTetrimino{createLTetrimino()};
     tetriminos.push_back(lTetrimino);
-    TetriminoRenderer lTetriminoRenderer{300, 100, tetriminoColor, lTetrimino};
+    TetriminoRenderer lTetriminoRenderer{300, 100, minoTextureStore,
+                                         lTetrimino};
     renderers.push_back(lTetriminoRenderer);
 
     auto oTetrimino{createOTetrimino()};
     tetriminos.push_back(oTetrimino);
-    TetriminoRenderer oTetriminoRenderer{400, 100, tetriminoColor, oTetrimino};
+    TetriminoRenderer oTetriminoRenderer{400, 100, minoTextureStore,
+                                         oTetrimino};
     renderers.push_back(oTetriminoRenderer);
 
     auto tTetrimino{createTTetrimino()};
     tetriminos.push_back(tTetrimino);
-    TetriminoRenderer tTetriminoRenderer{100, 200, tetriminoColor, tTetrimino};
+    TetriminoRenderer tTetriminoRenderer{100, 200, minoTextureStore,
+                                         tTetrimino};
     renderers.push_back(tTetriminoRenderer);
 
     auto sTetrimino{createSTetrimino()};
     tetriminos.push_back(sTetrimino);
-    TetriminoRenderer sTetriminoRenderer{200, 200, tetriminoColor, sTetrimino};
+    TetriminoRenderer sTetriminoRenderer{200, 200, minoTextureStore,
+                                         sTetrimino};
     renderers.push_back(sTetriminoRenderer);
 
     auto zTetrimino{createZTetrimino()};
     tetriminos.push_back(zTetrimino);
-    TetriminoRenderer zTetriminoRenderer{300, 200, tetriminoColor, zTetrimino};
+    TetriminoRenderer zTetriminoRenderer{300, 200, minoTextureStore,
+                                         zTetrimino};
     renderers.push_back(zTetriminoRenderer);
 
     SDL_Event event;

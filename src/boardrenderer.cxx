@@ -4,8 +4,9 @@
 
 #include <cassert>
 
-BoardRenderer::BoardRenderer(std::shared_ptr<Board> board)
-    : board{board}, tetriminoColor{0x7f, 0x7f, 0x7f, 0x0} {
+BoardRenderer::BoardRenderer(std::shared_ptr<Board> board,
+                             const MinoTextureStore& minoTextureStore)
+    : board{board}, minoTextureStore{minoTextureStore} {
     boardOutline = SDL_Rect{referenceX, referenceY,
                             TetriminoRenderer::width * Board::width,
                             TetriminoRenderer::width * Board::height};
@@ -14,13 +15,14 @@ BoardRenderer::BoardRenderer(std::shared_ptr<Board> board)
 void BoardRenderer::render(const Renderer& renderer) {
     assert(board->currentTetrimino);
 
-    TetriminoRenderer tetriminoRenderer{referenceX, referenceY, tetriminoColor,
-                                        board->currentTetrimino};
+    TetriminoRenderer tetriminoRenderer{
+        referenceX, referenceY, minoTextureStore, board->currentTetrimino};
     tetriminoRenderer.render(renderer);
 
     for (auto mino : board->minos) {
         MinoRenderer minoRenderer{referenceX, referenceY,
-                                  TetriminoRenderer::width, *mino};
+                                  TetriminoRenderer::width, *mino,
+                                  minoTextureStore};
 
         minoRenderer.render(renderer);
     }

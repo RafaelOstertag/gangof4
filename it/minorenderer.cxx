@@ -11,10 +11,10 @@ int main() {
     Color windowColor(0xff, 0xff, 0xff, 0x0);
     Window window{"Mino Renderer", 640, 480, windowColor};
 
-    Color minoColor{0x7f, 0x7f, 0x7f, 0x0};
-    Mino mino{0, 0, minoColor};
+    Mino mino{0, 0, CYAN};
 
-    MinoRenderer minoRenderer{100, 100, 20,mino};
+    auto minoTextureStore = createMinoTextureStore(window.getRenderer());
+    MinoRenderer minoRenderer{100, 100, 20, mino, minoTextureStore};
 
     window.clear();
     window.render(minoRenderer);

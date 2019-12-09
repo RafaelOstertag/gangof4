@@ -5,7 +5,8 @@
 
 void TetriminoRenderer::render(const Renderer& renderer) {
     for (auto mino : tetrimino->getMinos()) {
-        MinoRenderer minoRenderer{referenceX, referenceY, width, mino};
+        MinoRenderer minoRenderer{referenceX, referenceY, width, mino,
+                                  minoTextureStore};
         minoRenderer.render(renderer);
     }
 }

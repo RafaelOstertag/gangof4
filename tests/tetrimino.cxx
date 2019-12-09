@@ -33,52 +33,52 @@ class TetriminoTest : public CppUnit::TestFixture {
     void rotate_clockwise() {
         Tetrimino tetrimino{
             0, 0,
-            std::vector<Mino>{Mino{0, 0, black}, Mino{1, 0, black},
-                              Mino{1, 1, black}, Mino{2, 1, black}}};
+            std::vector<Mino>{Mino{0, 0, CYAN}, Mino{1, 0, CYAN},
+                              Mino{1, 1, CYAN}, Mino{2, 1, CYAN}}};
         tetrimino.rotateClockwise();
 
         auto minos = tetrimino.getMinos();
         CPPUNIT_ASSERT(minos.size() == 4);
-        CPPUNIT_ASSERT(Mino(1, 0, black) == minos[0]);
-        CPPUNIT_ASSERT(Mino(1, 1, black) == minos[1]);
-        CPPUNIT_ASSERT(Mino(0, 1, black) == minos[2]);
-        CPPUNIT_ASSERT(Mino(0, 2, black) == minos[3]);
+        CPPUNIT_ASSERT(Mino(1, 0, CYAN) == minos[0]);
+        CPPUNIT_ASSERT(Mino(1, 1, CYAN) == minos[1]);
+        CPPUNIT_ASSERT(Mino(0, 1, CYAN) == minos[2]);
+        CPPUNIT_ASSERT(Mino(0, 2, CYAN) == minos[3]);
 
         tetrimino.rotateClockwise();
         minos = tetrimino.getMinos();
-        CPPUNIT_ASSERT(Mino(0, 0, black) == minos[3]);
-        CPPUNIT_ASSERT(Mino(1, 0, black) == minos[2]);
-        CPPUNIT_ASSERT(Mino(1, 1, black) == minos[1]);
-        CPPUNIT_ASSERT(Mino(2, 1, black) == minos[0]);
+        CPPUNIT_ASSERT(Mino(0, 0, CYAN) == minos[3]);
+        CPPUNIT_ASSERT(Mino(1, 0, CYAN) == minos[2]);
+        CPPUNIT_ASSERT(Mino(1, 1, CYAN) == minos[1]);
+        CPPUNIT_ASSERT(Mino(2, 1, CYAN) == minos[0]);
     }
 
     void rotate_counterclockwise() {
         Tetrimino tetrimino{
             0, 0,
-            std::vector<Mino>{Mino{0, 0, black}, Mino{1, 0, black},
-                              Mino{1, 1, black}, Mino{2, 1, black}}};
+            std::vector<Mino>{Mino{0, 0, CYAN}, Mino{1, 0, CYAN},
+                              Mino{1, 1, CYAN}, Mino{2, 1, CYAN}}};
         tetrimino.rotateCounterclockwise();
 
         auto minos = tetrimino.getMinos();
         CPPUNIT_ASSERT(minos.size() == 4);
-        CPPUNIT_ASSERT(Mino(0, 2, black) == minos[0]);
-        CPPUNIT_ASSERT(Mino(0, 1, black) == minos[1]);
-        CPPUNIT_ASSERT(Mino(1, 1, black) == minos[2]);
-        CPPUNIT_ASSERT(Mino(1, 0, black) == minos[3]);
+        CPPUNIT_ASSERT(Mino(0, 2, CYAN) == minos[0]);
+        CPPUNIT_ASSERT(Mino(0, 1, CYAN) == minos[1]);
+        CPPUNIT_ASSERT(Mino(1, 1, CYAN) == minos[2]);
+        CPPUNIT_ASSERT(Mino(1, 0, CYAN) == minos[3]);
 
         tetrimino.rotateCounterclockwise();
         minos = tetrimino.getMinos();
-        CPPUNIT_ASSERT(Mino(2, 1, black) == minos[0]);
-        CPPUNIT_ASSERT(Mino(1, 1, black) == minos[1]);
-        CPPUNIT_ASSERT(Mino(1, 0, black) == minos[2]);
-        CPPUNIT_ASSERT(Mino(0, 0, black) == minos[3]);
+        CPPUNIT_ASSERT(Mino(2, 1, CYAN) == minos[0]);
+        CPPUNIT_ASSERT(Mino(1, 1, CYAN) == minos[1]);
+        CPPUNIT_ASSERT(Mino(1, 0, CYAN) == minos[2]);
+        CPPUNIT_ASSERT(Mino(0, 0, CYAN) == minos[3]);
     }
 
     void move_left() {
         Tetrimino tetrimino{
             0, 0,
-            std::vector<Mino>{Mino{0, 0, black}, Mino{1, 0, black},
-                              Mino{1, 1, black}, Mino{2, 1, black}}};
+            std::vector<Mino>{Mino{0, 0, CYAN}, Mino{1, 0, CYAN},
+                              Mino{1, 1, CYAN}, Mino{2, 1, CYAN}}};
 
         tetrimino.moveLeft();
 
@@ -88,17 +88,17 @@ class TetriminoTest : public CppUnit::TestFixture {
         CPPUNIT_ASSERT_EQUAL(1, tetrimino.maxY());
 
         auto minos = tetrimino.getMinos();
-        CPPUNIT_ASSERT(Mino(-1, 0, black) == minos[0]);
-        CPPUNIT_ASSERT(Mino(0, 0, black) == minos[1]);
-        CPPUNIT_ASSERT(Mino(0, 1, black) == minos[2]);
-        CPPUNIT_ASSERT(Mino(1, 1, black) == minos[3]);
+        CPPUNIT_ASSERT(Mino(-1, 0, CYAN) == minos[0]);
+        CPPUNIT_ASSERT(Mino(0, 0, CYAN) == minos[1]);
+        CPPUNIT_ASSERT(Mino(0, 1, CYAN) == minos[2]);
+        CPPUNIT_ASSERT(Mino(1, 1, CYAN) == minos[3]);
     }
 
     void move_right() {
         Tetrimino tetrimino{
             0, 0,
-            std::vector<Mino>{Mino{0, 0, black}, Mino{1, 0, black},
-                              Mino{1, 1, black}, Mino{2, 1, black}}};
+            std::vector<Mino>{Mino{0, 0, CYAN}, Mino{1, 0, CYAN},
+                              Mino{1, 1, CYAN}, Mino{2, 1, CYAN}}};
 
         tetrimino.moveRight();
 
@@ -108,17 +108,17 @@ class TetriminoTest : public CppUnit::TestFixture {
         CPPUNIT_ASSERT_EQUAL(1, tetrimino.maxY());
 
         auto minos = tetrimino.getMinos();
-        CPPUNIT_ASSERT(Mino(1, 0, black) == minos[0]);
-        CPPUNIT_ASSERT(Mino(2, 0, black) == minos[1]);
-        CPPUNIT_ASSERT(Mino(2, 1, black) == minos[2]);
-        CPPUNIT_ASSERT(Mino(3, 1, black) == minos[3]);
+        CPPUNIT_ASSERT(Mino(1, 0, CYAN) == minos[0]);
+        CPPUNIT_ASSERT(Mino(2, 0, CYAN) == minos[1]);
+        CPPUNIT_ASSERT(Mino(2, 1, CYAN) == minos[2]);
+        CPPUNIT_ASSERT(Mino(3, 1, CYAN) == minos[3]);
     }
 
     void move_down() {
         Tetrimino tetrimino{
             0, 0,
-            std::vector<Mino>{Mino{0, 0, black}, Mino{1, 0, black},
-                              Mino{1, 1, black}, Mino{2, 1, black}}};
+            std::vector<Mino>{Mino{0, 0, CYAN}, Mino{1, 0, CYAN},
+                              Mino{1, 1, CYAN}, Mino{2, 1, CYAN}}};
 
         tetrimino.moveDown();
 
@@ -128,10 +128,10 @@ class TetriminoTest : public CppUnit::TestFixture {
         CPPUNIT_ASSERT_EQUAL(2, tetrimino.maxY());
 
         auto minos = tetrimino.getMinos();
-        CPPUNIT_ASSERT(Mino(0, 1, black) == minos[0]);
-        CPPUNIT_ASSERT(Mino(1, 1, black) == minos[1]);
-        CPPUNIT_ASSERT(Mino(1, 2, black) == minos[2]);
-        CPPUNIT_ASSERT(Mino(2, 2, black) == minos[3]);
+        CPPUNIT_ASSERT(Mino(0, 1, CYAN) == minos[0]);
+        CPPUNIT_ASSERT(Mino(1, 1, CYAN) == minos[1]);
+        CPPUNIT_ASSERT(Mino(1, 2, CYAN) == minos[2]);
+        CPPUNIT_ASSERT(Mino(2, 2, CYAN) == minos[3]);
     }
 };
 

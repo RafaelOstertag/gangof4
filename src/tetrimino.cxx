@@ -122,50 +122,50 @@ std::vector<Mino> Tetrimino::getMinos() const {
 //
 
 std::shared_ptr<Tetrimino> createITetrimino() {
-    return std::shared_ptr<Tetrimino>{new Tetrimino{
-        0, 0,
-        std::vector<Mino>{Mino{0, 0, magenta}, Mino{1, 0, magenta},
-                          Mino{2, 0, magenta}, Mino{3, 0, magenta}}}};
+    return std::shared_ptr<Tetrimino>{
+        new Tetrimino{0, 0,
+                      std::vector<Mino>{Mino{0, 0, CYAN}, Mino{1, 0, CYAN},
+                                        Mino{2, 0, CYAN}, Mino{3, 0, CYAN}}}};
 }
 
 std::shared_ptr<Tetrimino> createJTetrimino() {
     return std::shared_ptr<Tetrimino>{
         new Tetrimino{0, 0,
-                      std::vector<Mino>{Mino{0, 0, blue}, Mino{0, 1, blue},
-                                        Mino{1, 1, blue}, Mino{2, 1, blue}}}};
+                      std::vector<Mino>{Mino{0, 0, RED}, Mino{0, 1, RED},
+                                        Mino{1, 1, RED}, Mino{2, 1, RED}}}};
 }
 
 std::shared_ptr<Tetrimino> createLTetrimino() {
-    return std::shared_ptr<Tetrimino>{new Tetrimino{
-        0, 0,
-        std::vector<Mino>{Mino{0, 1, orange}, Mino{1, 1, orange},
-                          Mino{2, 1, orange}, Mino{2, 0, orange}}}};
+    return std::shared_ptr<Tetrimino>{
+        new Tetrimino{0, 0,
+                      std::vector<Mino>{Mino{0, 1, PINK}, Mino{1, 1, PINK},
+                                        Mino{2, 1, PINK}, Mino{2, 0, PINK}}}};
 }
 
 std::shared_ptr<Tetrimino> createOTetrimino() {
     return std::shared_ptr<Tetrimino>{new Tetrimino{
         0, 0,
-        std::vector<Mino>{Mino{0, 0, yellow}, Mino{1, 0, yellow},
-                          Mino{0, 1, yellow}, Mino{1, 1, yellow}}}};
+        std::vector<Mino>{Mino{0, 0, YELLOW}, Mino{1, 0, YELLOW},
+                          Mino{0, 1, YELLOW}, Mino{1, 1, YELLOW}}}};
 }
 
 std::shared_ptr<Tetrimino> createTTetrimino() {
-    return std::shared_ptr<Tetrimino>{new Tetrimino{
-        0, 0,
-        std::vector<Mino>{Mino{1, 0, purple}, Mino{0, 1, purple},
-                          Mino{1, 1, purple}, Mino{2, 1, purple}}}};
+    return std::shared_ptr<Tetrimino>{
+        new Tetrimino{0, 0,
+                      std::vector<Mino>{Mino{1, 0, BLUE}, Mino{0, 1, BLUE},
+                                        Mino{1, 1, BLUE}, Mino{2, 1, BLUE}}}};
 }
 
 std::shared_ptr<Tetrimino> createSTetrimino() {
     return std::shared_ptr<Tetrimino>{
         new Tetrimino{0, 0,
-                      std::vector<Mino>{Mino{1, 0, green}, Mino{2, 0, green},
-                                        Mino{0, 1, green}, Mino{1, 1, green}}}};
+                      std::vector<Mino>{Mino{1, 0, GREEN}, Mino{2, 0, GREEN},
+                                        Mino{0, 1, GREEN}, Mino{1, 1, GREEN}}}};
 }
 
 std::shared_ptr<Tetrimino> createZTetrimino() {
-    return std::shared_ptr<Tetrimino>{
-        new Tetrimino{0, 0,
-                      std::vector<Mino>{Mino{0, 0, red}, Mino{1, 0, red},
-                                        Mino{1, 1, red}, Mino{2, 1, red}}}};
+    return std::shared_ptr<Tetrimino>{new Tetrimino{
+        0, 0,
+        std::vector<Mino>{Mino{0, 0, ORANGE}, Mino{1, 0, ORANGE},
+                          Mino{1, 1, ORANGE}, Mino{2, 1, ORANGE}}}};
 }

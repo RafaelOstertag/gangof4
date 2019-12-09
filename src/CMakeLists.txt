@@ -7,7 +7,9 @@ set(sources tetris.cxx
             tetriminorenderer.cxx 
             tetriminostock.cxx
             board.cxx
-            boardrenderer.cxx)
+            boardrenderer.cxx
+            texture.cxx
+            minotexturestore.cxx)
 
 
 add_executable(tetris ${sources})

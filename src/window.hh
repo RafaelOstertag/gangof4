@@ -22,6 +22,7 @@ class Window {
     void clear();
     void render(Renderable& renderable) const;
     void update() const;
+    constexpr const Renderer& getRenderer() const { return renderer; }
 
   private:
     SDL_Window* sdlWindow;

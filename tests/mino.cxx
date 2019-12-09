@@ -18,11 +18,11 @@ class MinoTest : public CppUnit::TestFixture {
     }
 
     void equals() {
-        Mino minoA{2, 3, black};
-        Mino minoB{2, 3, white};
+        Mino minoA{2, 3, CYAN};
+        Mino minoB{2, 3, RED};
         CPPUNIT_ASSERT(minoA == minoB);
 
-        Mino minoC{3, 2, black};
+        Mino minoC{3, 2, CYAN};
         CPPUNIT_ASSERT(minoA != minoC);
     }
 };

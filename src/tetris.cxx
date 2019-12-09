@@ -16,9 +16,10 @@ int main() {
     TetriminoStock tetriminoStock{};
     std::shared_ptr<Board> board{new Board{tetriminoStock}};
 
-    BoardRenderer boardRenderer{board};
-
     Window window{"Tetris", 480, 640, white};
+
+    auto minoTextureStore = createMinoTextureStore(window.getRenderer());
+    BoardRenderer boardRenderer{board, minoTextureStore};
 
     int counter = 0;
     int speed = 60;
