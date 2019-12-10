@@ -3,11 +3,15 @@
 #include "circulartetriminostock.hh"
 #include "normaltetriminostock.hh"
 #include "preview.hh"
+#include "scorer.hh"
 #include "sdl.hh"
+#include "text.hh"
 #include "window.hh"
 
 #include <cassert>
 #include <iostream>
+
+constexpr int baseRetardingValue = 78;
 
 int main() {
     if (!init_sdl()) {
@@ -19,7 +23,17 @@ int main() {
     /*     std::shared_ptr<TetriminoStock> tetriminoStock{
             new CircularTetriminoStock{}}; */
     std::shared_ptr<TetriminoStock> tetriminoStock{new NormalTetriminoStock{}};
-    std::shared_ptr<Board> board{new Board{tetriminoStock, grey}};
+    scorer_ptr_t scorer{new Scorer{Board::width}};
+    std::shared_ptr<Board> board{new Board{tetriminoStock, grey, scorer}};
+
+    Text scoreLabel{
+        "resources/lucidasansdemibold.ttf", 18, 320, 200, white, "Score"};
+    Text scoreText{"resources/lucidasansdemibold.ttf", 18, 320, 230, white,
+                   std::to_string(scorer->getScore())};
+    Text levelLabel{
+        "resources/lucidasansdemibold.ttf", 18, 320, 270, white, "Level"};
+    Text levelText{"resources/lucidasansdemibold.ttf", 18, 320, 300, white,
+                   std::to_string(scorer->getLevel())};
 
     Window window{"Tetris", 480, 640, black};
 
@@ -29,7 +43,7 @@ int main() {
     Preview preview{320, 10, tetriminoStock, minoTextureStore, grey};
 
     int counter = 0;
-    int speed = 60;
+    int retardingValue = baseRetardingValue;
 
     SDL_Event event;
     bool run{true};
@@ -72,9 +86,13 @@ int main() {
             continue;
         }
 
-        if (counter % speed == 0) {
+        counter %= retardingValue;
+        if (counter == 0) {
             board->nextMove();
-            counter = 0;
+            retardingValue = baseRetardingValue - 4 * scorer->getLevel();
+
+            scoreText.setText(std::to_string(scorer->getScore()));
+            levelText.setText(std::to_string(scorer->getLevel()));
         }
         if (board->isGameOver()) {
             std::cout << "Game Over" << std::endl;
@@ -87,8 +105,13 @@ int main() {
         window.render(boardRenderer);
         window.render(preview);
 
+        window.render(scoreLabel);
+        window.render(scoreText);
+        window.render(levelLabel);
+        window.render(levelText);
+
         window.update();
 
-        SDL_Delay(16);
+        SDL_Delay(10);
     }
 }

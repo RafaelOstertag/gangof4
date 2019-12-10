@@ -3,6 +3,7 @@
 
 #include "color.hh"
 #include "renderable.hh"
+#include "scorer.hh"
 #include "tetriminostock.hh"
 
 #include <array>
@@ -16,7 +17,8 @@ class Board {
     static constexpr int height = 24;
     static constexpr int width = 10;
 
-    Board(std::shared_ptr<TetriminoStock> tetriminoStock, const Color& color);
+    Board(std::shared_ptr<TetriminoStock> tetriminoStock, const Color& color,
+          scorer_ptr_t scorer);
 
     void nextMove();
 
@@ -29,6 +31,7 @@ class Board {
   private:
     std::shared_ptr<TetriminoStock> tetriminoStock;
     Color color;
+    scorer_ptr_t scorer;
     std::shared_ptr<Tetrimino> currentTetrimino;
     std::list<std::shared_ptr<Mino>> minos;
     bool gameOver;
@@ -40,7 +43,7 @@ class Board {
     bool willTetriminosCollideLeft() const;
     bool willTetriminosCollideRight() const;
     void handleCollision();
-    void compactBoard();
+    int compactBoard();
     bool isRowFull(int row) const;
     void removeRow(int row);
     void moveMinosAboveRowDown(int row);

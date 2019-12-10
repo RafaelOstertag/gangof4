@@ -12,7 +12,9 @@ set(sources tetris.cxx
             minotexturestore.cxx
             preview.cxx
             randomtetriminostock.cxx
-            normaltetriminostock.cxx)
+            normaltetriminostock.cxx
+            scorer.cxx
+            text.cxx)
 
 
 add_executable(tetris ${sources})

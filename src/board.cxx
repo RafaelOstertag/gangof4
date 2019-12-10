@@ -3,8 +3,9 @@
 #include <algorithm>
 #include <cassert>
 
-Board::Board(std::shared_ptr<TetriminoStock> tetriminoStock, const Color& color)
-    : tetriminoStock{tetriminoStock}, color{color},
+Board::Board(std::shared_ptr<TetriminoStock> tetriminoStock, const Color& color,
+             scorer_ptr_t scorer)
+    : tetriminoStock{tetriminoStock}, color{color}, scorer{scorer},
       currentTetrimino{nullptr}, minos{}, gameOver{false} {}
 
 void Board::nextMove() {
@@ -17,7 +18,8 @@ void Board::nextMove() {
 
     if (willCurrentTetriminoCollideBottom()) {
         handleCollision();
-        compactBoard();
+        auto linesRemoved = compactBoard();
+        scorer->scoreLinesRemoved(linesRemoved);
         return;
     }
 
@@ -129,13 +131,16 @@ void Board::handleCollision() {
     }
 }
 
-void Board::compactBoard() {
+int Board::compactBoard() {
+    int rowsRemoved = 0;
     for (int row = height - 1; row >= 0; row--) {
         while (isRowFull(row)) {
             removeRow(row);
             moveMinosAboveRowDown(row);
+            rowsRemoved++;
         }
     }
+    return rowsRemoved;
 }
 
 bool Board::isRowFull(int row) const {
