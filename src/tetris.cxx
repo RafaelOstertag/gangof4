@@ -1,5 +1,6 @@
 #include "board.hh"
 #include "boardrenderer.hh"
+#include "circulartetriminostock.hh"
 #include "sdl.hh"
 #include "window.hh"
 
@@ -13,10 +14,11 @@ int main() {
     }
     atexit(quit_sdl);
 
-    TetriminoStock tetriminoStock{};
-    std::shared_ptr<Board> board{new Board{tetriminoStock}};
+    std::shared_ptr<TetriminoStock> tetriminoStock{
+        new CircularTetriminoStock{}};
+    std::shared_ptr<Board> board{new Board{tetriminoStock, grey}};
 
-    Window window{"Tetris", 480, 640, white};
+    Window window{"Tetris", 480, 640, black};
 
     auto minoTextureStore = createMinoTextureStore(window.getRenderer());
     BoardRenderer boardRenderer{board, minoTextureStore};

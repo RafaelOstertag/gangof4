@@ -5,7 +5,7 @@ set(sources tetris.cxx
             renderer.cxx 
             minorenderer.cxx 
             tetriminorenderer.cxx 
-            tetriminostock.cxx
+            circulartetriminostock.cxx
             board.cxx
             boardrenderer.cxx
             texture.cxx

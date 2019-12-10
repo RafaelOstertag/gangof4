@@ -1,6 +1,7 @@
 #ifndef __BOARD_HH
 #define __BOARD_HH
 
+#include "color.hh"
 #include "renderable.hh"
 #include "tetriminostock.hh"
 
@@ -15,7 +16,7 @@ class Board {
     static constexpr int height = 24;
     static constexpr int width = 10;
 
-    Board(const TetriminoStock& tetriminoStock);
+    Board(std::shared_ptr<TetriminoStock> tetriminoStock, const Color& color);
 
     void nextMove();
 
@@ -26,7 +27,8 @@ class Board {
     bool isGameOver();
 
   private:
-    TetriminoStock tetriminoStock;
+    std::shared_ptr<TetriminoStock> tetriminoStock;
+    Color color;
     std::shared_ptr<Tetrimino> currentTetrimino;
     std::list<std::shared_ptr<Mino>> minos;
     bool gameOver;

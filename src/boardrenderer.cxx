@@ -15,6 +15,20 @@ BoardRenderer::BoardRenderer(std::shared_ptr<Board> board,
 void BoardRenderer::render(const Renderer& renderer) {
     assert(board->currentTetrimino);
 
+#ifndef NDEBUG
+    auto result =
+#endif
+        SDL_SetRenderDrawColor(renderer, board->color.red(),
+                               board->color.green(), board->color.blue(),
+                               board->color.alpha());
+    assert(result == 0);
+
+#ifndef NDEBUG
+    result =
+#endif
+        SDL_RenderFillRect(renderer, &boardOutline);
+    assert(result == 0);
+
     TetriminoRenderer tetriminoRenderer{
         referenceX, referenceY, minoTextureStore, board->currentTetrimino};
     tetriminoRenderer.render(renderer);
@@ -26,16 +40,4 @@ void BoardRenderer::render(const Renderer& renderer) {
 
         minoRenderer.render(renderer);
     }
-
-#ifndef NDEBUG
-    auto result =
-#endif
-        SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0x0);
-    assert(result == 0);
-
-#ifndef NDEBUG
-    result =
-#endif
-        SDL_RenderDrawRect(renderer, &boardOutline);
-    assert(result == 0);
 }

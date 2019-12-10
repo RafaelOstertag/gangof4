@@ -1,6 +1,6 @@
-#include "tetriminostock.hh"
+#include "circulartetriminostock.hh"
 
-TetriminoStock::TetriminoStock() {
+CircularTetriminoStock::CircularTetriminoStock() {
     factories[0] = createITetrimino;
     factories[1] = createJTetrimino;
     factories[2] = createLTetrimino;
@@ -12,9 +12,13 @@ TetriminoStock::TetriminoStock() {
     selectedFactory = 0;
 }
 
-std::shared_ptr<Tetrimino> TetriminoStock::draw() {
+std::shared_ptr<Tetrimino> CircularTetriminoStock::draw() {
     std::shared_ptr<Tetrimino> tetrimino = factories[selectedFactory]();
     selectedFactory++;
     selectedFactory %= numberOfTetriminos;
     return tetrimino;
+}
+
+std::shared_ptr<Tetrimino> CircularTetriminoStock::preview() {
+    return factories[(selectedFactory + 1) % numberOfTetriminos]();
 }

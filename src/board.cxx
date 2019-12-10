@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <cassert>
 
-Board::Board(const TetriminoStock& tetriminoStock)
-    : tetriminoStock{tetriminoStock},
+Board::Board(std::shared_ptr<TetriminoStock> tetriminoStock, const Color& color)
+    : tetriminoStock{tetriminoStock}, color{color},
       currentTetrimino{nullptr}, minos{}, gameOver{false} {}
 
 void Board::nextMove() {
@@ -61,7 +61,7 @@ bool Board::isGameOver() { return gameOver; }
 
 bool Board::drawTetrimino() {
     if (!currentTetrimino) {
-        currentTetrimino = tetriminoStock.draw();
+        currentTetrimino = tetriminoStock->draw();
         return true;
     }
 

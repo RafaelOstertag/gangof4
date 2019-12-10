@@ -2,17 +2,13 @@
 #define __TETRIMINOSTOCK_HH
 
 #include "tetrimino.hh"
-#include <array>
+#include <memory>
 
 class TetriminoStock {
   public:
-    TetriminoStock();
-    std::shared_ptr<Tetrimino> draw();
-
-  private:
-    static constexpr int numberOfTetriminos = 7;
-    std::array<std::shared_ptr<Tetrimino> (*)(), numberOfTetriminos> factories;
-    int selectedFactory;
+    virtual ~TetriminoStock(){};
+    virtual std::shared_ptr<Tetrimino> draw() = 0;
+    virtual std::shared_ptr<Tetrimino> preview() = 0;
 };
 
 #endif
