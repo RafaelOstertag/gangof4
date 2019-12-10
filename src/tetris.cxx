@@ -1,6 +1,7 @@
 #include "board.hh"
 #include "boardrenderer.hh"
 #include "circulartetriminostock.hh"
+#include "preview.hh"
 #include "sdl.hh"
 #include "window.hh"
 
@@ -22,6 +23,8 @@ int main() {
 
     auto minoTextureStore = createMinoTextureStore(window.getRenderer());
     BoardRenderer boardRenderer{board, minoTextureStore};
+
+    Preview preview{320, 10, tetriminoStock, minoTextureStore, grey};
 
     int counter = 0;
     int speed = 60;
@@ -80,6 +83,7 @@ int main() {
         window.clear();
 
         window.render(boardRenderer);
+        window.render(preview);
 
         window.update();
 
