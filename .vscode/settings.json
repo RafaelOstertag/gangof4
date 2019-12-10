@@ -5,6 +5,7 @@
         "stdexcept": "cpp",
         "iosfwd": "cpp",
         "sstream": "cpp",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "type_traits": "cpp"
     }
 }

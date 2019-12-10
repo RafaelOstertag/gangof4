@@ -1,6 +1,7 @@
 #include "board.hh"
 #include "boardrenderer.hh"
 #include "circulartetriminostock.hh"
+#include "normaltetriminostock.hh"
 #include "preview.hh"
 #include "sdl.hh"
 #include "window.hh"
@@ -15,8 +16,9 @@ int main() {
     }
     atexit(quit_sdl);
 
-    std::shared_ptr<TetriminoStock> tetriminoStock{
-        new CircularTetriminoStock{}};
+    /*     std::shared_ptr<TetriminoStock> tetriminoStock{
+            new CircularTetriminoStock{}}; */
+    std::shared_ptr<TetriminoStock> tetriminoStock{new NormalTetriminoStock{}};
     std::shared_ptr<Board> board{new Board{tetriminoStock, grey}};
 
     Window window{"Tetris", 480, 640, black};
