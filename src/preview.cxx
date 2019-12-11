@@ -13,8 +13,14 @@ Preview::Preview(int x, int y, std::shared_ptr<TetriminoStock> tetriminoStock,
 
 void Preview::render(const Renderer& renderer) {
     auto tetrimino = tetriminoStock->preview();
-    TetriminoRenderer tetriminoRenderer{x + TetriminoRenderer::width,
-                                        y + TetriminoRenderer::width,
+
+    // These offsets will center the preview Tetrimino
+    int xOffset = (2.5 * TetriminoRenderer::width) -
+                  ((tetrimino->maxX() + 1) * TetriminoRenderer::width / 2);
+    int yOffset = (2.5 * TetriminoRenderer::width) -
+                  ((tetrimino->maxY() + 1) * TetriminoRenderer::width / 2);
+
+    TetriminoRenderer tetriminoRenderer{x + xOffset, y + yOffset,
                                         minoTextureStore, tetrimino};
 
     tetriminoRenderer.render(renderer);
