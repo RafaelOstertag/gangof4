@@ -10,18 +10,18 @@
 
 class BoardRenderer : public Renderable {
   public:
-    BoardRenderer(std::shared_ptr<Board> board,
+    BoardRenderer(int referenceX, int referenceY, std::shared_ptr<Board> board,
                   const MinoTextureStore& minoTextureStore);
     virtual ~BoardRenderer() {}
 
     virtual void render(const Renderer& renderer);
 
   private:
-    static constexpr int referenceX = 100;
-    static constexpr int referenceY = 10;
     std::shared_ptr<Board> board;
     MinoTextureStore minoTextureStore;
     SDL_Rect boardOutline;
+    int referenceX;
+    int referenceY;
 };
 
 #endif

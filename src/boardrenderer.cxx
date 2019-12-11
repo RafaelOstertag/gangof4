@@ -4,9 +4,11 @@
 
 #include <cassert>
 
-BoardRenderer::BoardRenderer(std::shared_ptr<Board> board,
+BoardRenderer::BoardRenderer(int referenceX, int referenceY,
+                             std::shared_ptr<Board> board,
                              const MinoTextureStore& minoTextureStore)
-    : board{board}, minoTextureStore{minoTextureStore} {
+    : board{board}, minoTextureStore{minoTextureStore}, boardOutline{},
+      referenceX{referenceX}, referenceY{referenceY} {
     boardOutline = SDL_Rect{referenceX, referenceY,
                             TetriminoRenderer::width * Board::width,
                             TetriminoRenderer::width * Board::height};

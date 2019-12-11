@@ -38,10 +38,10 @@ int main() {
     Text gameOverText{
         "resources/lucidasansdemibold.ttf", 25, 130, 200, white, "Game Over"};
 
-    Window window{"Tetris", 480, 640, black};
+    Window window{"Tetris", 520, 500, black};
 
     auto minoTextureStore = createMinoTextureStore(window.getRenderer());
-    BoardRenderer boardRenderer{board, minoTextureStore};
+    BoardRenderer boardRenderer{100, 10, board, minoTextureStore};
 
     Preview preview{320, 10, tetriminoStock, minoTextureStore, grey};
 
