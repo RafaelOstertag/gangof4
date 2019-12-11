@@ -20,8 +20,6 @@ int main() {
     }
     atexit(quit_sdl);
 
-    /*     std::shared_ptr<TetriminoStock> tetriminoStock{
-            new CircularTetriminoStock{}}; */
     std::shared_ptr<TetriminoStock> tetriminoStock{new NormalTetriminoStock{}};
     scorer_ptr_t scorer{new Scorer{Board::width}};
     std::shared_ptr<Board> board{new Board{tetriminoStock, grey, scorer}};
