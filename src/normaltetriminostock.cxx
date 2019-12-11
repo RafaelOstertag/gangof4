@@ -1,10 +1,11 @@
 #include "normaltetriminostock.hh"
 
+#include <ctime>
+
 NormalTetriminoStock::NormalTetriminoStock()
-    : factories{}, prefetch{nullptr}, random{std::bind(
-                                          std::normal_distribution<double>{3,
-                                                                           3},
-                                          std::default_random_engine())} {
+    : factories{}, prefetch{nullptr},
+      random{std::bind(std::normal_distribution<double>{3, 3},
+                       std::default_random_engine(std::time(nullptr)))} {
     factories[0] = createITetrimino;
     factories[1] = createJTetrimino;
     factories[2] = createLTetrimino;
