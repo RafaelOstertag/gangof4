@@ -33,6 +33,9 @@ int main() {
     Text levelText{"resources/lucidasansdemibold.ttf", 18, 320, 300, white,
                    std::to_string(scorer->getLevel())};
 
+    Text nextTetrimino{
+        "resources/lucidasansdemibold.ttf", 18, 320, 10, white, "Next"};
+
     Text gameOverText{
         "resources/lucidasansdemibold.ttf", 25, 130, 200, white, "Game Over"};
 
@@ -41,7 +44,7 @@ int main() {
     auto minoTextureStore = createMinoTextureStore(window.getRenderer());
     BoardRenderer boardRenderer{100, 10, board, minoTextureStore};
 
-    Preview preview{320, 10, tetriminoStock, minoTextureStore, grey};
+    Preview preview{320, 40, tetriminoStock, minoTextureStore, grey};
 
     int counter = 0;
     int retardingValue = baseRetardingValue;
@@ -107,6 +110,7 @@ int main() {
         window.render(scoreText);
         window.render(levelLabel);
         window.render(levelText);
+        window.render(nextTetrimino);
         if (board->isGameOver()) {
             window.render(gameOverText);
         }
