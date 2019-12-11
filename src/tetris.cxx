@@ -35,6 +35,9 @@ int main() {
     Text levelText{"resources/lucidasansdemibold.ttf", 18, 320, 300, white,
                    std::to_string(scorer->getLevel())};
 
+    Text gameOverText{
+        "resources/lucidasansdemibold.ttf", 25, 130, 200, white, "Game Over"};
+
     Window window{"Tetris", 480, 640, black};
 
     auto minoTextureStore = createMinoTextureStore(window.getRenderer());
@@ -94,10 +97,7 @@ int main() {
             scoreText.setText(std::to_string(scorer->getScore()));
             levelText.setText(std::to_string(scorer->getLevel()));
         }
-        if (board->isGameOver()) {
-            std::cout << "Game Over" << std::endl;
-            return 0;
-        }
+
         counter++;
 
         window.clear();
@@ -109,6 +109,9 @@ int main() {
         window.render(scoreText);
         window.render(levelLabel);
         window.render(levelText);
+        if (board->isGameOver()) {
+            window.render(gameOverText);
+        }
 
         window.update();
 
