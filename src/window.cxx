@@ -2,11 +2,11 @@
 #include <iostream>
 #include <stdexcept>
 
-Window::Window(const std::string& name, int height, int width,
+Window::Window(const std::string& name, int width, int height,
                const Color& bgColor)
     : sdlWindow{nullptr}, renderer{}, bgColor{bgColor} {
     sdlWindow = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_UNDEFINED,
-                                 SDL_WINDOWPOS_UNDEFINED, height, width,
+                                 SDL_WINDOWPOS_UNDEFINED, width, height,
                                  SDL_WINDOW_SHOWN);
     if (sdlWindow == nullptr) {
         std::string errorMsg{"Cannot initialize window: "};

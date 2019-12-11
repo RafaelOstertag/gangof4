@@ -10,8 +10,7 @@
 
 class Window {
   public:
-    Window(const std::string& name, int height, int width,
-           const Color& bgColor);
+    Window(const std::string& name, int width, int heigh, const Color& bgColor);
     ~Window();
     Window(const Window&) = delete;
     Window& operator=(const Window&) = delete;
