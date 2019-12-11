@@ -1,21 +1,24 @@
-set(sources tetris.cxx
-            tetrimino.cxx 
-            sdl.cxx 
-            window.cxx 
-            renderer.cxx 
-            minorenderer.cxx 
-            tetriminorenderer.cxx 
-            circulartetriminostock.cxx
+set(sources 
             board.cxx
             boardrenderer.cxx
-            texture.cxx
+            circulartetriminostock.cxx
+            font.cxx
+            game.cxx
+            minorenderer.cxx 
             minotexturestore.cxx
+            normaltetriminostock.cxx
             preview.cxx
             randomtetriminostock.cxx
-            normaltetriminostock.cxx
+            renderer.cxx 
             scorer.cxx
+            sdl.cxx 
+            tetrimino.cxx 
+            tetriminorenderer.cxx 
+            tetris.cxx
             text.cxx
-            font.cxx)
+            texture.cxx
+            window.cxx
+)
 
 
 add_executable(tetris ${sources})

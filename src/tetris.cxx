@@ -1,15 +1,7 @@
-#include "board.hh"
-#include "boardrenderer.hh"
-#include "circulartetriminostock.hh"
-#include "font.hh"
-#include "normaltetriminostock.hh"
-#include "preview.hh"
-#include "scorer.hh"
+#include "game.hh"
 #include "sdl.hh"
-#include "text.hh"
 #include "window.hh"
 
-#include <cassert>
 #include <iostream>
 
 constexpr int baseRetardingValue = 78;
@@ -21,28 +13,8 @@ int main() {
     }
     atexit(quit_sdl);
 
-    std::shared_ptr<TetriminoStock> tetriminoStock{new NormalTetriminoStock{}};
-    scorer_ptr_t scorer{new Scorer{Board::width}};
-    std::shared_ptr<Board> board{new Board{tetriminoStock, grey, scorer}};
-
-    FontPtr font18{new Font{"resources/lucidasansdemibold.ttf", 18}};
-
-    Text scoreLabel{font18, 320, 200, white, "Score"};
-    Text scoreText{font18, 320, 230, white, std::to_string(scorer->getScore())};
-    Text levelLabel{font18, 320, 270, white, "Level"};
-    Text levelText{font18, 320, 300, white, std::to_string(scorer->getLevel())};
-
-    Text nextTetrimino{font18, 320, 10, white, "Next"};
-
-    FontPtr font25{new Font{"resources/lucidasansdemibold.ttf", 25}};
-    Text gameOverText{font25, 130, 200, white, "Game Over"};
-
     Window window{"Tetris", 520, 500, black};
-
-    auto minoTextureStore = createMinoTextureStore(window.getRenderer());
-    BoardRenderer boardRenderer{100, 10, board, minoTextureStore};
-
-    Preview preview{320, 40, tetriminoStock, minoTextureStore, grey};
+    GamePtr game{new Game{window}};
 
     int counter = 0;
     int retardingValue = baseRetardingValue;
@@ -63,21 +35,27 @@ int main() {
                 case SDLK_p:
                     pause = !pause;
                     break;
+                case SDLK_r:
+                    counter = 0;
+                    retardingValue = baseRetardingValue;
+                    pause = false;
+                    game = GamePtr{new Game{window}};
+                    break;
 
                 case SDLK_UP:
-                    board->rotateCurrentTetrimino();
+                    game->rotateCurrentTetrimino();
                     break;
 
                 case SDLK_DOWN:
-                    board->nextMove();
+                    game->nextMove();
                     break;
 
                 case SDLK_LEFT:
-                    board->moveCurrentTetriminoLeft();
+                    game->moveCurrentTetriminoLeft();
                     break;
 
                 case SDLK_RIGHT:
-                    board->moveCurrentTetriminoRight();
+                    game->moveCurrentTetriminoRight();
                     break;
                 }
             }
@@ -90,29 +68,15 @@ int main() {
 
         counter %= retardingValue;
         if (counter == 0) {
-            board->nextMove();
-            retardingValue = baseRetardingValue - 4 * scorer->getLevel();
-
-            scoreText.setText(std::to_string(scorer->getScore()));
-            levelText.setText(std::to_string(scorer->getLevel()));
+            game->nextMove();
+            retardingValue =
+                baseRetardingValue - 4 * game->getScorer()->getLevel();
         }
 
         counter++;
 
         window.clear();
-
-        window.render(boardRenderer);
-        window.render(preview);
-
-        window.render(scoreLabel);
-        window.render(scoreText);
-        window.render(levelLabel);
-        window.render(levelText);
-        window.render(nextTetrimino);
-        if (board->isGameOver()) {
-            window.render(gameOverText);
-        }
-
+        window.render(*game);
         window.update();
 
         SDL_Delay(10);

@@ -6,6 +6,7 @@
 #include "renderer.hh"
 
 #include <SDL.h>
+#include <memory>
 #include <string>
 
 class Window {
@@ -28,5 +29,7 @@ class Window {
     Renderer renderer;
     const Color& bgColor;
 };
+
+using WindowPtr = std::shared_ptr<Window>;
 
 #endif
