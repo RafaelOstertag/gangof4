@@ -14,7 +14,8 @@ set(sources tetris.cxx
             randomtetriminostock.cxx
             normaltetriminostock.cxx
             scorer.cxx
-            text.cxx)
+            text.cxx
+            font.cxx)
 
 
 add_executable(tetris ${sources})

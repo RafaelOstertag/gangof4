@@ -14,7 +14,7 @@ class Renderer {
     Renderer(Renderer&&);
     Renderer& operator=(Renderer&& o);
 
-    operator SDL_Renderer*() const;
+    constexpr operator SDL_Renderer*() const { return sdlRenderer; }
 
   private:
     SDL_Renderer* sdlRenderer;

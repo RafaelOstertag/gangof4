@@ -1,6 +1,7 @@
 #include "board.hh"
 #include "boardrenderer.hh"
 #include "circulartetriminostock.hh"
+#include "font.hh"
 #include "normaltetriminostock.hh"
 #include "preview.hh"
 #include "scorer.hh"
@@ -24,20 +25,17 @@ int main() {
     scorer_ptr_t scorer{new Scorer{Board::width}};
     std::shared_ptr<Board> board{new Board{tetriminoStock, grey, scorer}};
 
-    Text scoreLabel{
-        "resources/lucidasansdemibold.ttf", 18, 320, 200, white, "Score"};
-    Text scoreText{"resources/lucidasansdemibold.ttf", 18, 320, 230, white,
-                   std::to_string(scorer->getScore())};
-    Text levelLabel{
-        "resources/lucidasansdemibold.ttf", 18, 320, 270, white, "Level"};
-    Text levelText{"resources/lucidasansdemibold.ttf", 18, 320, 300, white,
-                   std::to_string(scorer->getLevel())};
+    FontPtr font18{new Font{"resources/lucidasansdemibold.ttf", 18}};
 
-    Text nextTetrimino{
-        "resources/lucidasansdemibold.ttf", 18, 320, 10, white, "Next"};
+    Text scoreLabel{font18, 320, 200, white, "Score"};
+    Text scoreText{font18, 320, 230, white, std::to_string(scorer->getScore())};
+    Text levelLabel{font18, 320, 270, white, "Level"};
+    Text levelText{font18, 320, 300, white, std::to_string(scorer->getLevel())};
 
-    Text gameOverText{
-        "resources/lucidasansdemibold.ttf", 25, 130, 200, white, "Game Over"};
+    Text nextTetrimino{font18, 320, 10, white, "Next"};
+
+    FontPtr font25{new Font{"resources/lucidasansdemibold.ttf", 25}};
+    Text gameOverText{font25, 130, 200, white, "Game Over"};
 
     Window window{"Tetris", 520, 500, black};
 

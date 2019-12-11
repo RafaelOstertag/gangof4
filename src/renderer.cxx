@@ -18,5 +18,3 @@ Renderer& Renderer::operator=(Renderer&& o) {
 
     return *this;
 }
-
-Renderer::operator SDL_Renderer*() const { return sdlRenderer; }
