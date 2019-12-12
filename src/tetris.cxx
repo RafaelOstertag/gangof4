@@ -15,7 +15,7 @@ bool showIntro(Window& window) {
     window.update();
 
     SDL_Event event;
-    while (1) {
+    while (true) {
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
                 return false;
@@ -30,6 +30,8 @@ bool showIntro(Window& window) {
                 }
             }
         }
+
+        SDL_Delay(250);
     }
 }
 
