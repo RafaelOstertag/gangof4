@@ -131,15 +131,15 @@ std::shared_ptr<Tetrimino> createITetrimino() {
 std::shared_ptr<Tetrimino> createJTetrimino() {
     return std::shared_ptr<Tetrimino>{
         new Tetrimino{0, 0,
-                      std::vector<Mino>{Mino{0, 0, RED}, Mino{0, 1, RED},
-                                        Mino{1, 1, RED}, Mino{2, 1, RED}}}};
+                      std::vector<Mino>{Mino{0, 0, BLUE}, Mino{0, 1, BLUE},
+                                        Mino{1, 1, BLUE}, Mino{2, 1, BLUE}}}};
 }
 
 std::shared_ptr<Tetrimino> createLTetrimino() {
-    return std::shared_ptr<Tetrimino>{
-        new Tetrimino{0, 0,
-                      std::vector<Mino>{Mino{0, 1, PINK}, Mino{1, 1, PINK},
-                                        Mino{2, 1, PINK}, Mino{2, 0, PINK}}}};
+    return std::shared_ptr<Tetrimino>{new Tetrimino{
+        0, 0,
+        std::vector<Mino>{Mino{0, 1, ORANGE}, Mino{1, 1, ORANGE},
+                          Mino{2, 1, ORANGE}, Mino{2, 0, ORANGE}}}};
 }
 
 std::shared_ptr<Tetrimino> createOTetrimino() {
@@ -150,10 +150,10 @@ std::shared_ptr<Tetrimino> createOTetrimino() {
 }
 
 std::shared_ptr<Tetrimino> createTTetrimino() {
-    return std::shared_ptr<Tetrimino>{
-        new Tetrimino{0, 0,
-                      std::vector<Mino>{Mino{1, 0, BLUE}, Mino{0, 1, BLUE},
-                                        Mino{1, 1, BLUE}, Mino{2, 1, BLUE}}}};
+    return std::shared_ptr<Tetrimino>{new Tetrimino{
+        0, 0,
+        std::vector<Mino>{Mino{1, 0, PURPLE}, Mino{0, 1, PURPLE},
+                          Mino{1, 1, PURPLE}, Mino{2, 1, PURPLE}}}};
 }
 
 std::shared_ptr<Tetrimino> createSTetrimino() {
@@ -164,8 +164,8 @@ std::shared_ptr<Tetrimino> createSTetrimino() {
 }
 
 std::shared_ptr<Tetrimino> createZTetrimino() {
-    return std::shared_ptr<Tetrimino>{new Tetrimino{
-        0, 0,
-        std::vector<Mino>{Mino{0, 0, ORANGE}, Mino{1, 0, ORANGE},
-                          Mino{1, 1, ORANGE}, Mino{2, 1, ORANGE}}}};
+    return std::shared_ptr<Tetrimino>{
+        new Tetrimino{0, 0,
+                      std::vector<Mino>{Mino{0, 0, RED}, Mino{1, 0, RED},
+                                        Mino{1, 1, RED}, Mino{2, 1, RED}}}};
 }
