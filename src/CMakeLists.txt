@@ -18,6 +18,7 @@ set(sources
             text.cxx
             texture.cxx
             window.cxx
+            help.cxx
 )
 
 

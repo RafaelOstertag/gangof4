@@ -1,10 +1,37 @@
 #include "game.hh"
+#include "help.hh"
 #include "sdl.hh"
 #include "window.hh"
 
 #include <iostream>
 
 constexpr int baseRetardingValue = 78;
+
+bool showIntro(Window& window) {
+
+    window.clear();
+    Help help{};
+    window.render(help);
+    window.update();
+
+    SDL_Event event;
+    while (1) {
+        while (SDL_PollEvent(&event) != 0) {
+            if (event.type == SDL_QUIT) {
+                return false;
+            } else if (event.type == SDL_KEYDOWN) {
+                switch (event.key.keysym.sym) {
+                case SDLK_q:
+                    return false;
+                case SDLK_RETURN:
+                case SDLK_RETURN2:
+                case SDLK_KP_ENTER:
+                    return true;
+                }
+            }
+        }
+    }
+}
 
 int main() {
     if (!init_sdl()) {
@@ -20,8 +47,9 @@ int main() {
     int retardingValue = baseRetardingValue;
 
     SDL_Event event;
-    bool run{true};
+    bool run = showIntro(window);
     bool pause{false};
+
     while (run) {
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
