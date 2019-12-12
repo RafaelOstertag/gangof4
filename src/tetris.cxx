@@ -13,7 +13,7 @@ int main() {
     }
     atexit(quit_sdl);
 
-    Window window{"Tetris", 520, 500, black};
+    Window window{"Tetris", 520, 500, darkGrey};
     GamePtr game{new Game{window}};
 
     int counter = 0;

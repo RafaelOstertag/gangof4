@@ -11,8 +11,7 @@ int main() {
     }
     atexit(quit_sdl);
 
-    Color windowColor(0xff, 0xff, 0xff, 0x0);
-    Window window{"Tetriminorenderer", 640, 480, windowColor};
+    Window window{"Tetriminorenderer", 640, 480, black};
 
     std::vector<std::shared_ptr<Tetrimino>> tetriminos;
     auto iTetrimino{createITetrimino()};

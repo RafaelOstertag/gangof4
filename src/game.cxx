@@ -4,8 +4,8 @@
 
 Game::Game(const Window& window)
     : tetriminoStock{new NormalTetriminoStock{}},
-      scorer{new Scorer{Board::width}}, board{new Board{tetriminoStock, grey,
-                                                        scorer}},
+      scorer{new Scorer{Board::width}}, board{new Board{tetriminoStock,
+                                                        lightGrey, scorer}},
       font18{new Font{"resources/lucidasansdemibold.ttf", 18}},
       font25{new Font{"resources/lucidasansdemibold.ttf", 25}},
       scoreLabel{font18, 320, 200, white, "Score"},
@@ -19,7 +19,7 @@ Game::Game(const Window& window)
       boardRenderer{100, 10, board, minoTextureStore}, preview{320, 40,
                                                                tetriminoStock,
                                                                minoTextureStore,
-                                                               grey} {
+                                                               lightGrey} {
 #ifndef NDEBUG
     std::cout << "Initialized game" << std::endl;
 #endif
