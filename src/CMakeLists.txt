@@ -4,9 +4,11 @@ set(sources
             circulartetriminostock.cxx
             font.cxx
             game.cxx
+            help.cxx
             minorenderer.cxx 
             minotexturestore.cxx
             normaltetriminostock.cxx
+            pausetext.cxx
             preview.cxx
             randomtetriminostock.cxx
             renderer.cxx 
@@ -18,7 +20,6 @@ set(sources
             text.cxx
             texture.cxx
             window.cxx
-            help.cxx
 )
 
 

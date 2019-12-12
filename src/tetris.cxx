@@ -1,5 +1,6 @@
 #include "game.hh"
 #include "help.hh"
+#include "pausetext.hh"
 #include "sdl.hh"
 #include "window.hh"
 
@@ -35,6 +36,11 @@ bool showIntro(Window& window) {
     }
 }
 
+void showPauseText(Window& window, PauseText& pauseText) {
+    window.render(pauseText);
+    window.update();
+}
+
 int main() {
     if (!init_sdl()) {
         std::cerr << SDL_GetError() << std::endl;
@@ -47,11 +53,12 @@ int main() {
 
     int counter = 0;
     int retardingValue = baseRetardingValue;
-
     SDL_Event event;
-    bool run = showIntro(window);
     bool pause{false};
+    PauseText pauseText;
 
+    // Pressing 'q' in the intro must quit
+    bool run = showIntro(window);
     while (run) {
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
@@ -92,8 +99,11 @@ int main() {
         }
 
         if (pause) {
-            SDL_Delay(500);
+            SDL_Delay(150);
+            showPauseText(window, pauseText);
             continue;
+        } else {
+            pauseText.reset();
         }
 
         counter %= retardingValue;
@@ -111,4 +121,6 @@ int main() {
 
         SDL_Delay(10);
     }
+
+    return 0;
 }
