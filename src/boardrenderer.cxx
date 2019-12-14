@@ -28,7 +28,7 @@ void BoardRenderer::render(const Renderer& renderer) {
 #ifndef NDEBUG
     result =
 #endif
-        SDL_RenderFillRect(renderer, &boardOutline);
+        SDL_RenderDrawRect(renderer, &boardOutline);
     assert(result == 0);
 
     TetriminoRenderer tetriminoRenderer{
