@@ -18,7 +18,8 @@ set(sources
             tetriminorenderer.cxx 
             tetris.cxx
             text.cxx
-            texture.cxx
+            texturefile.cxx
+            texturememory.cxx
             window.cxx
 )
 

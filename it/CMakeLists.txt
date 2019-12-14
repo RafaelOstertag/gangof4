@@ -1,11 +1,13 @@
-set(SOURCES ${PROJECT_SOURCE_DIR}/src/tetrimino.cxx 
+set(SOURCES 
+    ${PROJECT_SOURCE_DIR}/src/tetrimino.cxx 
     ${PROJECT_SOURCE_DIR}/src/minorenderer.cxx
     ${PROJECT_SOURCE_DIR}/src/minotexturestore.cxx
     ${PROJECT_SOURCE_DIR}/src/renderer.cxx
     ${PROJECT_SOURCE_DIR}/src/sdl.cxx
     ${PROJECT_SOURCE_DIR}/src/tetriminorenderer.cxx 
-    ${PROJECT_SOURCE_DIR}/src/texture.cxx 
+    ${PROJECT_SOURCE_DIR}/src/texturefile.cxx 
     ${PROJECT_SOURCE_DIR}/src/window.cxx
+    ${PROJECT_SOURCE_DIR}/src/texturememory.cxx
 )
 
 add_executable(tetriminorenderer tetriminorenderer.cxx ${SOURCES})
