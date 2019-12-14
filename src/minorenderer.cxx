@@ -13,6 +13,7 @@ void MinoRenderer::render(const Renderer& renderer) {
 #ifndef NDEBUG
     auto result =
 #endif
-        SDL_RenderCopy(renderer, minoTexture->get(), nullptr, &rectangle);
+        SDL_RenderCopy(renderer, minoTexture->getTexture(), nullptr,
+                       &rectangle);
     assert(result == 0);
 }

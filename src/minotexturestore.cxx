@@ -1,9 +1,18 @@
 #include "minotexturestore.hh"
+#include "texturefile.hh"
+#include "texturememory.hh"
 
 void MinoTextureStore::loadTexture(MinoTexture minoTexture,
                                    const std::string& filename,
                                    const Renderer& renderer) {
-    std::shared_ptr<Texture> texture{new Texture{filename, renderer}};
+    std::shared_ptr<Texture> texture{new TextureFile{filename, renderer}};
+
+    store[minoTexture] = texture;
+}
+
+void MinoTextureStore::loadTexture(MinoTexture minoTexture, void* ptr, int size,
+                                   const Renderer& renderer) {
+    std::shared_ptr<Texture> texture{new TextureMemory(ptr, size, renderer)};
 
     store[minoTexture] = texture;
 }

@@ -2,6 +2,7 @@
 #define __MINOTEXTURESTORE_HH
 
 #include "minotexture.hh"
+#include "renderer.hh"
 #include "texture.hh"
 
 #include <memory>
@@ -13,6 +14,8 @@ class MinoTextureStore {
     MinoTextureStore() : store{} {}
 
     void loadTexture(MinoTexture minoTexture, const std::string& filename,
+                     const Renderer& renderer);
+    void loadTexture(MinoTexture minoTexture, void* ptr, int size,
                      const Renderer& renderer);
 
     std::shared_ptr<Texture> getTexture(MinoTexture minoTexture) {

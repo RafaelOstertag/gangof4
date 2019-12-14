@@ -1,9 +1,9 @@
-#include "texture.hh"
+#include "texturefile.hh"
 
 #include <sstream>
 #include <stdexcept>
 
-Texture::Texture(const std::string& filename, const Renderer& renderer)
+TextureFile::TextureFile(const std::string& filename, const Renderer& renderer)
     : texture{nullptr} {
     auto bitmapSurface = SDL_LoadBMP(filename.c_str());
     if (bitmapSurface == nullptr) {
@@ -24,18 +24,18 @@ Texture::Texture(const std::string& filename, const Renderer& renderer)
     SDL_FreeSurface(bitmapSurface);
 }
 
-Texture::Texture(Texture&& other) : texture{other.texture} {
+TextureFile::TextureFile(TextureFile&& other) : texture{other.texture} {
     other.texture = nullptr;
 }
 
-Texture& Texture::operator=(Texture&& other) {
+TextureFile& TextureFile::operator=(TextureFile&& other) {
     texture = other.texture;
     other.texture = nullptr;
 
     return *this;
 }
 
-Texture::~Texture() {
+TextureFile::~TextureFile() {
     if (texture != nullptr) {
         SDL_DestroyTexture(texture);
     }
