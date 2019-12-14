@@ -8,6 +8,7 @@
 #include "preview.hh"
 #include "renderable.hh"
 #include "scorer.hh"
+#include "soundfile.hh"
 #include "text.hh"
 #include "window.hh"
 
@@ -18,13 +19,10 @@ class Game : public Renderable {
     Game(const Window& window);
     virtual ~Game();
 
-    constexpr void rotateCurrentTetrimino() { board->rotateCurrentTetrimino(); }
-    constexpr void moveCurrentTetriminoLeft() {
-        board->moveCurrentTetriminoLeft();
-    }
-    constexpr void moveCurrentTetriminoRight() {
-        board->moveCurrentTetriminoRight();
-    }
+    void rotateCurrentTetrimino();
+    void moveCurrentTetriminoLeft();
+
+    void moveCurrentTetriminoRight();
     void nextMove();
 
     scorer_ptr_t getScorer() const { return scorer; }
@@ -46,6 +44,8 @@ class Game : public Renderable {
     MinoTextureStore minoTextureStore;
     BoardRenderer boardRenderer;
     Preview preview;
+    SoundFile moveSound;
+    SoundFile rotateSound;
 };
 
 using GamePtr = std::shared_ptr<Game>;

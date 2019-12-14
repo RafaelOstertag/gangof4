@@ -1,5 +1,6 @@
 #include "game.hh"
 
+#include <SDL_mixer.h>
 #include <iostream>
 
 Game::Game(const Window& window)
@@ -19,7 +20,8 @@ Game::Game(const Window& window)
       boardRenderer{100, 10, board, minoTextureStore}, preview{320, 40,
                                                                tetriminoStock,
                                                                minoTextureStore,
-                                                               lightGrey} {
+                                                               lightGrey},
+      moveSound{"resources/move.wav"}, rotateSound{"resources/rotate.wav"} {
 #ifndef NDEBUG
     std::cout << "Initialized game" << std::endl;
 #endif
@@ -31,10 +33,25 @@ Game::~Game() {
 #endif
 }
 
+void Game::rotateCurrentTetrimino() {
+    board->rotateCurrentTetrimino();
+    Mix_PlayChannel(1, rotateSound.getMixChunk(), 0);
+}
+
+void Game::moveCurrentTetriminoLeft() {
+    board->moveCurrentTetriminoLeft();
+    Mix_PlayChannel(0, moveSound.getMixChunk(), 0);
+}
+void Game::moveCurrentTetriminoRight() {
+    board->moveCurrentTetriminoRight();
+    Mix_PlayChannel(0, moveSound.getMixChunk(), 0);
+}
+
 void Game::nextMove() {
     board->nextMove();
     scoreText.setText(std::to_string(scorer->getScore()));
     levelText.setText(std::to_string(scorer->getLevel()));
+    Mix_PlayChannel(0, moveSound.getMixChunk(), 0);
 }
 
 void Game::render(const Renderer& renderer) {

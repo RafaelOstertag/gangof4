@@ -21,6 +21,7 @@ set(sources
             texturefile.cxx
             texturememory.cxx
             window.cxx
+            soundfile.cxx
 )
 
 
