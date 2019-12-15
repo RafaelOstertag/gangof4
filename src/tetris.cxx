@@ -41,13 +41,7 @@ void showPauseText(Window& window, PauseText& pauseText) {
     window.update();
 }
 
-int main() {
-    if (!init_sdl()) {
-        std::cerr << SDL_GetError() << std::endl;
-        return 1;
-    }
-    atexit(quit_sdl);
-
+void run() {
     Window window{"Tetris", 520, 500, darkGrey};
     GamePtr game{new Game{window}};
 
@@ -121,6 +115,20 @@ int main() {
 
         SDL_Delay(10);
     }
+}
 
-    return 0;
+int main() {
+    if (!init_sdl()) {
+        std::cerr << SDL_GetError() << std::endl;
+        return 1;
+    }
+    atexit(quit_sdl);
+
+    try {
+        run();
+        return 0;
+    } catch (std::exception& e) {
+        std::cerr << "Ooops! " << e.what() << "\n";
+        return 2;
+    }
 }
