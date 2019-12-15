@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) tetris",
+            "name": "(gdb) gangof4",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/src/tetris",
+            "program": "${workspaceFolder}/build/src/gangof4",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
