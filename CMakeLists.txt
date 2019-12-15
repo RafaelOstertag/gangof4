@@ -42,3 +42,7 @@ add_subdirectory(tests)
 add_subdirectory(it)
 
 configure_file(gof_version.h.in gof_version.h)
+configure_file(resources/gangof4.desktop.in gangof4.desktop)
+
+install(FILES ${CMAKE_BINARY_DIR}/gangof4.desktop DESTINATION share/applications)
+install(FILES ${PROJECT_SOURCE_DIR}/resources/gangof4.png DESTINATION share/icons/hicolor/48x48/apps)
