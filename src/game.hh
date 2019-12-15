@@ -9,7 +9,7 @@
 #include "renderable.hh"
 #include "scorer.hh"
 #include "soundcallback.hh"
-#include "soundfile.hh"
+#include "soundmemory.hh"
 #include "text.hh"
 #include "window.hh"
 
@@ -49,11 +49,11 @@ class Game : public Renderable {
     MinoTextureStore minoTextureStore;
     BoardRenderer boardRenderer;
     Preview preview;
-    SoundFile moveSound;
-    SoundFile rotateSound;
-    SoundFile collisionSound;
-    SoundFile rowFullSound;
-    SoundFile gameOverSound;
+    SoundMemory moveSound;
+    SoundMemory rotateSound;
+    SoundMemory collisionSound;
+    SoundMemory rowFullSound;
+    SoundMemory gameOverSound;
 };
 
 using GamePtr = std::shared_ptr<Game>;

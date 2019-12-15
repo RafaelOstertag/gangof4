@@ -1,4 +1,9 @@
 #include "game.hh"
+#include "collision.hh"
+#include "gameover.hh"
+#include "move.hh"
+#include "rotate.hh"
+#include "rowfull.hh"
 
 #include <iostream>
 
@@ -20,10 +25,12 @@ Game::Game(const Window& window)
                                                                tetriminoStock,
                                                                minoTextureStore,
                                                                lightGrey},
-      moveSound{"resources/move.wav"}, rotateSound{"resources/rotate.wav"},
-      collisionSound{"resources/collision.wav"},
-      rowFullSound{"resources/rowfull.wav"}, gameOverSound{
-                                                 "resources/gameover.wav"} {
+      moveSound{moveWAV.data, moveWAV.size}, rotateSound{rotateWAV.data,
+                                                         rotateWAV.size},
+      collisionSound{collisionWAV.data, collisionWAV.size},
+      rowFullSound{rowFullWAV.data, rowFullWAV.size}, gameOverSound{
+                                                          gameOverWAV.data,
+                                                          gameOverWAV.size} {
 #ifndef NDEBUG
     std::cout << "Initialized game" << std::endl;
 #endif

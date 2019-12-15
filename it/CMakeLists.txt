@@ -15,6 +15,7 @@ set(SOURCES
     ${CMAKE_CURRENT_BINARY_DIR}/purplemino.cxx
     ${CMAKE_CURRENT_BINARY_DIR}/redmino.cxx
     ${CMAKE_CURRENT_BINARY_DIR}/yellowmino.cxx
+    ${PROJECT_SOURCE_DIR}/src/memoryrwops.cxx
 )
 
 bmpToCxx(bluemino blueMinoBMP)

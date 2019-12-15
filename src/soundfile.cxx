@@ -25,6 +25,10 @@ SoundFile::~SoundFile() {
 SoundFile::SoundFile(SoundFile&& o) : chunk{o.chunk} { o.chunk = nullptr; }
 
 SoundFile& SoundFile::operator=(SoundFile&& o) {
+    if (chunk != nullptr) {
+        Mix_FreeChunk(chunk);
+    }
+    
     chunk = o.chunk;
     o.chunk = nullptr;
 
