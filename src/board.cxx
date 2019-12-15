@@ -144,6 +144,7 @@ void Board::handleCollision() {
     drawTetrimino();
     if (willCurrentTetriminoCollideBottom()) {
         gameOver = true;
+        callCallbacks(GAME_OVER);
     }
 }
 

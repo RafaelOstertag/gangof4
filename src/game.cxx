@@ -20,7 +20,10 @@ Game::Game(const Window& window)
                                                                tetriminoStock,
                                                                minoTextureStore,
                                                                lightGrey},
-      moveSound{"resources/move.wav"}, rotateSound{"resources/rotate.wav"} {
+      moveSound{"resources/move.wav"}, rotateSound{"resources/rotate.wav"},
+      collisionSound{"resources/collision.wav"},
+      rowFullSound{"resources/rowfull.wav"}, gameOverSound{
+                                                 "resources/gameover.wav"} {
 #ifndef NDEBUG
     std::cout << "Initialized game" << std::endl;
 #endif
@@ -38,6 +41,18 @@ Game::Game(const Window& window)
     BoardCallbackPtr moveLeftCallback{
         new SoundCallback{MOVE_LEFT, moveSound, 0}};
     board->registerBoardCallback(moveLeftCallback);
+
+    BoardCallbackPtr collisionCallback{
+        new SoundCallback{COLLISION, collisionSound, 2}};
+    board->registerBoardCallback(collisionCallback);
+
+    BoardCallbackPtr rowFullCallback{
+        new SoundCallback{FULL_ROW, rowFullSound, 2}};
+    board->registerBoardCallback(rowFullCallback);
+
+    BoardCallbackPtr gameOverCallback{
+        new SoundCallback{GAME_OVER, gameOverSound, 3}};
+    board->registerBoardCallback(gameOverCallback);
 }
 
 Game::~Game() {

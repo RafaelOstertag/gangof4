@@ -7,7 +7,8 @@ enum BoardEvent {
     MOVE_RIGHT,
     MOVE_DOWN,
     COLLISION,
-    FULL_ROW
+    FULL_ROW,
+    GAME_OVER
 };
 
 #endif

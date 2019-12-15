@@ -51,6 +51,9 @@ class Game : public Renderable {
     Preview preview;
     SoundFile moveSound;
     SoundFile rotateSound;
+    SoundFile collisionSound;
+    SoundFile rowFullSound;
+    SoundFile gameOverSound;
 };
 
 using GamePtr = std::shared_ptr<Game>;
