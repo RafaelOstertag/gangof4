@@ -1,6 +1,13 @@
 #include "minotexturestore.hh"
+#include "bluemino.hh"
+#include "cyanmino.hh"
+#include "greenmino.hh"
+#include "orangemino.hh"
+#include "purplemino.hh"
+#include "redmino.hh"
 #include "texturefile.hh"
 #include "texturememory.hh"
+#include "yellowmino.hh"
 
 void MinoTextureStore::loadTexture(MinoTexture minoTexture,
                                    const std::string& filename,
@@ -24,13 +31,19 @@ void MinoTextureStore::loadTexture(MinoTexture minoTexture, void* ptr, int size,
 MinoTextureStore createMinoTextureStore(const Renderer& renderer) {
     MinoTextureStore textureStore{};
 
-    textureStore.loadTexture(CYAN, "resources/cyanmino.bmp", renderer);
-    textureStore.loadTexture(RED, "resources/redmino.bmp", renderer);
-    textureStore.loadTexture(YELLOW, "resources/yellowmino.bmp", renderer);
-    textureStore.loadTexture(PURPLE, "resources/purplemino.bmp", renderer);
-    textureStore.loadTexture(BLUE, "resources/bluemino.bmp", renderer);
-    textureStore.loadTexture(GREEN, "resources/greenmino.bmp", renderer);
-    textureStore.loadTexture(ORANGE, "resources/orangemino.bmp", renderer);
+    textureStore.loadTexture(CYAN, cyanMinoBMP.data, cyanMinoBMP.size,
+                             renderer);
+    textureStore.loadTexture(RED, redMinoBMP.data, redMinoBMP.size, renderer);
+    textureStore.loadTexture(YELLOW, yellowMinoBMP.data, yellowMinoBMP.size,
+                             renderer);
+    textureStore.loadTexture(PURPLE, purpleMinoBMP.data, purpleMinoBMP.size,
+                             renderer);
+    textureStore.loadTexture(BLUE, blueMinoBMP.data, blueMinoBMP.size,
+                             renderer);
+    textureStore.loadTexture(GREEN, greenMinoBMP.data, greenMinoBMP.size,
+                             renderer);
+    textureStore.loadTexture(ORANGE, orangeMinoBMP.data, orangeMinoBMP.size,
+                             renderer);
 
     return textureStore;
 }

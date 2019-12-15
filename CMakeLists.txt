@@ -12,6 +12,15 @@ set(CMAKE_CXX_FLAGS_RELEASE "-g0 -O3 -Wall -pedantic -Werror -DNDEBUG")
 include(FindPkgConfig)
 pkg_check_modules(SDL2 REQUIRED sdl2 SDL2_ttf SDL2_mixer)
 
+function(bmpToCxx filename varName)
+    add_custom_command(
+        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${filename}.cxx
+        COMMAND ${CMAKE_BINARY_DIR}/utils/bin2cxx ${PROJECT_SOURCE_DIR}/resources/${filename}.bmp ${varName} ${filename} ${CMAKE_CURRENT_BINARY_DIR}
+        DEPENDS bin2cxx
+    )
+endfunction(bmpToCxx)
+
+add_subdirectory(utils)
 add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(it)

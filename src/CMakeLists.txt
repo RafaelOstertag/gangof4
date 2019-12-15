@@ -22,10 +22,24 @@ set(sources
             texturememory.cxx
             window.cxx
             soundfile.cxx
+            ${CMAKE_CURRENT_BINARY_DIR}/bluemino.cxx
+            ${CMAKE_CURRENT_BINARY_DIR}/cyanmino.cxx
+            ${CMAKE_CURRENT_BINARY_DIR}/greenmino.cxx
+            ${CMAKE_CURRENT_BINARY_DIR}/orangemino.cxx
+            ${CMAKE_CURRENT_BINARY_DIR}/purplemino.cxx
+            ${CMAKE_CURRENT_BINARY_DIR}/redmino.cxx
+            ${CMAKE_CURRENT_BINARY_DIR}/yellowmino.cxx
 )
 
+bmpToCxx(bluemino blueMinoBMP)
+bmpToCxx(cyanmino cyanMinoBMP)
+bmpToCxx(greenmino greenMinoBMP)
+bmpToCxx(orangemino orangeMinoBMP)
+bmpToCxx(purplemino purpleMinoBMP)
+bmpToCxx(redmino redMinoBMP)
+bmpToCxx(yellowmino yellowMinoBMP)
 
 add_executable(tetris ${sources})
 target_compile_options(tetris PRIVATE ${SDL2_CFLAGS_OTHER})
-target_include_directories(tetris PUBLIC ${SDL2_INCLUDE_DIRS})
+target_include_directories(tetris PRIVATE ${CMAKE_CURRENT_BINARY_DIR} PUBLIC ${SDL2_INCLUDE_DIRS})
 target_link_libraries(tetris ${SDL2_LIBRARIES} )
