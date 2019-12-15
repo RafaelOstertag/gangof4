@@ -43,7 +43,7 @@ void showPauseText(Window& window, PauseText& pauseText) {
 }
 
 void run() {
-    Window window{PROJECT_NAME, 520, 500, darkGrey};
+    Window window{PROJECT_NAME, 600, 500, darkGrey};
     GamePtr game{new Game{window}};
 
     int counter = 0;

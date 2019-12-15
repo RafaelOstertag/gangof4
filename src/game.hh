@@ -4,6 +4,7 @@
 #include "board.hh"
 #include "boardrenderer.hh"
 #include "font.hh"
+#include "labelvalue.hh"
 #include "normaltetriminostock.hh"
 #include "preview.hh"
 #include "renderable.hh"
@@ -36,10 +37,8 @@ class Game : public Renderable {
     std::shared_ptr<Board> board;
     FontPtr font18;
     FontPtr font25;
-    Text scoreLabel;
-    Text scoreText;
-    Text levelLabel;
-    Text levelText;
+    LabelValue score;
+    LabelValue level;
     Text nextTetrimino;
     Text gameOverText;
     MinoTextureStore minoTextureStore;

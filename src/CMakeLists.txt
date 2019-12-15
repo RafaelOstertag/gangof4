@@ -19,6 +19,7 @@ set(sources
             game.cxx
             gangof4.cxx
             help.cxx
+            labelvalue.cxx
             memoryrwops.cxx
             minorenderer.cxx 
             minotexturestore.cxx

@@ -6,26 +6,25 @@
 #include "rowfull.hh"
 #include "veramonobold.hh"
 
+#include <cassert>
 #include <iostream>
 
 Game::Game(const Window& window)
     : tetriminoStock{new NormalTetriminoStock{}},
-      scorer{new Scorer{Board::width}}, board{new Board{tetriminoStock,
-                                                        lightGrey, scorer}},
+      scorer{new Scorer{Board::width}}, board{new Board{tetriminoStock, white,
+                                                        scorer}},
       font18{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 18}},
       font25{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 25}},
-      scoreLabel{font18, 320, 200, white, "Score"},
-      scoreText{font18, 320, 230, white, std::to_string(scorer->getScore())},
-      levelLabel{font18, 320, 270, white, "Level"},
-      levelText{font18, 320, 300, white, std::to_string(scorer->getLevel())},
-      nextTetrimino{font18, 320, 10, white, "Next"}, gameOverText{font25, 132,
-                                                                  200, white,
-                                                                  "Game Over"},
+      score{"Score", std::to_string(scorer->getScore()), white, 10, 10},
+      level{"Level", std::to_string(scorer->getLevel()), white, 10, 390},
+      nextTetrimino{font18, 490, 170, white, "Next"}, gameOverText{font25, 232,
+                                                                   200, white,
+                                                                   "Game Over"},
       minoTextureStore{createMinoTextureStore(window.getRenderer())},
-      boardRenderer{100, 10, board, minoTextureStore}, preview{320, 40,
+      boardRenderer{200, 10, board, minoTextureStore}, preview{490, 200,
                                                                tetriminoStock,
                                                                minoTextureStore,
-                                                               lightGrey},
+                                                               white},
       moveSound{moveWAV.data, moveWAV.size}, rotateSound{rotateWAV.data,
                                                          rotateWAV.size},
       collisionSound{collisionWAV.data, collisionWAV.size},
@@ -71,20 +70,42 @@ Game::~Game() {
 
 void Game::nextMove() {
     board->nextMove();
-    scoreText.setText(std::to_string(scorer->getScore()));
-    levelText.setText(std::to_string(scorer->getLevel()));
+    score.setValue(std::to_string(scorer->getScore()));
+    level.setValue(std::to_string(scorer->getLevel()));
 }
 
 void Game::render(const Renderer& renderer) {
     boardRenderer.render(renderer);
     preview.render(renderer);
-    scoreLabel.render(renderer);
-    scoreText.render(renderer);
-    levelLabel.render(renderer);
-    levelText.render(renderer);
+    score.render(renderer);
+    level.render(renderer);
     nextTetrimino.render(renderer);
 
     if (board->isGameOver()) {
         gameOverText.render(renderer);
     }
+
+#ifndef NDEBUG
+    auto result = SDL_SetRenderDrawColor(renderer, white.red(), white.green(),
+                                         white.blue(), white.alpha());
+#endif
+    assert(result == 0);
+
+#ifndef NDEBUG
+    result =
+#endif
+        SDL_RenderDrawLine(renderer, 110, 109, 200, 109);
+    assert(result == 0);
+
+#ifndef NDEBUG
+    result =
+#endif
+        SDL_RenderDrawLine(renderer, 110, 390, 200, 390);
+    assert(result == 0);
+
+#ifndef NDEBUG
+    result =
+#endif
+        SDL_RenderDrawLine(renderer, 400, 250, 490, 250);
+    assert(result == 0);
 }

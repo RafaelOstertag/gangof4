@@ -1,13 +1,4 @@
 set(SOURCES 
-    ${PROJECT_SOURCE_DIR}/src/tetrimino.cxx 
-    ${PROJECT_SOURCE_DIR}/src/minorenderer.cxx
-    ${PROJECT_SOURCE_DIR}/src/minotexturestore.cxx
-    ${PROJECT_SOURCE_DIR}/src/renderer.cxx
-    ${PROJECT_SOURCE_DIR}/src/sdl.cxx
-    ${PROJECT_SOURCE_DIR}/src/tetriminorenderer.cxx 
-    ${PROJECT_SOURCE_DIR}/src/texturefile.cxx 
-    ${PROJECT_SOURCE_DIR}/src/window.cxx
-    ${PROJECT_SOURCE_DIR}/src/texturememory.cxx
     ${CMAKE_CURRENT_BINARY_DIR}/bluemino.cxx
     ${CMAKE_CURRENT_BINARY_DIR}/cyanmino.cxx
     ${CMAKE_CURRENT_BINARY_DIR}/greenmino.cxx
@@ -16,6 +7,15 @@ set(SOURCES
     ${CMAKE_CURRENT_BINARY_DIR}/redmino.cxx
     ${CMAKE_CURRENT_BINARY_DIR}/yellowmino.cxx
     ${PROJECT_SOURCE_DIR}/src/memoryrwops.cxx
+    ${PROJECT_SOURCE_DIR}/src/minorenderer.cxx
+    ${PROJECT_SOURCE_DIR}/src/minotexturestore.cxx
+    ${PROJECT_SOURCE_DIR}/src/renderer.cxx
+    ${PROJECT_SOURCE_DIR}/src/sdl.cxx
+    ${PROJECT_SOURCE_DIR}/src/tetrimino.cxx 
+    ${PROJECT_SOURCE_DIR}/src/tetriminorenderer.cxx 
+    ${PROJECT_SOURCE_DIR}/src/texturefile.cxx 
+    ${PROJECT_SOURCE_DIR}/src/texturememory.cxx
+    ${PROJECT_SOURCE_DIR}/src/window.cxx
 )
 
 bmpToCxx(bluemino blueMinoBMP)
