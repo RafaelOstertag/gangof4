@@ -20,6 +20,10 @@ Font::~Font() {
 Font::Font(Font&& o) : ttfFont{o.ttfFont} { o.ttfFont = nullptr; }
 
 Font& Font::operator=(Font&& o) {
+    if (ttfFont != nullptr) {
+        TTF_CloseFont(ttfFont);
+    }
+
     ttfFont = o.ttfFont;
     o.ttfFont = nullptr;
 

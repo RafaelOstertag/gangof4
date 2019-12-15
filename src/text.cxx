@@ -18,6 +18,10 @@ Text::Text(Text&& o)
 Text& Text::operator=(Text&& o) {
     font = std::move(o.font);
 
+    if (texture != nullptr) {
+        SDL_DestroyTexture(texture);
+    }
+    
     texture = o.texture;
     o.texture = nullptr;
 

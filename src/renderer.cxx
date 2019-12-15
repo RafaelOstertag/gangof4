@@ -13,6 +13,10 @@ Renderer::Renderer(Renderer&& o) : sdlRenderer{o.sdlRenderer} {
 }
 
 Renderer& Renderer::operator=(Renderer&& o) {
+    if (sdlRenderer != nullptr) {
+        SDL_DestroyRenderer(sdlRenderer);
+    }
+    
     sdlRenderer = o.sdlRenderer;
     o.sdlRenderer = nullptr;
 

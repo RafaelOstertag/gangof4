@@ -29,6 +29,10 @@ TextureFile::TextureFile(TextureFile&& other) : texture{other.texture} {
 }
 
 TextureFile& TextureFile::operator=(TextureFile&& other) {
+    if (texture != nullptr) {
+        SDL_DestroyTexture(texture);
+    }
+    
     texture = other.texture;
     other.texture = nullptr;
 

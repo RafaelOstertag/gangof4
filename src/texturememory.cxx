@@ -1,4 +1,5 @@
 #include "texturememory.hh"
+#include "memoryrwops.hh"
 
 #include <sstream>
 #include <stdexcept>
@@ -6,14 +7,9 @@
 TextureMemory::TextureMemory(void* ptr, int size, const Renderer& renderer)
     : texture{nullptr} {
 
-    auto rwOpsPtr = SDL_RWFromMem(ptr, size);
-    if (rwOpsPtr == nullptr) {
-        std::ostringstream errorMessage;
-        errorMessage << "Cannot create RWOps from memory: " << SDL_GetError();
-        throw std::runtime_error(errorMessage.str());
-    }
+    MemoryRWOps memoryRWOps{ptr, size};
 
-    auto bitmapSurface = SDL_LoadBMP_RW(rwOpsPtr, 0);
+    auto bitmapSurface = SDL_LoadBMP_RW(memoryRWOps.getRWOps(), 0);
     if (bitmapSurface == nullptr) {
         std::ostringstream errorMessage;
         errorMessage << "Error loading bitmap from memory: " << SDL_GetError();
@@ -29,7 +25,6 @@ TextureMemory::TextureMemory(void* ptr, int size, const Renderer& renderer)
         throw std::invalid_argument(errorMessage.str());
     }
 
-    SDL_FreeRW(rwOpsPtr);
     SDL_FreeSurface(bitmapSurface);
 }
 
@@ -38,6 +33,10 @@ TextureMemory::TextureMemory(TextureMemory&& other) : texture{other.texture} {
 }
 
 TextureMemory& TextureMemory::operator=(TextureMemory&& other) {
+    if (texture != nullptr) {
+        SDL_DestroyTexture(texture);
+    }
+    
     texture = other.texture;
     other.texture = nullptr;
 
