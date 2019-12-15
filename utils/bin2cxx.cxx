@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <sys/stat.h>
