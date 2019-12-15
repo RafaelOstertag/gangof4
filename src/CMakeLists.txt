@@ -58,5 +58,5 @@ ttfToCxx(veramonobold veraMonoBoldTTF)
 
 add_executable(tetris ${sources})
 target_compile_options(tetris PRIVATE ${SDL2_CFLAGS_OTHER})
-target_include_directories(tetris PRIVATE ${CMAKE_CURRENT_BINARY_DIR} PUBLIC ${SDL2_INCLUDE_DIRS})
+target_include_directories(tetris PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${PROJECT_BINARY_DIR} PUBLIC ${SDL2_INCLUDE_DIRS})
 target_link_libraries(tetris ${SDL2_LIBRARIES} )

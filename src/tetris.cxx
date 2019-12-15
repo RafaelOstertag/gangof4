@@ -2,6 +2,7 @@
 #include "help.hh"
 #include "pausetext.hh"
 #include "sdl.hh"
+#include "version.h"
 #include "window.hh"
 
 #include <iostream>
@@ -117,7 +118,16 @@ void run() {
     }
 }
 
+void printYadaYada() {
+    std::cout << PROJECT_NAME << " " << VERSION_MAJOR << "." << VERSION_MINOR
+              << "." << VERSION_PATCH << "\n\n"
+              << "Copyright (c) 2019 Rafael Ostertag <rafi@guengel.ch>\n"
+              << "Fonts Copyright (c) 2003 by Bitstream, Inc\n\n";
+}
+
 int main() {
+    printYadaYada();
+
     if (!init_sdl()) {
         std::cerr << SDL_GetError() << std::endl;
         return 1;

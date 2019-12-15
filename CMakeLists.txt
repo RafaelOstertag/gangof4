@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # set the project name
-project(Bounce VERSION 1.0.0)
+project(Tetris VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -40,3 +40,5 @@ add_subdirectory(utils)
 add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(it)
+
+configure_file(version.h.in version.h)

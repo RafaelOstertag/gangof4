@@ -49,6 +49,7 @@
         "ostream": "cpp",
         "streambuf": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "version.h.in": "plaintext"
     }
 }
