@@ -20,13 +20,9 @@ class Game : public Renderable {
     Game(const Window& window);
     virtual ~Game();
 
-    constexpr void rotateCurrentTetrimino() { board->rotateCurrentTetrimino(); }
-    constexpr void moveCurrentTetriminoLeft() {
-        board->moveCurrentTetriminoLeft();
-    }
-    constexpr void moveCurrentTetriminoRight() {
-        board->moveCurrentTetriminoRight();
-    }
+    void rotateCurrentTetrimino() { board->rotateCurrentTetrimino(); }
+    void moveCurrentTetriminoLeft() { board->moveCurrentTetriminoLeft(); }
+    void moveCurrentTetriminoRight() { board->moveCurrentTetriminoRight(); }
 
     void nextMove();
 
