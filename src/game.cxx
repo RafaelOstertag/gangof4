@@ -4,6 +4,7 @@
 #include "move.hh"
 #include "rotate.hh"
 #include "rowfull.hh"
+#include "veramonobold.hh"
 
 #include <iostream>
 
@@ -11,13 +12,13 @@ Game::Game(const Window& window)
     : tetriminoStock{new NormalTetriminoStock{}},
       scorer{new Scorer{Board::width}}, board{new Board{tetriminoStock,
                                                         lightGrey, scorer}},
-      font18{new Font{"resources/lucidasansdemibold.ttf", 18}},
-      font25{new Font{"resources/lucidasansdemibold.ttf", 25}},
+      font18{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 18}},
+      font25{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 25}},
       scoreLabel{font18, 320, 200, white, "Score"},
       scoreText{font18, 320, 230, white, std::to_string(scorer->getScore())},
       levelLabel{font18, 320, 270, white, "Level"},
       levelText{font18, 320, 300, white, std::to_string(scorer->getLevel())},
-      nextTetrimino{font18, 320, 10, white, "Next"}, gameOverText{font25, 130,
+      nextTetrimino{font18, 320, 10, white, "Next"}, gameOverText{font25, 132,
                                                                   200, white,
                                                                   "Game Over"},
       minoTextureStore{createMinoTextureStore(window.getRenderer())},

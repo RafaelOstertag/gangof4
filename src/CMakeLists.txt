@@ -11,6 +11,7 @@ set(sources
             ${CMAKE_CURRENT_BINARY_DIR}/move.cxx
             ${CMAKE_CURRENT_BINARY_DIR}/rotate.cxx
             ${CMAKE_CURRENT_BINARY_DIR}/rowfull.cxx
+            ${CMAKE_CURRENT_BINARY_DIR}/rowfull.cxx
             board.cxx
             boardrenderer.cxx
             circulartetriminostock.cxx
@@ -36,6 +37,7 @@ set(sources
             texturememory.cxx
             window.cxx
             memoryrwops.cxx
+            veramonobold.cxx
 )
 
 bmpToCxx(bluemino blueMinoBMP)
@@ -51,6 +53,8 @@ wavToCxx(gameover gameOverWAV)
 wavToCxx(move moveWAV)
 wavToCxx(rotate rotateWAV)
 wavToCxx(rowfull rowFullWAV)
+
+ttfToCxx(veramonobold veraMonoBoldTTF)
 
 add_executable(tetris ${sources})
 target_compile_options(tetris PRIVATE ${SDL2_CFLAGS_OTHER})

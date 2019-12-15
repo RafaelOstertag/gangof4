@@ -1,13 +1,15 @@
 #ifndef __FONT_HH
 #define __FONT_HH
 
+#include "memoryrwops.hh"
+
 #include <SDL_ttf.h>
 #include <memory>
 #include <string>
 
 class Font {
   public:
-    Font(const std::string& ttfFilepath, int size);
+    Font(void* ptr, int memsize, int size);
     ~Font();
     Font(const Font&) = delete;
     Font& operator=(const Font&) = delete;
@@ -18,6 +20,7 @@ class Font {
     constexpr TTF_Font* getFont() const { return ttfFont; }
 
   private:
+    MemoryRWOps memoryFont;
     TTF_Font* ttfFont;
 };
 

@@ -28,6 +28,14 @@ function(wavToCxx filename varName)
     )
 endfunction(wavToCxx)
 
+function(ttfToCxx filename varName)
+    add_custom_command(
+        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${filename}.cxx
+        COMMAND ${CMAKE_BINARY_DIR}/utils/bin2cxx ${PROJECT_SOURCE_DIR}/resources/${filename}.ttf ${varName} ${filename} ${CMAKE_CURRENT_BINARY_DIR}
+        DEPENDS bin2cxx
+    )
+endfunction(ttfToCxx)
+
 add_subdirectory(utils)
 add_subdirectory(src)
 add_subdirectory(tests)
