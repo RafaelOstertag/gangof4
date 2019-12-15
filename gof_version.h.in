@@ -1,0 +1,9 @@
+#ifndef __VERSION_H
+#define __VERSION_H
+
+#define VERSION_MAJOR @GangOf4_VERSION_MAJOR@
+#define VERSION_MINOR @GangOf4_VERSION_MINOR@
+#define VERSION_PATCH @GangOf4_VERSION_PATCH@
+#define PROJECT_NAME "@PROJECT_NAME@"
+
+#endif

@@ -1,9 +1,0 @@
-#ifndef __VERSION_H
-#define __VERSION_H
-
-#define VERSION_MAJOR @Tetris_VERSION_MAJOR@
-#define VERSION_MINOR @Tetris_VERSION_MINOR@
-#define VERSION_PATCH @Tetris_VERSION_PATCH@
-#define PROJECT_NAME "@PROJECT_NAME@"
-
-#endif
