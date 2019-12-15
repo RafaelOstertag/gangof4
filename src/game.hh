@@ -8,6 +8,7 @@
 #include "preview.hh"
 #include "renderable.hh"
 #include "scorer.hh"
+#include "soundcallback.hh"
 #include "soundfile.hh"
 #include "text.hh"
 #include "window.hh"
@@ -19,10 +20,14 @@ class Game : public Renderable {
     Game(const Window& window);
     virtual ~Game();
 
-    void rotateCurrentTetrimino();
-    void moveCurrentTetriminoLeft();
+    constexpr void rotateCurrentTetrimino() { board->rotateCurrentTetrimino(); }
+    constexpr void moveCurrentTetriminoLeft() {
+        board->moveCurrentTetriminoLeft();
+    }
+    constexpr void moveCurrentTetriminoRight() {
+        board->moveCurrentTetriminoRight();
+    }
 
-    void moveCurrentTetriminoRight();
     void nextMove();
 
     scorer_ptr_t getScorer() const { return scorer; }

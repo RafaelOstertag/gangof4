@@ -1,6 +1,7 @@
 #ifndef __BOARD_HH
 #define __BOARD_HH
 
+#include "boardcallback.hh"
 #include "color.hh"
 #include "renderable.hh"
 #include "scorer.hh"
@@ -9,6 +10,7 @@
 #include <array>
 #include <list>
 #include <set>
+#include <vector>
 
 class BoardRenderer;
 
@@ -28,12 +30,15 @@ class Board {
 
     bool isGameOver();
 
+    void registerBoardCallback(BoardCallbackPtr callback);
+
   private:
     std::shared_ptr<TetriminoStock> tetriminoStock;
     Color color;
     scorer_ptr_t scorer;
     std::shared_ptr<Tetrimino> currentTetrimino;
     std::list<std::shared_ptr<Mino>> minos;
+    std::vector<BoardCallbackPtr> callbacks;
     bool gameOver;
 
     bool drawTetrimino();
@@ -47,6 +52,8 @@ class Board {
     bool isRowFull(int row) const;
     void removeRow(int row);
     void moveMinosAboveRowDown(int row);
+
+    void callCallbacks(BoardEvent event);
 
     friend BoardRenderer;
 };

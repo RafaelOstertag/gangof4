@@ -1,6 +1,5 @@
 #include "game.hh"
 
-#include <SDL_mixer.h>
 #include <iostream>
 
 Game::Game(const Window& window)
@@ -25,6 +24,20 @@ Game::Game(const Window& window)
 #ifndef NDEBUG
     std::cout << "Initialized game" << std::endl;
 #endif
+    BoardCallbackPtr rotateCallback{new SoundCallback{ROTATE, rotateSound, 1}};
+    board->registerBoardCallback(rotateCallback);
+
+    BoardCallbackPtr moveDownCallback{
+        new SoundCallback{MOVE_DOWN, moveSound, 0}};
+    board->registerBoardCallback(moveDownCallback);
+
+    BoardCallbackPtr moveRightCallback{
+        new SoundCallback{MOVE_RIGHT, moveSound, 0}};
+    board->registerBoardCallback(moveRightCallback);
+
+    BoardCallbackPtr moveLeftCallback{
+        new SoundCallback{MOVE_LEFT, moveSound, 0}};
+    board->registerBoardCallback(moveLeftCallback);
 }
 
 Game::~Game() {
@@ -33,25 +46,10 @@ Game::~Game() {
 #endif
 }
 
-void Game::rotateCurrentTetrimino() {
-    board->rotateCurrentTetrimino();
-    Mix_PlayChannel(1, rotateSound.getMixChunk(), 0);
-}
-
-void Game::moveCurrentTetriminoLeft() {
-    board->moveCurrentTetriminoLeft();
-    Mix_PlayChannel(0, moveSound.getMixChunk(), 0);
-}
-void Game::moveCurrentTetriminoRight() {
-    board->moveCurrentTetriminoRight();
-    Mix_PlayChannel(0, moveSound.getMixChunk(), 0);
-}
-
 void Game::nextMove() {
     board->nextMove();
     scoreText.setText(std::to_string(scorer->getScore()));
     levelText.setText(std::to_string(scorer->getLevel()));
-    Mix_PlayChannel(0, moveSound.getMixChunk(), 0);
 }
 
 void Game::render(const Renderer& renderer) {

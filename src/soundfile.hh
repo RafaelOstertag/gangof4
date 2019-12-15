@@ -1,13 +1,14 @@
 #ifndef __SOUNDFILE_HH
 #define __SOUNDFILE_HH
 
-#include <SDL_mixer.h>
+#include "sound.hh"
+
 #include <string>
 
-class SoundFile {
+class SoundFile : public Sound {
   public:
     SoundFile(const std::string& filename);
-    ~SoundFile();
+    virtual ~SoundFile();
 
     SoundFile(const SoundFile&) = delete;
     SoundFile& operator=(const SoundFile&) = delete;
@@ -15,7 +16,7 @@ class SoundFile {
     SoundFile(SoundFile&& o);
     SoundFile& operator=(SoundFile&& o);
 
-    Mix_Chunk* getMixChunk() { return chunk; }
+    virtual Mix_Chunk* getMixChunk() const { return chunk; }
 
   private:
     Mix_Chunk* chunk;

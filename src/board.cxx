@@ -6,7 +6,7 @@
 Board::Board(std::shared_ptr<TetriminoStock> tetriminoStock, const Color& color,
              scorer_ptr_t scorer)
     : tetriminoStock{tetriminoStock}, color{color}, scorer{scorer},
-      currentTetrimino{nullptr}, minos{}, gameOver{false} {}
+      currentTetrimino{nullptr}, minos{}, callbacks{}, gameOver{false} {}
 
 void Board::nextMove() {
     if (gameOver)
@@ -20,10 +20,18 @@ void Board::nextMove() {
         handleCollision();
         auto linesRemoved = compactBoard();
         scorer->scoreLinesRemoved(linesRemoved);
+
+        if (linesRemoved > 0) {
+            callCallbacks(FULL_ROW);
+        } else {
+            callCallbacks(COLLISION);
+        }
+
         return;
     }
 
     currentTetrimino->moveDown();
+    callCallbacks(MOVE_DOWN);
 }
 
 void Board::moveCurrentTetriminoLeft() {
@@ -33,6 +41,7 @@ void Board::moveCurrentTetriminoLeft() {
     assert(currentTetrimino);
     if (currentTetrimino->getX() > 0 && !willTetriminosCollideLeft()) {
         currentTetrimino->moveLeft();
+        callCallbacks(MOVE_LEFT);
     }
 }
 
@@ -44,6 +53,7 @@ void Board::moveCurrentTetriminoRight() {
     if (currentTetrimino->maxX() < (width - 1) &&
         !willTetriminosCollideRight()) {
         currentTetrimino->moveRight();
+        callCallbacks(MOVE_RIGHT);
     }
 }
 
@@ -56,10 +66,16 @@ void Board::rotateCurrentTetrimino() {
     if (currentTetrimino->maxX() >= width || willTetriminosCollideLeft() ||
         willTetriminosCollideRight()) {
         currentTetrimino->rotateCounterclockwise();
+    } else {
+        callCallbacks(ROTATE);
     }
 }
 
 bool Board::isGameOver() { return gameOver; }
+
+void Board::registerBoardCallback(BoardCallbackPtr callback) {
+    callbacks.push_back(callback);
+}
 
 bool Board::drawTetrimino() {
     if (!currentTetrimino) {
@@ -140,6 +156,7 @@ int Board::compactBoard() {
             rowsRemoved++;
         }
     }
+
     return rowsRemoved;
 }
 
@@ -170,5 +187,11 @@ void Board::moveMinosAboveRowDown(int row) {
     for (auto mino : minos) {
         if (mino->getY() < row)
             mino->moveY(1);
+    }
+}
+
+void Board::callCallbacks(BoardEvent event) {
+    for (auto callback : callbacks) {
+        callback->call(event, *this);
     }
 }
