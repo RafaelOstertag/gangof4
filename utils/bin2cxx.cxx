@@ -1,43 +1,39 @@
 #include <algorithm>
 #include <cerrno>
 #include <cstring>
-#include <fcntl.h>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
 #include <string>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
 #include <vector>
 
 const std::string spaces{"    "};
 
 void printHelp(char* cmd) {
-    std::cout << cmd << " <file> <varName> <filename> <output>" << std::endl
-              << std::endl;
-    std::cout << "<file>\t\tfile to convert into C-string" << std::endl;
-    std::cout << "<varName>\tvariable name" << std::endl;
-    std::cout << "<filename>\tfile name of '.cxx' and '.hh' files";
-    std::cout << "<output>\toutput directory." << std::endl;
+    std::cout << cmd << " <file> <varName> <filename> <output>\n\n";
+    std::cout << "<file>\t\tfile to convert into C-string\n";
+    std::cout << "<varName>\tvariable name\n";
+    std::cout << "<filename>\tfile name of '.cxx' and '.hh' files\n";
+    std::cout << "<output>\toutput directory.\n\n";
 }
 
 std::vector<unsigned char> readFile(const std::string& filename) {
-    auto fd = open(filename.c_str(), O_RDONLY);
-    if (fd < 0) {
+    std::ifstream instream{filename.c_str(), std::ios_base::binary};
+    if (!instream) {
         std::ostringstream errorMessage;
         errorMessage << "Cannot open file '" << filename << "': ";
         errorMessage << std::strerror(errno);
 
         throw std::invalid_argument(errorMessage.str());
     }
+
     std::vector<unsigned char> binaryFile;
     binaryFile.reserve(8196);
 
-    unsigned char c;
-    while (read(fd, &c, 1) != 0) {
+    for (unsigned char c = instream.get(); !instream.eof();
+         c = instream.get()) {
         binaryFile.push_back(c);
     }
 
@@ -117,7 +113,6 @@ int main(int argc, char* argv[]) {
     }
 
     try {
-
         auto fileContent = readFile(argv[1]);
 
         writeHHFile(argv[3], argv[4], argv[2], fileContent);
