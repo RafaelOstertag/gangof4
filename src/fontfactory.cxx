@@ -11,7 +11,7 @@ FontFactory& FontFactory::operator=(FontFactory&& o) {
     return *this;
 }
 
-FontPtr FontFactory::createFont(int size) {
+FontPtr FontFactory::createFont(FontSize size) {
     auto font = cache[size];
     if (!font) {
         font =

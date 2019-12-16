@@ -2,6 +2,7 @@
 #define __FONTFACTORY_HH
 
 #include "font.hh"
+#include "fontsize.hh"
 
 #include <unordered_map>
 
@@ -15,10 +16,10 @@ class FontFactory {
     FontFactory(FontFactory&& o);
     FontFactory& operator=(FontFactory&& o);
 
-    FontPtr createFont(int size);
+    FontPtr createFont(FontSize size);
 
   private:
-    std::unordered_map<int, FontPtr> cache;
+    std::unordered_map<FontSize, FontPtr> cache;
 };
 
 #endif

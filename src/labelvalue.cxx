@@ -6,9 +6,9 @@
 LabelValue::LabelValue(const std::string& label,
                        const std::string& initialValue, const Color& color,
                        int x, int y, FontFactory& fontFactory)
-    : color{color}, label{fontFactory.createFont(18), x + 20, y + 20,
-                          color, label},
-      value{fontFactory.createFont(18), x + 20, y + 50, color,
+    : color{color}, label{fontFactory.createFont(NORMAL), x + 20, y + 20, color,
+                          label},
+      value{fontFactory.createFont(NORMAL), x + 20, y + 50, color,
             initialValue},
       rectangle{x, y, 100, 100} {}
 
