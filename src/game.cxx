@@ -15,11 +15,11 @@ Game::Game(const Window& window)
                                                         scorer}},
       font18{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 18}},
       font25{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 25}},
-      score{"Score", std::to_string(scorer->getScore()), white, 10, 10},
-      level{"Level", std::to_string(scorer->getLevel()), white, 10, 390},
-      nextTetrimino{font18, 490, 170, white, "Next"}, gameOverText{font25, 232,
+      score{"SCORE", std::to_string(scorer->getScore()), white, 10, 10},
+      level{"LEVEL", std::to_string(scorer->getLevel()), white, 10, 390},
+      nextTetrimino{font18, 490, 170, white, "NEXT"}, gameOverText{font25, 232,
                                                                    200, white,
-                                                                   "Game Over"},
+                                                                   "GAME OVER"},
       minoTextureStore{createMinoTextureStore(window.getRenderer())},
       boardRenderer{200, 10, board, minoTextureStore}, preview{490, 200,
                                                                tetriminoStock,
@@ -31,9 +31,7 @@ Game::Game(const Window& window)
       rowFullSound{rowFullWAV.data, rowFullWAV.size}, gameOverSound{
                                                           gameOverWAV.data,
                                                           gameOverWAV.size} {
-#ifndef NDEBUG
-    std::cout << "Initialized game" << std::endl;
-#endif
+
     BoardCallbackPtr rotateCallback{new SoundCallback{ROTATE, rotateSound, 1}};
     board->registerBoardCallback(rotateCallback);
 
@@ -60,6 +58,10 @@ Game::Game(const Window& window)
     BoardCallbackPtr gameOverCallback{
         new SoundCallback{GAME_OVER, gameOverSound, 3}};
     board->registerBoardCallback(gameOverCallback);
+
+#ifndef NDEBUG
+    std::cout << "Initialized game" << std::endl;
+#endif
 }
 
 Game::~Game() {
