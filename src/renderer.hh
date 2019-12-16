@@ -18,6 +18,8 @@ class Renderer {
 
   private:
     SDL_Renderer* sdlRenderer;
+
+    void destroyRenderer();
 };
 
 #endif

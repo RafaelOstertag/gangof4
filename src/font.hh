@@ -23,6 +23,8 @@ class Font {
   private:
     MemoryRWOps memoryFont;
     TTF_Font* ttfFont;
+
+    void destroyFont();
 };
 
 using FontPtr = std::shared_ptr<Font>;

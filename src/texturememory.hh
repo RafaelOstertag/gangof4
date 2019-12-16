@@ -19,6 +19,8 @@ class TextureMemory : public Texture {
 
   private:
     SDL_Texture* texture;
+
+    void destroyTexture();
 };
 
 #endif

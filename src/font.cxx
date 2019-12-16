@@ -12,11 +12,7 @@ Font::Font(void* ptr, int memsize, int size)
     }
 }
 
-Font::~Font() {
-    if (ttfFont != nullptr) {
-        TTF_CloseFont(ttfFont);
-    }
-}
+Font::~Font() { destroyFont(); }
 
 Font::Font(Font&& o) : memoryFont{std::move(o.memoryFont)}, ttfFont{o.ttfFont} {
     o.ttfFont = nullptr;
@@ -25,12 +21,17 @@ Font::Font(Font&& o) : memoryFont{std::move(o.memoryFont)}, ttfFont{o.ttfFont} {
 Font& Font::operator=(Font&& o) {
     memoryFont = std::move(o.memoryFont);
 
-    if (ttfFont != nullptr) {
-        TTF_CloseFont(ttfFont);
-    }
+    destroyFont();
 
     ttfFont = o.ttfFont;
     o.ttfFont = nullptr;
 
     return *this;
+}
+
+void Font::destroyFont() {
+    if (ttfFont != nullptr) {
+        TTF_CloseFont(ttfFont);
+        ttfFont = nullptr;
+    }
 }

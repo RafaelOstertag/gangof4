@@ -18,10 +18,8 @@ Text::Text(Text&& o)
 Text& Text::operator=(Text&& o) {
     font = std::move(o.font);
 
-    if (texture != nullptr) {
-        SDL_DestroyTexture(texture);
-    }
-    
+    destroyTexture();
+
     texture = o.texture;
     o.texture = nullptr;
 
@@ -32,7 +30,7 @@ Text& Text::operator=(Text&& o) {
     return *this;
 }
 
-Text::~Text() { freeTexture(); }
+Text::~Text() { destroyTexture(); }
 
 void Text::setText(const std::string& text) {
     if (this->text == text) {
@@ -40,7 +38,7 @@ void Text::setText(const std::string& text) {
     }
     this->text = text;
 
-    freeTexture();
+    destroyTexture();
 }
 
 void Text::render(const Renderer& renderer) {
@@ -53,7 +51,7 @@ void Text::render(const Renderer& renderer) {
     SDL_RenderCopy(renderer, texture, nullptr, &rectangle);
 }
 
-void Text::freeTexture() {
+void Text::destroyTexture() {
     if (texture) {
         SDL_DestroyTexture(texture);
         texture = nullptr;
