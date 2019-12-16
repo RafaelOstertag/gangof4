@@ -1,3 +1,4 @@
+#include "consts.hh"
 #include "game.hh"
 #include "gof_version.h"
 #include "help.hh"
@@ -43,7 +44,7 @@ void showPauseText(Window& window, PauseText& pauseText) {
 }
 
 void run() {
-    Window window{PROJECT_NAME, 600, 500, DARK_GRAY};
+    Window window{PROJECT_NAME, WINDOW_WIDTH_PX, WINDOW_HEIGHT_PX, DARK_GRAY};
     GamePtr game{new Game{window}};
 
     int counter = 0;
