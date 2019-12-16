@@ -11,7 +11,7 @@
 
 Game::Game(const Window& window)
     : tetriminoStock{new NormalTetriminoStock{}},
-      scorer{new Scorer{Board::width}}, board{new Board{tetriminoStock, white,
+      scorer{new Scorer{Board::WIDTH_IN_MINOS}}, board{new Board{tetriminoStock, white,
                                                         scorer}},
       font18{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 18}},
       font25{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 25}},

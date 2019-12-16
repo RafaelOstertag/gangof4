@@ -50,7 +50,7 @@ void Board::moveCurrentTetriminoRight() {
         return;
 
     assert(currentTetrimino);
-    if (currentTetrimino->maxX() < (width - 1) &&
+    if (currentTetrimino->maxX() < (WIDTH_IN_MINOS - 1) &&
         !willTetriminosCollideRight()) {
         currentTetrimino->moveRight();
         callCallbacks(MOVE_RIGHT);
@@ -63,7 +63,7 @@ void Board::rotateCurrentTetrimino() {
 
     assert(currentTetrimino);
     currentTetrimino->rotateClockwise();
-    if (currentTetrimino->maxX() >= width || willTetriminosCollideLeft() ||
+    if (currentTetrimino->maxX() >= WIDTH_IN_MINOS || willTetriminosCollideLeft() ||
         willTetriminosCollideRight()) {
         currentTetrimino->rotateCounterclockwise();
     } else {
@@ -89,7 +89,7 @@ bool Board::drawTetrimino() {
 bool Board::willCurrentTetriminoCollideBottom() const {
     assert(currentTetrimino);
 
-    if ((currentTetrimino->maxY() + 1) >= height)
+    if ((currentTetrimino->maxY() + 1) >= HEIGHT_IN_MINOS)
         return true;
 
     for (auto mino : currentTetrimino->getMinos()) {
@@ -150,7 +150,7 @@ void Board::handleCollision() {
 
 int Board::compactBoard() {
     int rowsRemoved = 0;
-    for (int row = height - 1; row >= 0; row--) {
+    for (int row = HEIGHT_IN_MINOS - 1; row >= 0; row--) {
         while (isRowFull(row)) {
             removeRow(row);
             moveMinosAboveRowDown(row);
@@ -162,18 +162,18 @@ int Board::compactBoard() {
 }
 
 bool Board::isRowFull(int row) const {
-    assert(row >= 0 && row < height);
+    assert(row >= 0 && row < HEIGHT_IN_MINOS);
 
     int minosOnRow = 0;
     for (auto mino : minos) {
         if (mino->getY() == row)
             minosOnRow++;
     }
-    return minosOnRow == width;
+    return minosOnRow == WIDTH_IN_MINOS;
 }
 
 void Board::removeRow(int row) {
-    assert(row >= 0 && row < height);
+    assert(row >= 0 && row < HEIGHT_IN_MINOS);
 
     auto first = std::remove_if(minos.begin(), minos.end(), [row](auto mino) {
         return mino->getY() == row;
@@ -183,7 +183,7 @@ void Board::removeRow(int row) {
 }
 
 void Board::moveMinosAboveRowDown(int row) {
-    assert(row > 0 && row < height);
+    assert(row > 0 && row < HEIGHT_IN_MINOS);
 
     for (auto mino : minos) {
         if (mino->getY() < row)
