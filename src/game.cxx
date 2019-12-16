@@ -1,65 +1,68 @@
 #include "game.hh"
 #include "collision.hh"
+#include "fontfactory.hh"
 #include "gameover.hh"
 #include "move.hh"
 #include "rotate.hh"
 #include "rowfull.hh"
-#include "veramonobold.hh"
+#include "soundchannel.hh"
 
 #include <cassert>
 #include <iostream>
 
-Game::Game(const Window& window)
-    : tetriminoStock{new NormalTetriminoStock{}},
-      scorer{new Scorer{Board::width}}, board{new Board{tetriminoStock, white,
-                                                        scorer}},
-      font18{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 18}},
-      font25{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 25}},
-      score{"Score", std::to_string(scorer->getScore()), white, 10, 10},
-      level{"Level", std::to_string(scorer->getLevel()), white, 10, 390},
-      nextTetrimino{font18, 490, 170, white, "Next"}, gameOverText{font25, 232,
-                                                                   200, white,
-                                                                   "Game Over"},
+Game::Game(const Window& window, FontFactory& fontFactory)
+    : tetriminoStock{new NormalTetriminoStock{}}, scorer{new Scorer{
+                                                      Board::WIDTH_IN_MINOS}},
+      board{new Board{tetriminoStock, WHITE, scorer}},
+      score{"SCORE",    std::to_string(scorer->getScore()), WHITE, 10, 10,
+            fontFactory},
+      level{"LEVEL",    std::to_string(scorer->getLevel()), WHITE, 10, 390,
+            fontFactory},
+      nextTetrimino{fontFactory.createFont(NORMAL), 490, 170, WHITE, "NEXT"},
+      gameOverText{fontFactory.createFont(BIG), 232, 200, WHITE, "GAME OVER"},
       minoTextureStore{createMinoTextureStore(window.getRenderer())},
       boardRenderer{200, 10, board, minoTextureStore}, preview{490, 200,
                                                                tetriminoStock,
                                                                minoTextureStore,
-                                                               white},
+                                                               WHITE},
       moveSound{moveWAV.data, moveWAV.size}, rotateSound{rotateWAV.data,
                                                          rotateWAV.size},
       collisionSound{collisionWAV.data, collisionWAV.size},
       rowFullSound{rowFullWAV.data, rowFullWAV.size}, gameOverSound{
                                                           gameOverWAV.data,
                                                           gameOverWAV.size} {
-#ifndef NDEBUG
-    std::cout << "Initialized game" << std::endl;
-#endif
-    BoardCallbackPtr rotateCallback{new SoundCallback{ROTATE, rotateSound, 1}};
+
+    BoardCallbackPtr rotateCallback{
+        new SoundCallback{ROTATE, rotateSound, TWO}};
     board->registerBoardCallback(rotateCallback);
 
     BoardCallbackPtr moveDownCallback{
-        new SoundCallback{MOVE_DOWN, moveSound, 0}};
+        new SoundCallback{MOVE_DOWN, moveSound, ONE}};
     board->registerBoardCallback(moveDownCallback);
 
     BoardCallbackPtr moveRightCallback{
-        new SoundCallback{MOVE_RIGHT, moveSound, 0}};
+        new SoundCallback{MOVE_RIGHT, moveSound, ONE}};
     board->registerBoardCallback(moveRightCallback);
 
     BoardCallbackPtr moveLeftCallback{
-        new SoundCallback{MOVE_LEFT, moveSound, 0}};
+        new SoundCallback{MOVE_LEFT, moveSound, ONE}};
     board->registerBoardCallback(moveLeftCallback);
 
     BoardCallbackPtr collisionCallback{
-        new SoundCallback{COLLISION, collisionSound, 2}};
+        new SoundCallback{COLLISION, collisionSound, THREE}};
     board->registerBoardCallback(collisionCallback);
 
     BoardCallbackPtr rowFullCallback{
-        new SoundCallback{FULL_ROW, rowFullSound, 2}};
+        new SoundCallback{FULL_ROW, rowFullSound, THREE}};
     board->registerBoardCallback(rowFullCallback);
 
     BoardCallbackPtr gameOverCallback{
-        new SoundCallback{GAME_OVER, gameOverSound, 3}};
+        new SoundCallback{GAME_OVER, gameOverSound, FOUR}};
     board->registerBoardCallback(gameOverCallback);
+
+#ifndef NDEBUG
+    std::cout << "Initialized game" << std::endl;
+#endif
 }
 
 Game::~Game() {
@@ -86,8 +89,8 @@ void Game::render(const Renderer& renderer) {
     }
 
 #ifndef NDEBUG
-    auto result = SDL_SetRenderDrawColor(renderer, white.red(), white.green(),
-                                         white.blue(), white.alpha());
+    auto result = SDL_SetRenderDrawColor(renderer, WHITE.red(), WHITE.green(),
+                                         WHITE.blue(), WHITE.alpha());
 #endif
     assert(result == 0);
 

@@ -11,23 +11,24 @@ MemoryRWOps::MemoryRWOps(void* ptr, int size) : memRWOps{nullptr} {
     }
 }
 
-MemoryRWOps::~MemoryRWOps() {
-    if (memRWOps != nullptr) {
-        SDL_FreeRW(memRWOps);
-    }
-}
+MemoryRWOps::~MemoryRWOps() { destroyRWOps(); }
 
 MemoryRWOps::MemoryRWOps(MemoryRWOps&& o) : memRWOps{o.memRWOps} {
     o.memRWOps = nullptr;
 }
 
 MemoryRWOps& MemoryRWOps::operator=(MemoryRWOps&& o) {
-    if (memRWOps != nullptr) {
-        SDL_FreeRW(memRWOps);
-    }
+    destroyRWOps();
 
     memRWOps = o.memRWOps;
     o.memRWOps = nullptr;
 
     return *this;
+}
+
+void MemoryRWOps::destroyRWOps() {
+    if (memRWOps != nullptr) {
+        SDL_FreeRW(memRWOps);
+        memRWOps = nullptr;
+    }
 }

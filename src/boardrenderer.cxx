@@ -10,8 +10,8 @@ BoardRenderer::BoardRenderer(int referenceX, int referenceY,
     : board{board}, minoTextureStore{minoTextureStore}, boardOutline{},
       referenceX{referenceX}, referenceY{referenceY} {
     boardOutline = SDL_Rect{referenceX, referenceY,
-                            TetriminoRenderer::width * Board::width,
-                            TetriminoRenderer::width * Board::height};
+                            TetriminoRenderer::width * Board::WIDTH_IN_MINOS,
+                            TetriminoRenderer::width * Board::HEIGHT_IN_MINOS};
 }
 
 void BoardRenderer::render(const Renderer& renderer) {

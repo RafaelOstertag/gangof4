@@ -18,23 +18,24 @@ SoundMemory::SoundMemory(void* ptr, int size) {
     }
 }
 
-SoundMemory::~SoundMemory() {
-    if (chunk != nullptr) {
-        Mix_FreeChunk(chunk);
-    }
-}
+SoundMemory::~SoundMemory() { destroyChunk(); }
 
 SoundMemory::SoundMemory(SoundMemory&& o) : chunk{o.chunk} {
     o.chunk = nullptr;
 }
 
 SoundMemory& SoundMemory::operator=(SoundMemory&& o) {
-    if (chunk != nullptr) {
-        Mix_FreeChunk(chunk);
-    }
+    destroyChunk();
 
     chunk = o.chunk;
     o.chunk = nullptr;
 
     return *this;
+}
+
+void SoundMemory::destroyChunk() {
+    if (chunk != nullptr) {
+        Mix_FreeChunk(chunk);
+        chunk = nullptr;
+    }
 }

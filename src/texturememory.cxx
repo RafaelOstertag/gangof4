@@ -33,18 +33,19 @@ TextureMemory::TextureMemory(TextureMemory&& other) : texture{other.texture} {
 }
 
 TextureMemory& TextureMemory::operator=(TextureMemory&& other) {
-    if (texture != nullptr) {
-        SDL_DestroyTexture(texture);
-    }
-    
+    destroyTexture();
+
     texture = other.texture;
     other.texture = nullptr;
 
     return *this;
 }
 
-TextureMemory::~TextureMemory() {
+TextureMemory::~TextureMemory() { destroyTexture(); }
+
+void TextureMemory::destroyTexture() {
     if (texture != nullptr) {
         SDL_DestroyTexture(texture);
+        texture = nullptr;
     }
 }

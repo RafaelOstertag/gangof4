@@ -1,16 +1,14 @@
 #include "help.hh"
-#include "veramonobold.hh"
 
-Help::Help()
-    : font25{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 25}},
-      labelQuit{font25, 270, 100, white, "Quit"}, quitKey{font25, 292, 130,
-                                                          white, "Q"},
-      labelRestart{font25, 247, 180, white, "Restart"}, restartKey{font25, 292,
-                                                                   210, white,
-                                                                   "R"},
-      labelPause{font25, 262, 260, white, "Pause"}, pauseKey{font25, 292, 290,
-                                                             white, "P"},
-      labelStart{font25, 150, 380, white, "Press Enter to Start"} {}
+Help::Help(FontFactory& fontFactory)
+    : labelQuit{fontFactory.createFont(BIG), 270, 100, WHITE, "QUIT"},
+      quitKey{fontFactory.createFont(BIG), 292, 130, WHITE, "Q"},
+      labelRestart{fontFactory.createFont(BIG), 247, 180, WHITE, "RESTART"},
+      restartKey{fontFactory.createFont(BIG), 292, 210, WHITE, "R"},
+      labelPause{fontFactory.createFont(BIG), 262, 260, WHITE, "PAUSE"},
+      pauseKey{fontFactory.createFont(BIG), 292, 290, WHITE, "P"},
+      labelStart{fontFactory.createFont(BIG), 150, 380, WHITE,
+                 "PRESS ENTER TO START"} {}
 
 void Help::render(const Renderer& renderer) {
     labelQuit.render(renderer);

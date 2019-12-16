@@ -1,12 +1,13 @@
 #ifndef __PAUSETEXT_HH
 #define __PAUSETEXT_HH
 
+#include "fontfactory.hh"
 #include "renderable.hh"
 #include "text.hh"
 
 class PauseText : public Renderable {
   public:
-    PauseText();
+    PauseText(FontFactory& fontFactory);
     virtual ~PauseText() {}
 
     constexpr void reset() { rendered = false; }
@@ -14,7 +15,6 @@ class PauseText : public Renderable {
     virtual void render(const Renderer& renderer);
 
   private:
-    FontPtr font25;
     Text message;
     bool rendered;
 };
