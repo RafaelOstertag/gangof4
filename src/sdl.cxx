@@ -1,11 +1,10 @@
 #include "sdl.hh"
+#include "soundchannel.hh"
 
 #include <SDL.h>
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 #include <iostream>
-
-constexpr int NUMBER_OF_AUDIO_CHANNELS = 4;
 
 bool init_sdl() {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
@@ -13,8 +12,8 @@ bool init_sdl() {
         return false;
     }
 
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, NUMBER_OF_AUDIO_CHANNELS,
-                      4096) < 0) {
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, NUMBER_OF_CHANNELS, 4096) <
+        0) {
         std::cerr << "SDL_mixer could not initialize! SDL_mixer Error: "
                   << Mix_GetError() << std::endl;
         return false;

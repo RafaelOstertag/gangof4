@@ -5,6 +5,7 @@
 #include "move.hh"
 #include "rotate.hh"
 #include "rowfull.hh"
+#include "soundchannel.hh"
 
 #include <cassert>
 #include <iostream>
@@ -31,31 +32,32 @@ Game::Game(const Window& window, FontFactory& fontFactory)
                                                           gameOverWAV.data,
                                                           gameOverWAV.size} {
 
-    BoardCallbackPtr rotateCallback{new SoundCallback{ROTATE, rotateSound, 1}};
+    BoardCallbackPtr rotateCallback{
+        new SoundCallback{ROTATE, rotateSound, TWO}};
     board->registerBoardCallback(rotateCallback);
 
     BoardCallbackPtr moveDownCallback{
-        new SoundCallback{MOVE_DOWN, moveSound, 0}};
+        new SoundCallback{MOVE_DOWN, moveSound, ONE}};
     board->registerBoardCallback(moveDownCallback);
 
     BoardCallbackPtr moveRightCallback{
-        new SoundCallback{MOVE_RIGHT, moveSound, 0}};
+        new SoundCallback{MOVE_RIGHT, moveSound, ONE}};
     board->registerBoardCallback(moveRightCallback);
 
     BoardCallbackPtr moveLeftCallback{
-        new SoundCallback{MOVE_LEFT, moveSound, 0}};
+        new SoundCallback{MOVE_LEFT, moveSound, ONE}};
     board->registerBoardCallback(moveLeftCallback);
 
     BoardCallbackPtr collisionCallback{
-        new SoundCallback{COLLISION, collisionSound, 2}};
+        new SoundCallback{COLLISION, collisionSound, THREE}};
     board->registerBoardCallback(collisionCallback);
 
     BoardCallbackPtr rowFullCallback{
-        new SoundCallback{FULL_ROW, rowFullSound, 2}};
+        new SoundCallback{FULL_ROW, rowFullSound, THREE}};
     board->registerBoardCallback(rowFullCallback);
 
     BoardCallbackPtr gameOverCallback{
-        new SoundCallback{GAME_OVER, gameOverSound, 3}};
+        new SoundCallback{GAME_OVER, gameOverSound, FOUR}};
     board->registerBoardCallback(gameOverCallback);
 
 #ifndef NDEBUG
