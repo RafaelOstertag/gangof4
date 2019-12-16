@@ -11,20 +11,20 @@
 
 Game::Game(const Window& window)
     : tetriminoStock{new NormalTetriminoStock{}},
-      scorer{new Scorer{Board::WIDTH_IN_MINOS}}, board{new Board{tetriminoStock, white,
+      scorer{new Scorer{Board::WIDTH_IN_MINOS}}, board{new Board{tetriminoStock, WHITE,
                                                         scorer}},
       font18{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 18}},
       font25{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 25}},
-      score{"SCORE", std::to_string(scorer->getScore()), white, 10, 10},
-      level{"LEVEL", std::to_string(scorer->getLevel()), white, 10, 390},
-      nextTetrimino{font18, 490, 170, white, "NEXT"}, gameOverText{font25, 232,
-                                                                   200, white,
+      score{"SCORE", std::to_string(scorer->getScore()), WHITE, 10, 10},
+      level{"LEVEL", std::to_string(scorer->getLevel()), WHITE, 10, 390},
+      nextTetrimino{font18, 490, 170, WHITE, "NEXT"}, gameOverText{font25, 232,
+                                                                   200, WHITE,
                                                                    "GAME OVER"},
       minoTextureStore{createMinoTextureStore(window.getRenderer())},
       boardRenderer{200, 10, board, minoTextureStore}, preview{490, 200,
                                                                tetriminoStock,
                                                                minoTextureStore,
-                                                               white},
+                                                               WHITE},
       moveSound{moveWAV.data, moveWAV.size}, rotateSound{rotateWAV.data,
                                                          rotateWAV.size},
       collisionSound{collisionWAV.data, collisionWAV.size},
@@ -88,8 +88,8 @@ void Game::render(const Renderer& renderer) {
     }
 
 #ifndef NDEBUG
-    auto result = SDL_SetRenderDrawColor(renderer, white.red(), white.green(),
-                                         white.blue(), white.alpha());
+    auto result = SDL_SetRenderDrawColor(renderer, WHITE.red(), WHITE.green(),
+                                         WHITE.blue(), WHITE.alpha());
 #endif
     assert(result == 0);
 
