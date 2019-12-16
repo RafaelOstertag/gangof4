@@ -31,7 +31,7 @@ class Text : public Renderable {
     std::string text;
     SDL_Rect rectangle;
 
-    void freeTexture();
+    void destroyTexture();
     void textToTexture(const Renderer& renderer);
 };
 

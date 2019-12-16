@@ -2,6 +2,7 @@
 #define __FONT_HH
 
 #include "memoryrwops.hh"
+#include "veramonobold.hh"
 
 #include <SDL_ttf.h>
 #include <memory>
@@ -22,6 +23,8 @@ class Font {
   private:
     MemoryRWOps memoryFont;
     TTF_Font* ttfFont;
+
+    void destroyFont();
 };
 
 using FontPtr = std::shared_ptr<Font>;

@@ -18,6 +18,8 @@ class SoundMemory : public Sound {
 
   private:
     Mix_Chunk* chunk;
+
+    void destroyChunk();
 };
 
 #endif

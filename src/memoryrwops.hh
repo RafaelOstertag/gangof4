@@ -18,6 +18,8 @@ class MemoryRWOps {
 
   private:
     SDL_RWops* memRWOps;
+
+    void destroyRWOps();
 };
 
 #endif

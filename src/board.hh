@@ -16,8 +16,8 @@ class BoardRenderer;
 
 class Board {
   public:
-    static constexpr int height = 24;
-    static constexpr int width = 10;
+    static constexpr int HEIGHT_IN_MINOS = 24;
+    static constexpr int WIDTH_IN_MINOS = 10;
 
     Board(std::shared_ptr<TetriminoStock> tetriminoStock, const Color& color,
           scorer_ptr_t scorer);

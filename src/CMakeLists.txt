@@ -16,6 +16,7 @@ set(sources
             boardrenderer.cxx
             circulartetriminostock.cxx
             font.cxx
+            fontfactory.cxx
             game.cxx
             gangof4.cxx
             help.cxx

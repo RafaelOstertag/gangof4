@@ -1,15 +1,16 @@
 #include "labelvalue.hh"
-#include "veramonobold.hh"
+#include "fontfactory.hh"
 
 #include <cassert>
 
 LabelValue::LabelValue(const std::string& label,
                        const std::string& initialValue, const Color& color,
-                       int x, int y)
-    : font{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 18}},
-      color{color}, label{font, x + 20, y + 20, color, label},
-      value{font, x + 20, y + 50, color, initialValue}, rectangle{x, y, 100,
-                                                                  100} {}
+                       int x, int y, FontFactory& fontFactory)
+    : color{color}, label{fontFactory.createFont(NORMAL), x + 20, y + 20, color,
+                          label},
+      value{fontFactory.createFont(NORMAL), x + 20, y + 50, color,
+            initialValue},
+      rectangle{x, y, 100, 100} {}
 
 void LabelValue::render(const Renderer& renderer) {
 #ifndef NDEBUG

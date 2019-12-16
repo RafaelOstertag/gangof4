@@ -16,21 +16,22 @@ SoundFile::SoundFile(const std::string& filename) : chunk{nullptr} {
     }
 }
 
-SoundFile::~SoundFile() {
-    if (chunk != nullptr) {
-        Mix_FreeChunk(chunk);
-    }
-}
+SoundFile::~SoundFile() { destroyChunk(); }
 
 SoundFile::SoundFile(SoundFile&& o) : chunk{o.chunk} { o.chunk = nullptr; }
 
 SoundFile& SoundFile::operator=(SoundFile&& o) {
-    if (chunk != nullptr) {
-        Mix_FreeChunk(chunk);
-    }
-    
+    destroyChunk();
+
     chunk = o.chunk;
     o.chunk = nullptr;
 
     return *this;
+}
+
+void SoundFile::destroyChunk() {
+    if (chunk != nullptr) {
+        Mix_FreeChunk(chunk);
+        chunk = nullptr;
+    }
 }

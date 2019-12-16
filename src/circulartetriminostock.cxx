@@ -15,10 +15,10 @@ CircularTetriminoStock::CircularTetriminoStock() {
 std::shared_ptr<Tetrimino> CircularTetriminoStock::draw() {
     std::shared_ptr<Tetrimino> tetrimino = factories[selectedFactory]();
     selectedFactory++;
-    selectedFactory %= numberOfTetriminos;
+    selectedFactory %= NUMBER_OF_TETRIMINOS;
     return tetrimino;
 }
 
 std::shared_ptr<Tetrimino> CircularTetriminoStock::preview() {
-    return factories[(selectedFactory + 1) % numberOfTetriminos]();
+    return factories[(selectedFactory + 1) % NUMBER_OF_TETRIMINOS]();
 }
