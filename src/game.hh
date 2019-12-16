@@ -3,7 +3,7 @@
 
 #include "board.hh"
 #include "boardrenderer.hh"
-#include "font.hh"
+#include "fontfactory.hh"
 #include "labelvalue.hh"
 #include "normaltetriminostock.hh"
 #include "preview.hh"
@@ -18,7 +18,7 @@
 
 class Game : public Renderable {
   public:
-    Game(const Window& window);
+    Game(const Window& window, FontFactory& fontFactory);
     virtual ~Game();
 
     void rotateCurrentTetrimino() { board->rotateCurrentTetrimino(); }
@@ -35,8 +35,6 @@ class Game : public Renderable {
     std::shared_ptr<TetriminoStock> tetriminoStock;
     scorer_ptr_t scorer;
     std::shared_ptr<Board> board;
-    FontPtr font18;
-    FontPtr font25;
     LabelValue score;
     LabelValue level;
     Text nextTetrimino;

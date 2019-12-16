@@ -10,10 +10,10 @@
 
 constexpr int baseRetardingValue = 78;
 
-bool showIntro(Window& window) {
+bool showIntro(Window& window, FontFactory& fontFactory) {
 
     window.clear();
-    Help help{};
+    Help help{fontFactory};
     window.render(help);
     window.update();
 
@@ -45,16 +45,17 @@ void showPauseText(Window& window, PauseText& pauseText) {
 
 void run() {
     Window window{PROJECT_NAME, WINDOW_WIDTH_PX, WINDOW_HEIGHT_PX, DARK_GRAY};
-    GamePtr game{new Game{window}};
+    FontFactory fontFactory;
+    GamePtr game{new Game{window, fontFactory}};
 
     int counter = 0;
     int retardingValue = baseRetardingValue;
     SDL_Event event;
     bool pause{false};
-    PauseText pauseText;
+    PauseText pauseText{fontFactory};
 
     // Pressing 'q' in the intro must quit
-    bool run = showIntro(window);
+    bool run = showIntro(window, fontFactory);
     while (run) {
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
@@ -72,7 +73,7 @@ void run() {
                     counter = 0;
                     retardingValue = baseRetardingValue;
                     pause = false;
-                    game = GamePtr{new Game{window}};
+                    game = GamePtr{new Game{window, fontFactory}};
                     break;
 
                 case SDLK_UP:

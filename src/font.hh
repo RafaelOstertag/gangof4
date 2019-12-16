@@ -2,6 +2,7 @@
 #define __FONT_HH
 
 #include "memoryrwops.hh"
+#include "veramonobold.hh"
 
 #include <SDL_ttf.h>
 #include <memory>

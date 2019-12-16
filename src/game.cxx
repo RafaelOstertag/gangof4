@@ -1,25 +1,24 @@
 #include "game.hh"
 #include "collision.hh"
+#include "fontfactory.hh"
 #include "gameover.hh"
 #include "move.hh"
 #include "rotate.hh"
 #include "rowfull.hh"
-#include "veramonobold.hh"
 
 #include <cassert>
 #include <iostream>
 
-Game::Game(const Window& window)
-    : tetriminoStock{new NormalTetriminoStock{}},
-      scorer{new Scorer{Board::WIDTH_IN_MINOS}}, board{new Board{tetriminoStock, WHITE,
-                                                        scorer}},
-      font18{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 18}},
-      font25{new Font{veraMonoBoldTTF.data, veraMonoBoldTTF.size, 25}},
-      score{"SCORE", std::to_string(scorer->getScore()), WHITE, 10, 10},
-      level{"LEVEL", std::to_string(scorer->getLevel()), WHITE, 10, 390},
-      nextTetrimino{font18, 490, 170, WHITE, "NEXT"}, gameOverText{font25, 232,
-                                                                   200, WHITE,
-                                                                   "GAME OVER"},
+Game::Game(const Window& window, FontFactory& fontFactory)
+    : tetriminoStock{new NormalTetriminoStock{}}, scorer{new Scorer{
+                                                      Board::WIDTH_IN_MINOS}},
+      board{new Board{tetriminoStock, WHITE, scorer}},
+      score{"SCORE",    std::to_string(scorer->getScore()), WHITE, 10, 10,
+            fontFactory},
+      level{"LEVEL",    std::to_string(scorer->getLevel()), WHITE, 10, 390,
+            fontFactory},
+      nextTetrimino{fontFactory.createFont(18), 490, 170, WHITE, "NEXT"},
+      gameOverText{fontFactory.createFont(25), 232, 200, WHITE, "GAME OVER"},
       minoTextureStore{createMinoTextureStore(window.getRenderer())},
       boardRenderer{200, 10, board, minoTextureStore}, preview{490, 200,
                                                                tetriminoStock,
