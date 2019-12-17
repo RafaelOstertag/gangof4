@@ -3,10 +3,10 @@
 #include "window.hh"
 
 int main() {
-    if (!init_sdl()) {
+    SDL::initialize();
+    if (!SDL::isInitialized()) {
         return 1;
     }
-    atexit(quit_sdl);
 
     Color windowColor(0xff, 0xff, 0xff, 0x0);
     Window window{"Mino Renderer", 640, 480, windowColor};
@@ -21,4 +21,5 @@ int main() {
     window.update();
 
     SDL_Delay(1000);
+    SDL::shutdown();
 }
