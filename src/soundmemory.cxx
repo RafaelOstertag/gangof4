@@ -1,11 +1,14 @@
 #include "soundmemory.hh"
 #include "memoryrwops.hh"
+#include "sdl.hh"
 
 #include <sstream>
 #include <stdexcept>
 
-SoundMemory::SoundMemory(void* ptr, int size) {
-
+SoundMemory::SoundMemory(void* ptr, int size) : chunk{nullptr} {
+    if (!SDL::hasSound()) {
+        return;
+    }
     MemoryRWOps memoryRWOps{ptr, size};
 
     chunk = Mix_LoadWAV_RW(memoryRWOps.getRWOps(), 0);

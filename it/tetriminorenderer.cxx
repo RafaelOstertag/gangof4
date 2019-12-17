@@ -6,10 +6,10 @@
 
 int main() {
 
-    if (!init_sdl()) {
+    SDL::initialize();
+    if (!SDL::isInitialized()) {
         return 1;
     }
-    atexit(quit_sdl);
 
     Window window{"Tetriminorenderer", 640, 480, DARK_GRAY};
 
@@ -106,4 +106,6 @@ int main() {
 
         SDL_Delay(30);
     }
+
+    SDL::shutdown();
 }

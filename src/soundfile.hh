@@ -1,11 +1,11 @@
 #ifndef __SOUNDFILE_HH
 #define __SOUNDFILE_HH
 
-#include "sound.hh"
+#include "soundeffect.hh"
 
 #include <string>
 
-class SoundFile : public Sound {
+class SoundFile : public SoundEffect {
   public:
     SoundFile(const std::string& filename);
     virtual ~SoundFile();
