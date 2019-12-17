@@ -24,18 +24,14 @@ Game::Game(const Window& window, FontFactory& fontFactory)
       boardRenderer{200, 10, board, minoTextureStore}, preview{490, 200,
                                                                tetriminoStock,
                                                                minoTextureStore,
-                                                               WHITE},
-      moveSound{moveWAV.data, moveWAV.size}, rotateSound{rotateWAV.data,
-                                                         rotateWAV.size},
-      collisionSound{collisionWAV.data, collisionWAV.size},
-      rowFullSound{rowFullWAV.data, rowFullWAV.size}, gameOverSound{
-                                                          gameOverWAV.data,
-                                                          gameOverWAV.size} {
+                                                               WHITE} {
 
+    SoundEffectPtr rotateSound{new SoundMemory{rotateWAV.data, rotateWAV.size}};
     BoardCallbackPtr rotateCallback{
         new SoundCallback{ROTATE, rotateSound, TWO}};
     board->registerBoardCallback(rotateCallback);
 
+    SoundEffectPtr moveSound{new SoundMemory{moveWAV.data, moveWAV.size}};
     BoardCallbackPtr moveDownCallback{
         new SoundCallback{MOVE_DOWN, moveSound, ONE}};
     board->registerBoardCallback(moveDownCallback);
@@ -48,14 +44,20 @@ Game::Game(const Window& window, FontFactory& fontFactory)
         new SoundCallback{MOVE_LEFT, moveSound, ONE}};
     board->registerBoardCallback(moveLeftCallback);
 
+    SoundEffectPtr collisionSound{
+        new SoundMemory{collisionWAV.data, collisionWAV.size}};
     BoardCallbackPtr collisionCallback{
         new SoundCallback{COLLISION, collisionSound, THREE}};
     board->registerBoardCallback(collisionCallback);
 
+    SoundEffectPtr rowFullSound{
+        new SoundMemory{rowFullWAV.data, rowFullWAV.size}};
     BoardCallbackPtr rowFullCallback{
         new SoundCallback{FULL_ROW, rowFullSound, THREE}};
     board->registerBoardCallback(rowFullCallback);
 
+    SoundEffectPtr gameOverSound{
+        new SoundMemory{gameOverWAV.data, gameOverWAV.size}};
     BoardCallbackPtr gameOverCallback{
         new SoundCallback{GAME_OVER, gameOverSound, FOUR}};
     board->registerBoardCallback(gameOverCallback);

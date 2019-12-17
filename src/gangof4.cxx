@@ -130,11 +130,10 @@ void printYadaYada() {
 int main() {
     printYadaYada();
 
-    if (!init_sdl()) {
-        std::cerr << SDL_GetError() << std::endl;
+    SDL::initialize();
+    if (!SDL::isInitialized()) {
         return 1;
     }
-    atexit(quit_sdl);
 
     try {
         run();
@@ -143,4 +142,6 @@ int main() {
         std::cerr << "Ooops! " << e.what() << "\n";
         return 2;
     }
+
+    SDL::shutdown();
 }
