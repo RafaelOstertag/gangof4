@@ -3,23 +3,24 @@
 
 #include "SDL_mixer.h"
 #include "boardcallback.hh"
-#include "sound.hh"
+#include "soundeffect.hh"
 
 class SoundCallback : public BoardCallback {
   public:
-    SoundCallback(BoardEvent listenTo, const Sound& sound, int channel)
-        : listenTo{listenTo}, sound{sound}, channel{channel} {}
+    SoundCallback(BoardEvent listenTo, const SoundEffect& soundEffect,
+                  int channel)
+        : listenTo{listenTo}, soundEffect{soundEffect}, channel{channel} {}
     virtual ~SoundCallback(){};
 
     virtual void call(BoardEvent event, const Board& board) {
         if (event != listenTo)
             return;
-        Mix_PlayChannel(channel, sound.getMixChunk(), 0);
+        Mix_PlayChannel(channel, soundEffect.getMixChunk(), 0);
     }
 
   private:
     BoardEvent listenTo;
-    const Sound& sound;
+    const SoundEffect& soundEffect;
     int channel;
 };
 

@@ -1,9 +1,9 @@
 #ifndef __SOUNDMEMORY_HH
 #define __SOUNDMEMORY_HH
 
-#include "sound.hh"
+#include "soundeffect.hh"
 
-class SoundMemory : public Sound {
+class SoundMemory : public SoundEffect {
   public:
     SoundMemory(void* ptr, int size);
     virtual ~SoundMemory();
