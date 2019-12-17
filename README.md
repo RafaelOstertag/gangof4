@@ -1,3 +1,5 @@
+[![Build Status](https://jenkins.guengel.ch/jenkins/buildStatus/icon?job=GangOf4%2Fdevelop)](https://jenkins.guengel.ch/jenkins/job/GangOf4/job/develop/)
+
 A Tetris clone.
 
 Build Requirements
