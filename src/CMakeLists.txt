@@ -40,6 +40,7 @@ set(sources
             texturememory.cxx
             veramonobold.cxx
             window.cxx
+            soundplayer.cxx
 )
 
 bmpToCxx(bluemino blueMinoBMP)

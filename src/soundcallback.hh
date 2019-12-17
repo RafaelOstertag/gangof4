@@ -1,27 +1,29 @@
 #ifndef __ROTATECALLBACK_HH
 #define __ROTATECALLBACK_HH
 
-#include "SDL_mixer.h"
 #include "boardcallback.hh"
+#include "soundchannel.hh"
 #include "soundeffect.hh"
+#include "soundplayer.hh"
+
+#include <SDL_mixer.h>
 
 class SoundCallback : public BoardCallback {
   public:
-    SoundCallback(BoardEvent listenTo, const SoundEffect& soundEffect,
-                  int channel)
-        : listenTo{listenTo}, soundEffect{soundEffect}, channel{channel} {}
+    SoundCallback(BoardEvent listenTo, const SoundEffectPtr& soundEffect,
+                  SoundChannel channel)
+        : listenTo{listenTo}, soundPlayer{soundEffect, channel} {}
     virtual ~SoundCallback(){};
 
     virtual void call(BoardEvent event, const Board& board) {
         if (event != listenTo)
             return;
-        Mix_PlayChannel(channel, soundEffect.getMixChunk(), 0);
+        soundPlayer.play();
     }
 
   private:
     BoardEvent listenTo;
-    const SoundEffect& soundEffect;
-    int channel;
+    SoundPlayer soundPlayer;
 };
 
 #endif

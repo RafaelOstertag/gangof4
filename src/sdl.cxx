@@ -22,7 +22,7 @@ void SDL::initialize() {
 
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, NUMBER_OF_CHANNELS, 4096) <
         0) {
-        std::cerr << "Ouch! No soundAvailable available, SDL_mixer Error: "
+        std::cerr << "Ouch! No sound available, SDL_mixer Error: "
                   << Mix_GetError() << "\n";
         soundAvailable = false;
     } else {

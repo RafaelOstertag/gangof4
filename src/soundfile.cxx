@@ -1,9 +1,14 @@
 #include "soundfile.hh"
+#include "sdl.hh"
 
 #include <sstream>
 #include <stdexcept>
 
 SoundFile::SoundFile(const std::string& filename) : chunk{nullptr} {
+    if (!SDL::hasSound()) {
+        return;
+    }
+
     chunk = Mix_LoadWAV(filename.c_str());
     if (chunk == nullptr) {
         std::ostringstream errorMessage;

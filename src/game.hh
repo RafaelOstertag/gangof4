@@ -42,11 +42,6 @@ class Game : public Renderable {
     MinoTextureStore minoTextureStore;
     BoardRenderer boardRenderer;
     Preview preview;
-    SoundMemory moveSound;
-    SoundMemory rotateSound;
-    SoundMemory collisionSound;
-    SoundMemory rowFullSound;
-    SoundMemory gameOverSound;
 };
 
 using GamePtr = std::shared_ptr<Game>;
