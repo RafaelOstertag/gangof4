@@ -15,8 +15,8 @@ class RandomTetriminoStock : public TetriminoStock {
     virtual std::shared_ptr<Tetrimino> preview();
 
   private:
-    static constexpr int numberOfTetriminos = 7;
-    std::array<std::shared_ptr<Tetrimino> (*)(), numberOfTetriminos> factories;
+    static constexpr int NUMBER_OF_TETRIMINOS = 7;
+    std::array<std::shared_ptr<Tetrimino> (*)(), NUMBER_OF_TETRIMINOS> factories;
     std::shared_ptr<Tetrimino> prefetch;
     std::function<int()> random;
 
