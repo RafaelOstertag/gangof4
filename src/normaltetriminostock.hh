@@ -10,6 +10,9 @@
 #include <map>
 #endif
 
+/**
+ * Produce Tetriminos randomly with normal distribution.
+ */
 class NormalTetriminoStock : public TetriminoStock {
   public:
     NormalTetriminoStock();
