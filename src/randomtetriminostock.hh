@@ -16,9 +16,11 @@ class RandomTetriminoStock : public TetriminoStock {
 
   private:
     static constexpr int NUMBER_OF_TETRIMINOS = 7;
-    std::array<std::shared_ptr<Tetrimino> (*)(), NUMBER_OF_TETRIMINOS> factories;
+    std::array<std::shared_ptr<Tetrimino> (*)(), NUMBER_OF_TETRIMINOS>
+        factories;
     std::shared_ptr<Tetrimino> prefetch;
     std::function<int()> random;
+    int previousTetriminoFactoryIndex;
 
     std::shared_ptr<Tetrimino> randomTetrimino();
 };
