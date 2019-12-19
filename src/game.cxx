@@ -3,6 +3,7 @@
 #include "fontfactory.hh"
 #include "gameover.hh"
 #include "move.hh"
+#include "randomtetriminostock.hh"
 #include "rotate.hh"
 #include "rowfull.hh"
 #include "soundchannel.hh"
@@ -11,7 +12,7 @@
 #include <iostream>
 
 Game::Game(const Window& window, FontFactory& fontFactory)
-    : tetriminoStock{new NormalTetriminoStock{}}, scorer{new Scorer{
+    : tetriminoStock{new RandomTetriminoStock{}}, scorer{new Scorer{
                                                       Board::WIDTH_IN_MINOS}},
       board{new Board{tetriminoStock, WHITE, scorer}},
       score{"SCORE",    std::to_string(scorer->getScore()), WHITE, 10, 10,

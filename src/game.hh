@@ -5,12 +5,12 @@
 #include "boardrenderer.hh"
 #include "fontfactory.hh"
 #include "labelvalue.hh"
-#include "normaltetriminostock.hh"
 #include "preview.hh"
 #include "renderable.hh"
 #include "scorer.hh"
 #include "soundcallback.hh"
 #include "soundmemory.hh"
+#include "tetriminostock.hh"
 #include "text.hh"
 #include "window.hh"
 
