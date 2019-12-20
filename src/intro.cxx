@@ -7,7 +7,9 @@ Intro::Intro(FontFactory& fontFactory)
       restartKey{fontFactory.createFont(BIG), 292, 210, WHITE, "R"},
       labelPause{fontFactory.createFont(BIG), 262, 260, WHITE, "PAUSE"},
       pauseKey{fontFactory.createFont(BIG), 292, 290, WHITE, "P"},
-      labelStart{fontFactory.createFont(BIG), 150, 380, WHITE,
+      cursorKeys{fontFactory.createFont(BIG), 75, 340, WHITE,
+                 "USE CURSOR KEYS TO MOVE BLOCKS"},
+      labelStart{fontFactory.createFont(BIG), 150, 450, WHITE,
                  "PRESS ENTER TO START"} {}
 
 void Intro::render(const Renderer& renderer) {
@@ -17,5 +19,6 @@ void Intro::render(const Renderer& renderer) {
     restartKey.render(renderer);
     labelPause.render(renderer);
     pauseKey.render(renderer);
+    cursorKeys.render(renderer);
     labelStart.render(renderer);
 }

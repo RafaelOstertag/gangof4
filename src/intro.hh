@@ -20,6 +20,7 @@ class Intro : public Renderable {
     Text restartKey;
     Text labelPause;
     Text pauseKey;
+    Text cursorKeys;
     Text labelStart;
 };
 
