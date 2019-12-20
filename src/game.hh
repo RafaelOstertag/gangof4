@@ -27,13 +27,13 @@ class Game : public Renderable {
 
     void nextMove();
 
-    scorer_ptr_t getScorer() const { return scorer; }
+    ScorerPtr getScorer() const { return scorer; }
 
     virtual void render(const Renderer& renderer);
 
   private:
     std::shared_ptr<TetriminoStock> tetriminoStock;
-    scorer_ptr_t scorer;
+    ScorerPtr scorer;
     std::shared_ptr<Board> board;
     LabelValue score;
     LabelValue level;

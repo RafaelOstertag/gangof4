@@ -7,21 +7,13 @@ class Scorer {
   public:
     using score_t = unsigned int;
     using level_t = unsigned int;
+    virtual ~Scorer() {}
 
-    Scorer(unsigned int minosPerLine) : minosPerLine{minosPerLine}, score{0} {}
-    void scoreLinesRemoved(unsigned int numberOfLines);
-
-    constexpr score_t getScore() const { return score; }
-    constexpr level_t getLevel() const { return score / pointsPerLevel; }
-
-  private:
-    static constexpr score_t pointsPerMino = 2;
-    static constexpr score_t pointsPerLevel = 100;
-    static constexpr score_t scorePerLine = 4;
-    unsigned int minosPerLine;
-    score_t score;
+    virtual void scoreLinesRemoved(unsigned int numberOfLines) = 0;
+    virtual score_t getScore() const = 0;
+    virtual level_t getLevel() const = 0;
 };
 
-using scorer_ptr_t = std::shared_ptr<Scorer>;
+using ScorerPtr = std::shared_ptr<Scorer>;
 
 #endif

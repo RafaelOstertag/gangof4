@@ -20,7 +20,7 @@ class Board {
     static constexpr int WIDTH_IN_MINOS = 10;
 
     Board(std::shared_ptr<TetriminoStock> tetriminoStock, const Color& color,
-          scorer_ptr_t scorer);
+          ScorerPtr scorer);
 
     void nextMove();
 
@@ -35,7 +35,7 @@ class Board {
   private:
     std::shared_ptr<TetriminoStock> tetriminoStock;
     Color color;
-    scorer_ptr_t scorer;
+    ScorerPtr scorer;
     std::shared_ptr<Tetrimino> currentTetrimino;
     std::list<std::shared_ptr<Mino>> minos;
     std::vector<BoardCallbackPtr> callbacks;

@@ -1,10 +1,11 @@
 #include "board.hh"
+#include "slowadvancingscorer.hh"
 
 #include <algorithm>
 #include <cassert>
 
 Board::Board(std::shared_ptr<TetriminoStock> tetriminoStock, const Color& color,
-             scorer_ptr_t scorer)
+             ScorerPtr scorer)
     : tetriminoStock{tetriminoStock}, color{color}, scorer{scorer},
       currentTetrimino{nullptr}, minos{}, callbacks{}, gameOver{false} {}
 
@@ -63,8 +64,8 @@ void Board::rotateCurrentTetrimino() {
 
     assert(currentTetrimino);
     currentTetrimino->rotateClockwise();
-    if (currentTetrimino->maxX() >= WIDTH_IN_MINOS || willTetriminosCollideLeft() ||
-        willTetriminosCollideRight()) {
+    if (currentTetrimino->maxX() >= WIDTH_IN_MINOS ||
+        willTetriminosCollideLeft() || willTetriminosCollideRight()) {
         currentTetrimino->rotateCounterclockwise();
     } else {
         callCallbacks(ROTATE);
