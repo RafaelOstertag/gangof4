@@ -4,7 +4,7 @@
 #include "sdl/fontfactory.hh"
 #include "sdl/renderable.hh"
 #include "sdl/window.hh"
-#include "text.hh"
+#include "sdl/text.hh"
 
 class Intro : public Renderable {
   public:

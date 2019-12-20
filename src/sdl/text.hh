@@ -1,9 +1,9 @@
 #ifndef __TEXT_HH
 #define __TEXT_HH
 
-#include "sdl/color.hh"
-#include "sdl/font.hh"
-#include "sdl/renderable.hh"
+#include "../sdl/color.hh"
+#include "../sdl/font.hh"
+#include "../sdl/renderable.hh"
 
 #include <SDL.h>
 #include <string>

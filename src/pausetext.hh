@@ -3,7 +3,7 @@
 
 #include "sdl/fontfactory.hh"
 #include "sdl/renderable.hh"
-#include "text.hh"
+#include "sdl/text.hh"
 
 class PauseText : public Renderable {
   public:

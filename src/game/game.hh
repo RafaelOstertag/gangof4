@@ -8,7 +8,7 @@
 #include "../sdl/renderable.hh"
 #include "../sdl/window.hh"
 #include "../tetrimino/tetriminostock.hh"
-#include "../text.hh"
+#include "../sdl/text.hh"
 #include "labelvalue.hh"
 #include "preview.hh"
 #include "soundcallback.hh"

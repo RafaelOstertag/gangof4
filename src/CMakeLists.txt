@@ -33,6 +33,7 @@ set(sources
             sdl/soundfile.cxx
             sdl/soundmemory.cxx
             sdl/soundplayer.cxx
+            sdl/text.cxx
             sdl/texturefile.cxx
             sdl/texturememory.cxx
             sdl/window.cxx
@@ -43,7 +44,6 @@ set(sources
             tetrimino/randomtetriminostock.cxx
             tetrimino/tetrimino.cxx 
             tetrimino/tetriminorenderer.cxx 
-            text.cxx
             veramonobold.cxx
 )
 
