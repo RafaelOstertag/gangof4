@@ -1,5 +1,5 @@
 #include "consts.hh"
-#include "game.hh"
+#include "easygamefactory.hh"
 #include "gof_version.h"
 #include "help.hh"
 #include "pausetext.hh"
@@ -46,7 +46,8 @@ void showPauseText(Window& window, PauseText& pauseText) {
 void run() {
     Window window{PROJECT_NAME, WINDOW_WIDTH_PX, WINDOW_HEIGHT_PX, DARK_GRAY};
     FontFactory fontFactory;
-    GamePtr game{new Game{window, fontFactory}};
+    EasyGameFactory easyGameFactory{window, fontFactory};
+    GamePtr game = easyGameFactory.create();
 
     int counter = 0;
     int retardingValue = baseRetardingValue;
@@ -73,7 +74,7 @@ void run() {
                     counter = 0;
                     retardingValue = baseRetardingValue;
                     pause = false;
-                    game = GamePtr{new Game{window, fontFactory}};
+                    game = easyGameFactory.create();
                     break;
 
                 case SDLK_UP:

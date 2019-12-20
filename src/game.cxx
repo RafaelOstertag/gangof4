@@ -1,5 +1,6 @@
 #include "game.hh"
 #include "collision.hh"
+#include "fastadvancingscorer.hh"
 #include "fontfactory.hh"
 #include "gameover.hh"
 #include "move.hh"
@@ -11,10 +12,11 @@
 #include <cassert>
 #include <iostream>
 
-Game::Game(const Window& window, FontFactory& fontFactory)
-    : tetriminoStock{new RandomTetriminoStock{}}, scorer{new Scorer{
-                                                      Board::WIDTH_IN_MINOS}},
-      board{new Board{tetriminoStock, WHITE, scorer}},
+Game::Game(const Window& window, FontFactory& fontFactory,
+           TetriminoStockPtr tetriminoStock, ScorerPtr scorer)
+    : tetriminoStock{tetriminoStock}, scorer{scorer}, board{new Board{
+                                                          tetriminoStock, WHITE,
+                                                          scorer}},
       score{"SCORE",    std::to_string(scorer->getScore()), WHITE, 10, 10,
             fontFactory},
       level{"LEVEL",    std::to_string(scorer->getLevel()), WHITE, 10, 390,

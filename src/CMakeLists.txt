@@ -15,12 +15,16 @@ set(sources
             board.cxx
             boardrenderer.cxx
             circulartetriminostock.cxx
+            easygamefactory.cxx
+            fastadvancingscorer.cxx
             font.cxx
             fontfactory.cxx
             game.cxx
             gangof4.cxx
+            hardgamefactory.cxx
             help.cxx
             labelvalue.cxx
+            mediumgamefactory.cxx
             memoryrwops.cxx
             minorenderer.cxx 
             minotexturestore.cxx
@@ -29,10 +33,11 @@ set(sources
             preview.cxx
             randomtetriminostock.cxx
             renderer.cxx 
-            scorer.cxx
             sdl.cxx 
+            slowadvancingscorer.cxx
             soundfile.cxx
             soundmemory.cxx
+            soundplayer.cxx
             tetrimino.cxx 
             tetriminorenderer.cxx 
             text.cxx
@@ -40,7 +45,6 @@ set(sources
             texturememory.cxx
             veramonobold.cxx
             window.cxx
-            soundplayer.cxx
 )
 
 bmpToCxx(bluemino blueMinoBMP)

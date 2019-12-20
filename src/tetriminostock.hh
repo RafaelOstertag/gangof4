@@ -11,4 +11,6 @@ class TetriminoStock {
     virtual std::shared_ptr<Tetrimino> preview() = 0;
 };
 
+using TetriminoStockPtr = std::shared_ptr<TetriminoStock>;
+
 #endif

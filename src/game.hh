@@ -18,7 +18,8 @@
 
 class Game : public Renderable {
   public:
-    Game(const Window& window, FontFactory& fontFactory);
+    Game(const Window& window, FontFactory& fontFactory,
+         TetriminoStockPtr tetriminoStock, ScorerPtr scorer);
     virtual ~Game();
 
     void rotateCurrentTetrimino() { board->rotateCurrentTetrimino(); }
@@ -32,7 +33,7 @@ class Game : public Renderable {
     virtual void render(const Renderer& renderer);
 
   private:
-    std::shared_ptr<TetriminoStock> tetriminoStock;
+    TetriminoStockPtr tetriminoStock;
     ScorerPtr scorer;
     std::shared_ptr<Board> board;
     LabelValue score;
