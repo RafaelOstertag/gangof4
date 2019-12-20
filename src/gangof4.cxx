@@ -1,5 +1,8 @@
 #include "consts.hh"
+#include "difficultyselector.hh"
 #include "game/easygamefactory.hh"
+#include "game/hardgamefactory.hh"
+#include "game/mediumgamefactory.hh"
 #include "gof_version.h"
 #include "intro.hh"
 #include "pausetext.hh"
@@ -9,6 +12,60 @@
 #include <iostream>
 
 constexpr int baseRetardingValue = 78;
+
+bool showDifficultySelector(Window& window, FontFactory& fontFactory,
+                            GameDifficulty* selectedGameDifficulty) {
+    window.clear();
+    DifficultySelector difficultySelector{window, fontFactory};
+
+    SDL_Event event;
+    while (true) {
+        while (SDL_PollEvent(&event) != 0) {
+            if (event.type == SDL_QUIT) {
+                return false;
+            } else if (event.type == SDL_KEYDOWN) {
+                switch (event.key.keysym.sym) {
+                case SDLK_q:
+                    return false;
+                case SDLK_RETURN:
+                case SDLK_RETURN2:
+                case SDLK_KP_ENTER:
+                    *selectedGameDifficulty =
+                        difficultySelector.getDifficulty();
+                    return true;
+                case SDLK_UP:
+                    difficultySelector.selectPreviousDifficulty();
+                    break;
+                case SDLK_DOWN:
+                    difficultySelector.selectNextDifficulty();
+                    break;
+                }
+            }
+        }
+
+        window.clear();
+        window.render(difficultySelector);
+        window.update();
+
+        SDL_Delay(50);
+    }
+}
+
+std::shared_ptr<GameFactory>
+gameFactoryForDifficulty(GameDifficulty gameDifficulty, const Window& window,
+                         FontFactory& fontFactory) {
+    switch (gameDifficulty) {
+    case EASY:
+        return std::shared_ptr<GameFactory>{
+            new EasyGameFactory{window, fontFactory}};
+    case MEDIUM:
+        return std::shared_ptr<GameFactory>{
+            new MediumGameFactory{window, fontFactory}};
+    case HARD:
+        return std::shared_ptr<GameFactory>{
+            new HardGameFactory{window, fontFactory}};
+    }
+}
 
 bool showIntro(Window& window, FontFactory& fontFactory) {
 
@@ -46,8 +103,6 @@ void showPauseText(Window& window, PauseText& pauseText) {
 void run() {
     Window window{PROJECT_NAME, WINDOW_WIDTH_PX, WINDOW_HEIGHT_PX, DARK_GRAY};
     FontFactory fontFactory;
-    EasyGameFactory easyGameFactory{window, fontFactory};
-    GamePtr game = easyGameFactory.create();
 
     int counter = 0;
     int retardingValue = baseRetardingValue;
@@ -57,6 +112,13 @@ void run() {
 
     // Pressing 'q' in the intro must quit
     bool run = showIntro(window, fontFactory);
+    GameDifficulty gameDifficulty{EASY};
+    run &= showDifficultySelector(window, fontFactory, &gameDifficulty);
+
+    std::shared_ptr<GameFactory> gameFactory =
+        gameFactoryForDifficulty(gameDifficulty, window, fontFactory);
+    GamePtr game = gameFactory->create();
+
     while (run) {
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
@@ -74,7 +136,7 @@ void run() {
                     counter = 0;
                     retardingValue = baseRetardingValue;
                     pause = false;
-                    game = easyGameFactory.create();
+                    game = gameFactory->create();
                     break;
 
                 case SDLK_UP:

@@ -14,6 +14,7 @@ set(sources
             ${CMAKE_CURRENT_BINARY_DIR}/yellowmino.cxx
             board/board.cxx
             board/boardrenderer.cxx
+            difficultyselector.cxx
             game/easygamefactory.cxx
             game/game.cxx
             game/hardgamefactory.cxx
