@@ -1,7 +1,7 @@
 #include "consts.hh"
 #include "easygamefactory.hh"
 #include "gof_version.h"
-#include "help.hh"
+#include "intro.hh"
 #include "pausetext.hh"
 #include "sdl.hh"
 #include "window.hh"
@@ -13,8 +13,8 @@ constexpr int baseRetardingValue = 78;
 bool showIntro(Window& window, FontFactory& fontFactory) {
 
     window.clear();
-    Help help{fontFactory};
-    window.render(help);
+    Intro intro{fontFactory};
+    window.render(intro);
     window.update();
 
     SDL_Event event;

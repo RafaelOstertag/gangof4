@@ -22,7 +22,7 @@ set(sources
             game.cxx
             gangof4.cxx
             hardgamefactory.cxx
-            help.cxx
+            intro.cxx
             labelvalue.cxx
             mediumgamefactory.cxx
             memoryrwops.cxx

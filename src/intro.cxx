@@ -1,6 +1,6 @@
-#include "help.hh"
+#include "intro.hh"
 
-Help::Help(FontFactory& fontFactory)
+Intro::Intro(FontFactory& fontFactory)
     : labelQuit{fontFactory.createFont(BIG), 270, 100, WHITE, "QUIT"},
       quitKey{fontFactory.createFont(BIG), 292, 130, WHITE, "Q"},
       labelRestart{fontFactory.createFont(BIG), 247, 180, WHITE, "RESTART"},
@@ -10,7 +10,7 @@ Help::Help(FontFactory& fontFactory)
       labelStart{fontFactory.createFont(BIG), 150, 380, WHITE,
                  "PRESS ENTER TO START"} {}
 
-void Help::render(const Renderer& renderer) {
+void Intro::render(const Renderer& renderer) {
     labelQuit.render(renderer);
     quitKey.render(renderer);
     labelRestart.render(renderer);

@@ -1,15 +1,15 @@
-#ifndef __HELP_HH
-#define __HELP_HH
+#ifndef __INTRO_HH
+#define __INTRO_HH
 
 #include "fontfactory.hh"
 #include "renderable.hh"
 #include "text.hh"
 #include "window.hh"
 
-class Help : public Renderable {
+class Intro : public Renderable {
   public:
-    Help(FontFactory& fontFactory);
-    virtual ~Help(){};
+    Intro(FontFactory& fontFactory);
+    virtual ~Intro(){};
 
     virtual void render(const Renderer& renderer);
 
