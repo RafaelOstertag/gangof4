@@ -3,7 +3,7 @@
 
 #include "mino.hh"
 #include "minotexturestore.hh"
-#include "renderable.hh"
+#include "../sdl/renderable.hh"
 
 class MinoRenderer : public Renderable {
   public:

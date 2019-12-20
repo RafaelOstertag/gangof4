@@ -1,10 +1,10 @@
 #ifndef __INTRO_HH
 #define __INTRO_HH
 
-#include "fontfactory.hh"
-#include "renderable.hh"
+#include "sdl/fontfactory.hh"
+#include "sdl/renderable.hh"
+#include "sdl/window.hh"
 #include "text.hh"
-#include "window.hh"
 
 class Intro : public Renderable {
   public:

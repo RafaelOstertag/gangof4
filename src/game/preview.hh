@@ -1,10 +1,10 @@
 #ifndef __PREVIEW_HH
 #define __PREVIEW_HH
 
-#include "color.hh"
-#include "minotexturestore.hh"
-#include "renderable.hh"
-#include "tetriminostock.hh"
+#include "../sdl/color.hh"
+#include "../sdl/renderable.hh"
+#include "../tetrimino/minotexturestore.hh"
+#include "../tetrimino/tetriminostock.hh"
 
 class Preview : public Renderable {
   public:

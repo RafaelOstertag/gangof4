@@ -2,10 +2,10 @@
 #define __BOARD_HH
 
 #include "boardcallback.hh"
-#include "color.hh"
-#include "renderable.hh"
-#include "scorer.hh"
-#include "tetriminostock.hh"
+#include "../scorer/scorer.hh"
+#include "../sdl/color.hh"
+#include "../sdl/renderable.hh"
+#include "../tetrimino/tetriminostock.hh"
 
 #include <array>
 #include <list>

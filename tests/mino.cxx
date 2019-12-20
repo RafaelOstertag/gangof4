@@ -1,4 +1,4 @@
-#include "mino.hh"
+#include "tetrimino/mino.hh"
 
 #include <cppunit/CompilerOutputter.h>
 #include <cppunit/TestCaller.h>

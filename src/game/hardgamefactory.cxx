@@ -1,7 +1,7 @@
 #include "hardgamefactory.hh"
-#include "board.hh"
-#include "fastadvancingscorer.hh"
-#include "normaltetriminostock.hh"
+#include "../board/board.hh"
+#include "../scorer/fastadvancingscorer.hh"
+#include "../tetrimino/normaltetriminostock.hh"
 
 HardGameFactory::HardGameFactory(const Window& window, FontFactory& fontFactory)
     : window{window}, fontFactory{fontFactory} {}

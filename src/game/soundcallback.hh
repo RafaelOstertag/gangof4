@@ -1,10 +1,10 @@
 #ifndef __ROTATECALLBACK_HH
 #define __ROTATECALLBACK_HH
 
-#include "boardcallback.hh"
-#include "soundchannel.hh"
-#include "soundeffect.hh"
-#include "soundplayer.hh"
+#include "../board/boardcallback.hh"
+#include "../sdl/soundchannel.hh"
+#include "../sdl/soundeffect.hh"
+#include "../sdl/soundplayer.hh"
 
 #include <SDL_mixer.h>
 

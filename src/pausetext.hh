@@ -1,8 +1,8 @@
 #ifndef __PAUSETEXT_HH
 #define __PAUSETEXT_HH
 
-#include "fontfactory.hh"
-#include "renderable.hh"
+#include "sdl/fontfactory.hh"
+#include "sdl/renderable.hh"
 #include "text.hh"
 
 class PauseText : public Renderable {

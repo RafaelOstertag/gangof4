@@ -4,8 +4,8 @@
 #include "renderer.hh"
 
 class Renderable {
-    public:
-      virtual void render(const Renderer& renderer) = 0;
+  public:
+    virtual void render(const Renderer& renderer) = 0;
 };
 
 #endif

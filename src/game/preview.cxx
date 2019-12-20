@@ -1,5 +1,5 @@
 #include "preview.hh"
-#include "tetriminorenderer.hh"
+#include "../tetrimino/tetriminorenderer.hh"
 
 #include <cassert>
 

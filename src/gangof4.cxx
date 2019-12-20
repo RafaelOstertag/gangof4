@@ -1,10 +1,10 @@
 #include "consts.hh"
-#include "easygamefactory.hh"
+#include "game/easygamefactory.hh"
 #include "gof_version.h"
 #include "intro.hh"
 #include "pausetext.hh"
-#include "sdl.hh"
-#include "window.hh"
+#include "sdl/sdl.hh"
+#include "sdl/window.hh"
 
 #include <iostream>
 

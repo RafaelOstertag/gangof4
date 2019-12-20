@@ -1,13 +1,13 @@
 #include "game.hh"
+#include "../sdl/fontfactory.hh"
+#include "../sdl/soundchannel.hh"
+#include "../sdl/soundmemory.hh"
+#include "../tetrimino/tetriminostock.hh"
 #include "collision.hh"
-#include "fastadvancingscorer.hh"
-#include "fontfactory.hh"
 #include "gameover.hh"
 #include "move.hh"
-#include "randomtetriminostock.hh"
 #include "rotate.hh"
 #include "rowfull.hh"
-#include "soundchannel.hh"
 
 #include <cassert>
 #include <iostream>

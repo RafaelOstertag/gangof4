@@ -1,6 +1,6 @@
 #include "boardrenderer.hh"
-#include "minorenderer.hh"
-#include "tetriminorenderer.hh"
+#include "../tetrimino/minorenderer.hh"
+#include "../tetrimino/tetriminorenderer.hh"
 
 #include <cassert>
 

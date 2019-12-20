@@ -1,5 +1,5 @@
 #include "board.hh"
-#include "slowadvancingscorer.hh"
+#include "../scorer/scorer.hh"
 
 #include <algorithm>
 #include <cassert>

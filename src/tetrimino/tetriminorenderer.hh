@@ -1,8 +1,8 @@
 #ifndef __TETRIMINORENDERER_HH
 #define __TETRIMINORENDERER_HH
 
+#include "../sdl/renderable.hh"
 #include "minotexturestore.hh"
-#include "renderable.hh"
 #include "tetrimino.hh"
 
 class TetriminoRenderer : public Renderable {

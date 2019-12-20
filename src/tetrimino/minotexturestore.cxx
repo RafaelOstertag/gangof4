@@ -1,12 +1,12 @@
 #include "minotexturestore.hh"
+#include "../sdl/texturefile.hh"
+#include "../sdl/texturememory.hh"
 #include "bluemino.hh"
 #include "cyanmino.hh"
 #include "greenmino.hh"
 #include "orangemino.hh"
 #include "purplemino.hh"
 #include "redmino.hh"
-#include "texturefile.hh"
-#include "texturememory.hh"
 #include "yellowmino.hh"
 
 void MinoTextureStore::loadTexture(MinoTexture minoTexture,

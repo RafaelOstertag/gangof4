@@ -1,9 +1,9 @@
 #ifndef __MINOTEXTURESTORE_HH
 #define __MINOTEXTURESTORE_HH
 
+#include "../sdl/renderer.hh"
+#include "../sdl/texture.hh"
 #include "minotexture.hh"
-#include "renderer.hh"
-#include "texture.hh"
 
 #include <memory>
 #include <string>

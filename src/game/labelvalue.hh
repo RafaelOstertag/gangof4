@@ -1,10 +1,10 @@
 #ifndef __LABELVALUE_HH
 #define __LABELVALUE_HH
 
-#include "color.hh"
-#include "fontfactory.hh"
-#include "renderable.hh"
-#include "text.hh"
+#include "../sdl/color.hh"
+#include "../sdl/fontfactory.hh"
+#include "../sdl/renderable.hh"
+#include "../text.hh"
 
 #include <string>
 

@@ -1,5 +1,5 @@
 #include "labelvalue.hh"
-#include "fontfactory.hh"
+#include "../sdl/fontfactory.hh"
 
 #include <cassert>
 

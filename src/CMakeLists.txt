@@ -12,39 +12,39 @@ set(sources
             ${CMAKE_CURRENT_BINARY_DIR}/rowfull.cxx
             ${CMAKE_CURRENT_BINARY_DIR}/rowfull.cxx
             ${CMAKE_CURRENT_BINARY_DIR}/yellowmino.cxx
-            board.cxx
-            boardrenderer.cxx
-            circulartetriminostock.cxx
-            easygamefactory.cxx
-            fastadvancingscorer.cxx
-            font.cxx
-            fontfactory.cxx
-            game.cxx
+            board/board.cxx
+            board/boardrenderer.cxx
+            game/easygamefactory.cxx
+            game/game.cxx
+            game/hardgamefactory.cxx
+            game/labelvalue.cxx
+            game/mediumgamefactory.cxx
+            game/preview.cxx
             gangof4.cxx
-            hardgamefactory.cxx
             intro.cxx
-            labelvalue.cxx
-            mediumgamefactory.cxx
-            memoryrwops.cxx
-            minorenderer.cxx 
-            minotexturestore.cxx
-            normaltetriminostock.cxx
             pausetext.cxx
-            preview.cxx
-            randomtetriminostock.cxx
-            renderer.cxx 
-            sdl.cxx 
-            slowadvancingscorer.cxx
-            soundfile.cxx
-            soundmemory.cxx
-            soundplayer.cxx
-            tetrimino.cxx 
-            tetriminorenderer.cxx 
+            scorer/fastadvancingscorer.cxx
+            scorer/slowadvancingscorer.cxx
+            sdl/font.cxx
+            sdl/fontfactory.cxx
+            sdl/memoryrwops.cxx
+            sdl/renderer.cxx 
+            sdl/sdl.cxx 
+            sdl/soundfile.cxx
+            sdl/soundmemory.cxx
+            sdl/soundplayer.cxx
+            sdl/texturefile.cxx
+            sdl/texturememory.cxx
+            sdl/window.cxx
+            tetrimino/circulartetriminostock.cxx
+            tetrimino/minorenderer.cxx 
+            tetrimino/minotexturestore.cxx
+            tetrimino/normaltetriminostock.cxx
+            tetrimino/randomtetriminostock.cxx
+            tetrimino/tetrimino.cxx 
+            tetrimino/tetriminorenderer.cxx 
             text.cxx
-            texturefile.cxx
-            texturememory.cxx
             veramonobold.cxx
-            window.cxx
 )
 
 bmpToCxx(bluemino blueMinoBMP)

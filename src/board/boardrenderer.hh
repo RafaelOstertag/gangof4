@@ -1,10 +1,10 @@
 #ifndef __BOARDRENDERER_HH
 #define __BOARDRENDERER_HH
 
+#include "../sdl/color.hh"
+#include "../sdl/renderable.hh"
+#include "../tetrimino/minotexturestore.hh"
 #include "board.hh"
-#include "color.hh"
-#include "minotexturestore.hh"
-#include "renderable.hh"
 
 #include <memory>
 

@@ -1,7 +1,7 @@
 #include "mediumgamefactory.hh"
-#include "board.hh"
-#include "fastadvancingscorer.hh"
-#include "randomtetriminostock.hh"
+#include "../board/board.hh"
+#include "../scorer/fastadvancingscorer.hh"
+#include "../tetrimino/randomtetriminostock.hh"
 
 MediumGameFactory::MediumGameFactory(const Window& window,
                                      FontFactory& fontFactory)

@@ -1,7 +1,7 @@
 #include "easygamefactory.hh"
-#include "board.hh"
-#include "randomtetriminostock.hh"
-#include "slowadvancingscorer.hh"
+#include "../board/board.hh"
+#include "../scorer/slowadvancingscorer.hh"
+#include "../tetrimino/randomtetriminostock.hh"
 
 EasyGameFactory::EasyGameFactory(const Window& window, FontFactory& fontFactory)
     : window{window}, fontFactory{fontFactory} {}
