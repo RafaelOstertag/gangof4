@@ -16,7 +16,8 @@ constexpr int baseRetardingValue = 78;
 bool showDifficultySelector(Window& window, FontFactory& fontFactory,
                             GameDifficulty* selectedGameDifficulty) {
     window.clear();
-    DifficultySelector difficultySelector{window, fontFactory};
+    DifficultySelector difficultySelector{window, fontFactory,
+                                          *selectedGameDifficulty};
 
     SDL_Event event;
     while (true) {
@@ -113,22 +114,25 @@ void run() {
     // Pressing 'q' in the intro must quit
     bool run = showIntro(window, fontFactory);
     GameDifficulty gameDifficulty{EASY};
-    run &= showDifficultySelector(window, fontFactory, &gameDifficulty);
+    if (!run)
+        return;
+
+    run = showDifficultySelector(window, fontFactory, &gameDifficulty);
+    if (!run)
+        return;
 
     std::shared_ptr<GameFactory> gameFactory =
         gameFactoryForDifficulty(gameDifficulty, window, fontFactory);
     GamePtr game = gameFactory->create();
 
-    while (run) {
+    while (true) {
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
-                run = false;
+                return;
             } else if (event.type == SDL_KEYDOWN) {
                 switch (event.key.keysym.sym) {
                 case SDLK_q:
-                    run = false;
-                    break;
-
+                    return;
                 case SDLK_p:
                     pause = !pause;
                     break;
@@ -136,6 +140,12 @@ void run() {
                     counter = 0;
                     retardingValue = baseRetardingValue;
                     pause = false;
+                    run = showDifficultySelector(window, fontFactory,
+                                                 &gameDifficulty);
+                    if (!run)
+                        return;
+                    gameFactory = gameFactoryForDifficulty(gameDifficulty,
+                                                           window, fontFactory);
                     game = gameFactory->create();
                     break;
 

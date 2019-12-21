@@ -13,8 +13,13 @@ constexpr int SELECTOR_Y_START = 105;
 
 DifficultySelector::DifficultySelector(const Window& window,
                                        FontFactory& fontFactory)
-    : difficulty{EASY}, minoTextureStore{createMinoTextureStore(
-                            window.getRenderer())},
+    : DifficultySelector{window, fontFactory, EASY} {}
+
+DifficultySelector::DifficultySelector(const Window& window,
+                                       FontFactory& fontFactory,
+                                       GameDifficulty initialDifficulty)
+    : difficulty{initialDifficulty}, minoTextureStore{createMinoTextureStore(
+                                         window.getRenderer())},
       selected{createTTetrimino()}, easyText{fontFactory.createFont(BIG),
                                              TEXT_X, TEXT_Y_START, WHITE,
                                              "EASY"},
