@@ -1,20 +1,78 @@
 #include "consts.hh"
-#include "game.hh"
+#include "difficultyselector.hh"
+#include "game/easygamefactory.hh"
+#include "game/hardgamefactory.hh"
+#include "game/mediumgamefactory.hh"
 #include "gof_version.h"
-#include "help.hh"
+#include "intro.hh"
 #include "pausetext.hh"
-#include "sdl.hh"
-#include "window.hh"
+#include "sdl/sdl.hh"
+#include "sdl/window.hh"
 
 #include <iostream>
 
 constexpr int baseRetardingValue = 78;
 
+bool showDifficultySelector(Window& window, FontFactory& fontFactory,
+                            GameDifficulty* selectedGameDifficulty) {
+    window.clear();
+    DifficultySelector difficultySelector{window, fontFactory,
+                                          *selectedGameDifficulty};
+
+    SDL_Event event;
+    while (true) {
+        while (SDL_PollEvent(&event) != 0) {
+            if (event.type == SDL_QUIT) {
+                return false;
+            } else if (event.type == SDL_KEYDOWN) {
+                switch (event.key.keysym.sym) {
+                case SDLK_q:
+                    return false;
+                case SDLK_RETURN:
+                case SDLK_RETURN2:
+                case SDLK_KP_ENTER:
+                    *selectedGameDifficulty =
+                        difficultySelector.getDifficulty();
+                    return true;
+                case SDLK_UP:
+                    difficultySelector.selectPreviousDifficulty();
+                    break;
+                case SDLK_DOWN:
+                    difficultySelector.selectNextDifficulty();
+                    break;
+                }
+            }
+        }
+
+        window.clear();
+        window.render(difficultySelector);
+        window.update();
+
+        SDL_Delay(50);
+    }
+}
+
+std::shared_ptr<GameFactory>
+gameFactoryForDifficulty(GameDifficulty gameDifficulty, const Window& window,
+                         FontFactory& fontFactory) {
+    switch (gameDifficulty) {
+    case EASY:
+        return std::shared_ptr<GameFactory>{
+            new EasyGameFactory{window, fontFactory}};
+    case MEDIUM:
+        return std::shared_ptr<GameFactory>{
+            new MediumGameFactory{window, fontFactory}};
+    case HARD:
+        return std::shared_ptr<GameFactory>{
+            new HardGameFactory{window, fontFactory}};
+    }
+}
+
 bool showIntro(Window& window, FontFactory& fontFactory) {
 
     window.clear();
-    Help help{fontFactory};
-    window.render(help);
+    Intro intro{fontFactory};
+    window.render(intro);
     window.update();
 
     SDL_Event event;
@@ -46,7 +104,6 @@ void showPauseText(Window& window, PauseText& pauseText) {
 void run() {
     Window window{PROJECT_NAME, WINDOW_WIDTH_PX, WINDOW_HEIGHT_PX, DARK_GRAY};
     FontFactory fontFactory;
-    GamePtr game{new Game{window, fontFactory}};
 
     int counter = 0;
     int retardingValue = baseRetardingValue;
@@ -56,16 +113,26 @@ void run() {
 
     // Pressing 'q' in the intro must quit
     bool run = showIntro(window, fontFactory);
-    while (run) {
+    GameDifficulty gameDifficulty{EASY};
+    if (!run)
+        return;
+
+    run = showDifficultySelector(window, fontFactory, &gameDifficulty);
+    if (!run)
+        return;
+
+    std::shared_ptr<GameFactory> gameFactory =
+        gameFactoryForDifficulty(gameDifficulty, window, fontFactory);
+    GamePtr game = gameFactory->create();
+
+    while (true) {
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
-                run = false;
+                return;
             } else if (event.type == SDL_KEYDOWN) {
                 switch (event.key.keysym.sym) {
                 case SDLK_q:
-                    run = false;
-                    break;
-
+                    return;
                 case SDLK_p:
                     pause = !pause;
                     break;
@@ -73,7 +140,13 @@ void run() {
                     counter = 0;
                     retardingValue = baseRetardingValue;
                     pause = false;
-                    game = GamePtr{new Game{window, fontFactory}};
+                    run = showDifficultySelector(window, fontFactory,
+                                                 &gameDifficulty);
+                    if (!run)
+                        return;
+                    gameFactory = gameFactoryForDifficulty(gameDifficulty,
+                                                           window, fontFactory);
+                    game = gameFactory->create();
                     break;
 
                 case SDLK_UP:

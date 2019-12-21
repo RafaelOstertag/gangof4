@@ -1,4 +1,4 @@
-#include "tetrimino.hh"
+#include "tetrimino/tetrimino.hh"
 
 #include <cppunit/CompilerOutputter.h>
 #include <cppunit/TestCaller.h>

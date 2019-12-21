@@ -1,6 +1,6 @@
-#include "minorenderer.hh"
-#include "sdl.hh"
-#include "window.hh"
+#include "tetrimino/minorenderer.hh"
+#include "sdl/sdl.hh"
+#include "sdl/window.hh"
 
 int main() {
     SDL::initialize();

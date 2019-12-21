@@ -1,6 +1,6 @@
-#include "tetriminorenderer.hh"
-#include "sdl.hh"
-#include "window.hh"
+#include "tetrimino/tetriminorenderer.hh"
+#include "sdl/sdl.hh"
+#include "sdl/window.hh"
 
 #include <algorithm>
 

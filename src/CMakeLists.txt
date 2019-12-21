@@ -12,35 +12,40 @@ set(sources
             ${CMAKE_CURRENT_BINARY_DIR}/rowfull.cxx
             ${CMAKE_CURRENT_BINARY_DIR}/rowfull.cxx
             ${CMAKE_CURRENT_BINARY_DIR}/yellowmino.cxx
-            board.cxx
-            boardrenderer.cxx
-            circulartetriminostock.cxx
-            font.cxx
-            fontfactory.cxx
-            game.cxx
+            board/board.cxx
+            board/boardrenderer.cxx
+            difficultyselector.cxx
+            game/easygamefactory.cxx
+            game/game.cxx
+            game/hardgamefactory.cxx
+            game/labelvalue.cxx
+            game/mediumgamefactory.cxx
+            game/preview.cxx
             gangof4.cxx
-            help.cxx
-            labelvalue.cxx
-            memoryrwops.cxx
-            minorenderer.cxx 
-            minotexturestore.cxx
-            normaltetriminostock.cxx
+            intro.cxx
             pausetext.cxx
-            preview.cxx
-            randomtetriminostock.cxx
-            renderer.cxx 
-            scorer.cxx
-            sdl.cxx 
-            soundfile.cxx
-            soundmemory.cxx
-            tetrimino.cxx 
-            tetriminorenderer.cxx 
-            text.cxx
-            texturefile.cxx
-            texturememory.cxx
+            scorer/fastadvancingscorer.cxx
+            scorer/slowadvancingscorer.cxx
+            sdl/font.cxx
+            sdl/fontfactory.cxx
+            sdl/memoryrwops.cxx
+            sdl/renderer.cxx 
+            sdl/sdl.cxx 
+            sdl/soundfile.cxx
+            sdl/soundmemory.cxx
+            sdl/soundplayer.cxx
+            sdl/text.cxx
+            sdl/texturefile.cxx
+            sdl/texturememory.cxx
+            sdl/window.cxx
+            tetrimino/circulartetriminostock.cxx
+            tetrimino/minorenderer.cxx 
+            tetrimino/minotexturestore.cxx
+            tetrimino/normaltetriminostock.cxx
+            tetrimino/randomtetriminostock.cxx
+            tetrimino/tetrimino.cxx 
+            tetrimino/tetriminorenderer.cxx 
             veramonobold.cxx
-            window.cxx
-            soundplayer.cxx
 )
 
 bmpToCxx(bluemino blueMinoBMP)
