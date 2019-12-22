@@ -7,7 +7,7 @@
 
 class Tetrimino {
   public:
-    Tetrimino(int x, int y, const std::vector<Mino>& minos);
+    Tetrimino(const std::vector<Mino>& minos);
     ~Tetrimino();
 
     Tetrimino(const Tetrimino&) = delete;
