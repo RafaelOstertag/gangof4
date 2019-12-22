@@ -1,4 +1,4 @@
-#include "normaltetriminostock.hh"
+#include "hardtetriminostock.hh"
 
 #include <cassert>
 #include <ctime>
@@ -18,7 +18,7 @@ enum FactoryNumber {
 };
 }
 
-NormalTetriminoStock::NormalTetriminoStock()
+HardTetriminoStock::HardTetriminoStock()
     : factories{}, prefetch{nullptr}, random{std::bind(
                                           std::normal_distribution<double>{3.5,
                                                                            1},
@@ -35,15 +35,15 @@ NormalTetriminoStock::NormalTetriminoStock()
     prefetch = randomTetrimino();
 }
 
-std::shared_ptr<Tetrimino> NormalTetriminoStock::draw() {
+std::shared_ptr<Tetrimino> HardTetriminoStock::draw() {
     auto tetrimino = prefetch;
     prefetch = randomTetrimino();
     return tetrimino;
 }
 
-std::shared_ptr<Tetrimino> NormalTetriminoStock::preview() { return prefetch; }
+std::shared_ptr<Tetrimino> HardTetriminoStock::preview() { return prefetch; }
 
-std::shared_ptr<Tetrimino> NormalTetriminoStock::randomTetrimino() {
+std::shared_ptr<Tetrimino> HardTetriminoStock::randomTetrimino() {
     int factoryNumber;
 
     do {

@@ -11,6 +11,7 @@ set(sources
             ${CMAKE_CURRENT_BINARY_DIR}/rotate.cxx
             ${CMAKE_CURRENT_BINARY_DIR}/rowfull.cxx
             ${CMAKE_CURRENT_BINARY_DIR}/rowfull.cxx
+            ${CMAKE_CURRENT_BINARY_DIR}/veramonobold.cxx
             ${CMAKE_CURRENT_BINARY_DIR}/yellowmino.cxx
             board/board.cxx
             board/boardrenderer.cxx
@@ -39,13 +40,12 @@ set(sources
             sdl/texturememory.cxx
             sdl/window.cxx
             tetrimino/circulartetriminostock.cxx
+            tetrimino/hardtetriminostock.cxx
             tetrimino/minorenderer.cxx 
             tetrimino/minotexturestore.cxx
-            tetrimino/normaltetriminostock.cxx
             tetrimino/randomtetriminostock.cxx
             tetrimino/tetrimino.cxx 
             tetrimino/tetriminorenderer.cxx 
-            veramonobold.cxx
 )
 
 bmpToCxx(bluemino blueMinoBMP)

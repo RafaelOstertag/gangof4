@@ -1,5 +1,5 @@
-#ifndef __NORMALTETRIMINOSTOCK_HH
-#define __NORMALTETRIMINOSTOCK_HH
+#ifndef __HARDTETRIMINOSTOCK_HH
+#define __HARDTETRIMINOSTOCK_HH
 
 #include "tetriminostock.hh"
 
@@ -13,10 +13,10 @@
 /**
  * Produce Tetriminos randomly with normal distribution.
  */
-class NormalTetriminoStock : public TetriminoStock {
+class HardTetriminoStock : public TetriminoStock {
   public:
-    NormalTetriminoStock();
-    virtual ~NormalTetriminoStock() {}
+    HardTetriminoStock();
+    virtual ~HardTetriminoStock() {}
 
     virtual std::shared_ptr<Tetrimino> draw();
     virtual std::shared_ptr<Tetrimino> preview();
