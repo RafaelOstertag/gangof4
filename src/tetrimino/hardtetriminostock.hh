@@ -18,17 +18,16 @@ class HardTetriminoStock : public TetriminoStock {
     HardTetriminoStock();
     virtual ~HardTetriminoStock() {}
 
-    virtual std::shared_ptr<Tetrimino> draw();
-    virtual std::shared_ptr<Tetrimino> preview();
+    virtual TetriminoPtr draw();
+    virtual TetriminoPtr preview();
 
   private:
     static constexpr int I_TETRIMINO_AT_LEAST_EVERY = 10;
     static constexpr int NUMBER_OF_TETRIMINOS = 7;
-    std::array<std::shared_ptr<Tetrimino> (*)(), NUMBER_OF_TETRIMINOS>
-        factories;
-    std::shared_ptr<Tetrimino> prefetch;
+    std::array<TetriminoPtr (*)(), NUMBER_OF_TETRIMINOS> factories;
+    TetriminoPtr prefetch;
     std::function<int()> random;
-    std::shared_ptr<Tetrimino> randomTetrimino();
+    TetriminoPtr randomTetrimino();
     int lastFactoryNumber;
     int drawsSinceITetrimino;
 };

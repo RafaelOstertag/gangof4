@@ -9,13 +9,12 @@ class CircularTetriminoStock : public TetriminoStock {
     CircularTetriminoStock();
     virtual ~CircularTetriminoStock() {}
 
-    virtual std::shared_ptr<Tetrimino> draw();
-    virtual std::shared_ptr<Tetrimino> preview();
+    virtual TetriminoPtr draw();
+    virtual TetriminoPtr preview();
 
   private:
     static constexpr int NUMBER_OF_TETRIMINOS = 7;
-    std::array<std::shared_ptr<Tetrimino> (*)(), NUMBER_OF_TETRIMINOS>
-        factories;
+    std::array<TetriminoPtr (*)(), NUMBER_OF_TETRIMINOS> factories;
     int selectedFactory;
 };
 

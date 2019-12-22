@@ -13,7 +13,7 @@ int main() {
 
     Window window{"Tetriminorenderer", 640, 480, DARK_GRAY};
 
-    std::vector<std::shared_ptr<Tetrimino>> tetriminos;
+    std::vector<TetriminoPtr> tetriminos;
     auto iTetrimino{createITetrimino()};
     tetriminos.push_back(iTetrimino);
 

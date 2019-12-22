@@ -25,7 +25,7 @@ class DifficultySelector : public Renderable {
   private:
     GameDifficulty difficulty;
     MinoTextureStore minoTextureStore;
-    std::shared_ptr<Tetrimino> selected;
+    TetriminoPtr selected;
     Text easyText;
     Text mediumText;
     Text hardText;

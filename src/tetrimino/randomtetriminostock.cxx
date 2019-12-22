@@ -19,15 +19,15 @@ RandomTetriminoStock::RandomTetriminoStock()
     prefetch = randomTetrimino();
 }
 
-std::shared_ptr<Tetrimino> RandomTetriminoStock::draw() {
+TetriminoPtr RandomTetriminoStock::draw() {
     auto tetrimino = prefetch;
     prefetch = randomTetrimino();
     return tetrimino;
 }
 
-std::shared_ptr<Tetrimino> RandomTetriminoStock::preview() { return prefetch; }
+TetriminoPtr RandomTetriminoStock::preview() { return prefetch; }
 
-std::shared_ptr<Tetrimino> RandomTetriminoStock::randomTetrimino() {
+TetriminoPtr RandomTetriminoStock::randomTetrimino() {
     auto factoryIndex = random();
 
     while (previousTetriminoFactoryIndex == factoryIndex) {

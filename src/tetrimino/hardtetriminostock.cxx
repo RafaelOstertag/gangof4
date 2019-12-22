@@ -35,15 +35,15 @@ HardTetriminoStock::HardTetriminoStock()
     prefetch = randomTetrimino();
 }
 
-std::shared_ptr<Tetrimino> HardTetriminoStock::draw() {
+TetriminoPtr HardTetriminoStock::draw() {
     auto tetrimino = prefetch;
     prefetch = randomTetrimino();
     return tetrimino;
 }
 
-std::shared_ptr<Tetrimino> HardTetriminoStock::preview() { return prefetch; }
+TetriminoPtr HardTetriminoStock::preview() { return prefetch; }
 
-std::shared_ptr<Tetrimino> HardTetriminoStock::randomTetrimino() {
+TetriminoPtr HardTetriminoStock::randomTetrimino() {
     int factoryNumber;
 
     do {

@@ -141,7 +141,7 @@ void Board::handleCollision() {
     for (auto mino : currentTetrimino->getMinos()) {
         minos.push_front(std::shared_ptr<Mino>{new Mino{mino}});
     }
-    currentTetrimino = std::shared_ptr<Tetrimino>{nullptr};
+    currentTetrimino = TetriminoPtr{nullptr};
     drawTetrimino();
     if (willCurrentTetriminoCollideBottom()) {
         gameOver = true;
