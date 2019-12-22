@@ -3,39 +3,37 @@
 #include <cassert>
 #include <ctime>
 #ifndef NDEBUG
-#include <iomanip>
 #include <iostream>
 #endif
 
-NormalTetriminoStock::NormalTetriminoStock()
-    : factories{}, prefetch{nullptr}, random {
-    std::bind(std::normal_distribution<double>{3.5, 1},
-              std::default_random_engine(std::time(nullptr)))
+namespace {
+enum FactoryNumber {
+    I_TETRIMINO = 0,
+    J_TETRIMINO,
+    L_TETRIMINO,
+    S_TETRIMINO,
+    Z_TETRIMINO,
+    T_TETRIMINO,
+    O_TETRIMION
+};
 }
-#ifndef NDEBUG
-, distribution {}
-#endif
-{
-    factories[0] = createITetrimino;
-    factories[1] = createJTetrimino;
-    factories[2] = createLTetrimino;
-    factories[3] = createSTetrimino;
-    factories[4] = createZTetrimino;
-    factories[5] = createTTetrimino;
-    factories[6] = createOTetrimino;
+
+NormalTetriminoStock::NormalTetriminoStock()
+    : factories{}, prefetch{nullptr}, random{std::bind(
+                                          std::normal_distribution<double>{3.5,
+                                                                           1},
+                                          std::mt19937(std::time(nullptr)))},
+      lastFactoryNumber{-1}, drawsSinceITetrimino{0} {
+    factories[I_TETRIMINO] = createITetrimino;
+    factories[J_TETRIMINO] = createJTetrimino;
+    factories[L_TETRIMINO] = createLTetrimino;
+    factories[S_TETRIMINO] = createSTetrimino;
+    factories[Z_TETRIMINO] = createZTetrimino;
+    factories[T_TETRIMINO] = createTTetrimino;
+    factories[O_TETRIMION] = createOTetrimino;
 
     prefetch = randomTetrimino();
 }
-
-#ifndef NDEBUG
-NormalTetriminoStock::~NormalTetriminoStock() {
-    std::cout << "\nTetrimino Distribution:\n";
-    for (auto item : distribution) {
-        std::cout << item.first << ": " << item.second << "\n";
-    }
-    std::cout << "\n";
-}
-#endif
 
 std::shared_ptr<Tetrimino> NormalTetriminoStock::draw() {
     auto tetrimino = prefetch;
@@ -46,22 +44,31 @@ std::shared_ptr<Tetrimino> NormalTetriminoStock::draw() {
 std::shared_ptr<Tetrimino> NormalTetriminoStock::preview() { return prefetch; }
 
 std::shared_ptr<Tetrimino> NormalTetriminoStock::randomTetrimino() {
-    auto factoryNumber = random();
-    if (factoryNumber < 0) {
-        factoryNumber *= -1;
-    }
-    if (factoryNumber >= NUMBER_OF_TETRIMINOS) {
-        factoryNumber %= NUMBER_OF_TETRIMINOS;
+    int factoryNumber;
+
+    do {
+        factoryNumber = random();
+    } while (factoryNumber == lastFactoryNumber || factoryNumber < 0 ||
+             factoryNumber >= NUMBER_OF_TETRIMINOS);
+    assert(factoryNumber >= 0 && factoryNumber < NUMBER_OF_TETRIMINOS);
+
+    if (factoryNumber == I_TETRIMINO) {
+        drawsSinceITetrimino = 0;
+    } else {
+        drawsSinceITetrimino++;
     }
 
-    assert(factoryNumber >= 0 && factoryNumber < NUMBER_OF_TETRIMINOS);
+    if (drawsSinceITetrimino > I_TETRIMINO_AT_LEAST_EVERY) {
+#ifndef NDEBUG
+        std::cout << "Curtesy I Tetrimino draw\n";
+#endif
+        factoryNumber = I_TETRIMINO;
+        drawsSinceITetrimino = 0;
+    }
+
+    lastFactoryNumber = factoryNumber;
 #ifndef NDEBUG
     std::cout << "Drew Tetrimino #" << factoryNumber << "\n";
 #endif
-
-#ifndef NDEBUG
-    distribution[factoryNumber]++;
-#endif
-
     return factories[factoryNumber]();
 }
