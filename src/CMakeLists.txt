@@ -16,6 +16,7 @@ set(sources
             board/board.cxx
             board/boardrenderer.cxx
             difficultyselector.cxx
+            difficultytext.cxx
             game/easygamefactory.cxx
             game/game.cxx
             game/hardgamefactory.cxx

@@ -1,5 +1,6 @@
 #include "consts.hh"
 #include "difficultyselector.hh"
+#include "difficultytext.hh"
 #include "game/easygamefactory.hh"
 #include "game/hardgamefactory.hh"
 #include "game/mediumgamefactory.hh"
@@ -124,6 +125,8 @@ void run() {
     std::shared_ptr<GameFactory> gameFactory =
         gameFactoryForDifficulty(gameDifficulty, window, fontFactory);
     GamePtr game = gameFactory->create();
+    DifficultyTextPtr difficultyText{
+        new DifficultyText{gameDifficulty, fontFactory}};
 
     while (true) {
         while (SDL_PollEvent(&event) != 0) {
@@ -147,6 +150,8 @@ void run() {
                     gameFactory = gameFactoryForDifficulty(gameDifficulty,
                                                            window, fontFactory);
                     game = gameFactory->create();
+                    difficultyText = DifficultyTextPtr{
+                        new DifficultyText{gameDifficulty, fontFactory}};
                     break;
 
                 case SDLK_UP:
@@ -187,6 +192,7 @@ void run() {
 
         window.clear();
         window.render(*game);
+        window.render(*difficultyText);
         window.update();
 
         SDL_Delay(10);
