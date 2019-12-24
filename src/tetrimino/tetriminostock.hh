@@ -7,8 +7,8 @@
 class TetriminoStock {
   public:
     virtual ~TetriminoStock(){};
-    virtual std::shared_ptr<Tetrimino> draw() = 0;
-    virtual std::shared_ptr<Tetrimino> preview() = 0;
+    virtual TetriminoPtr draw() = 0;
+    virtual TetriminoPtr preview() = 0;
 };
 
 using TetriminoStockPtr = std::shared_ptr<TetriminoStock>;

@@ -7,7 +7,7 @@
 
 class Tetrimino {
   public:
-    Tetrimino(int x, int y, const std::vector<Mino>& minos);
+    Tetrimino(const std::vector<Mino>& minos);
     ~Tetrimino();
 
     Tetrimino(const Tetrimino&) = delete;
@@ -33,12 +33,14 @@ class Tetrimino {
     int y;
 };
 
-std::shared_ptr<Tetrimino> createITetrimino();
-std::shared_ptr<Tetrimino> createJTetrimino();
-std::shared_ptr<Tetrimino> createLTetrimino();
-std::shared_ptr<Tetrimino> createOTetrimino();
-std::shared_ptr<Tetrimino> createTTetrimino();
-std::shared_ptr<Tetrimino> createSTetrimino();
-std::shared_ptr<Tetrimino> createZTetrimino();
+using TetriminoPtr = std::shared_ptr<Tetrimino>;
+
+TetriminoPtr createITetrimino();
+TetriminoPtr createJTetrimino();
+TetriminoPtr createLTetrimino();
+TetriminoPtr createOTetrimino();
+TetriminoPtr createTTetrimino();
+TetriminoPtr createSTetrimino();
+TetriminoPtr createZTetrimino();
 
 #endif

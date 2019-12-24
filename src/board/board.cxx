@@ -81,10 +81,27 @@ void Board::registerBoardCallback(BoardCallbackPtr callback) {
 bool Board::drawTetrimino() {
     if (!currentTetrimino) {
         currentTetrimino = tetriminoStock->draw();
+        centerCurrentTetrimino();
         return true;
     }
 
     return false;
+}
+
+void Board::centerCurrentTetrimino() {
+    auto halfTetriminoSize = currentTetrimino->maxX();
+    auto movesToCenter = HALF_WIDTH_IN_MINOS - halfTetriminoSize;
+    static_assert(WIDTH_IN_MINOS == 10, "Assume 10 minos per row");
+    switch (movesToCenter) {
+    case 4:
+        currentTetrimino->moveRight();
+    case 3:
+        currentTetrimino->moveRight();
+    case 2:
+        currentTetrimino->moveRight();
+    case 1:
+        currentTetrimino->moveRight();
+    }
 }
 
 bool Board::willCurrentTetriminoCollideBottom() const {
@@ -141,7 +158,7 @@ void Board::handleCollision() {
     for (auto mino : currentTetrimino->getMinos()) {
         minos.push_front(std::shared_ptr<Mino>{new Mino{mino}});
     }
-    currentTetrimino = std::shared_ptr<Tetrimino>{nullptr};
+    currentTetrimino = TetriminoPtr{nullptr};
     drawTetrimino();
     if (willCurrentTetriminoCollideBottom()) {
         gameOver = true;

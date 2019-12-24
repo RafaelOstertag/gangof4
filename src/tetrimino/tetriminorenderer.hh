@@ -11,7 +11,7 @@ class TetriminoRenderer : public Renderable {
 
     TetriminoRenderer(int referenceX, int referenceY,
                       const MinoTextureStore& minoTextureStore,
-                      std::shared_ptr<Tetrimino> tetrimino)
+                      TetriminoPtr tetrimino)
         : referenceX{referenceX}, referenceY{referenceY},
           minoTextureStore{minoTextureStore}, tetrimino{tetrimino} {}
     virtual ~TetriminoRenderer() {}
@@ -22,7 +22,7 @@ class TetriminoRenderer : public Renderable {
     int referenceX;
     int referenceY;
     MinoTextureStore minoTextureStore;
-    std::shared_ptr<Tetrimino> tetrimino;
+    TetriminoPtr tetrimino;
 };
 
 #endif

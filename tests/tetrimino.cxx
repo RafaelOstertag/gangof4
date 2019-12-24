@@ -32,7 +32,6 @@ class TetriminoTest : public CppUnit::TestFixture {
 
     void rotate_clockwise() {
         Tetrimino tetrimino{
-            0, 0,
             std::vector<Mino>{Mino{0, 0, CYAN}, Mino{1, 0, CYAN},
                               Mino{1, 1, CYAN}, Mino{2, 1, CYAN}}};
         tetrimino.rotateClockwise();
@@ -54,7 +53,6 @@ class TetriminoTest : public CppUnit::TestFixture {
 
     void rotate_counterclockwise() {
         Tetrimino tetrimino{
-            0, 0,
             std::vector<Mino>{Mino{0, 0, CYAN}, Mino{1, 0, CYAN},
                               Mino{1, 1, CYAN}, Mino{2, 1, CYAN}}};
         tetrimino.rotateCounterclockwise();
@@ -76,7 +74,6 @@ class TetriminoTest : public CppUnit::TestFixture {
 
     void move_left() {
         Tetrimino tetrimino{
-            0, 0,
             std::vector<Mino>{Mino{0, 0, CYAN}, Mino{1, 0, CYAN},
                               Mino{1, 1, CYAN}, Mino{2, 1, CYAN}}};
 
@@ -96,7 +93,6 @@ class TetriminoTest : public CppUnit::TestFixture {
 
     void move_right() {
         Tetrimino tetrimino{
-            0, 0,
             std::vector<Mino>{Mino{0, 0, CYAN}, Mino{1, 0, CYAN},
                               Mino{1, 1, CYAN}, Mino{2, 1, CYAN}}};
 
@@ -116,7 +112,6 @@ class TetriminoTest : public CppUnit::TestFixture {
 
     void move_down() {
         Tetrimino tetrimino{
-            0, 0,
             std::vector<Mino>{Mino{0, 0, CYAN}, Mino{1, 0, CYAN},
                               Mino{1, 1, CYAN}, Mino{2, 1, CYAN}}};
 
