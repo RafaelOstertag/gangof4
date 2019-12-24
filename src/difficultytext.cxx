@@ -1,5 +1,6 @@
 #include "difficultytext.hh"
 #include <cassert>
+#include <stdexcept>
 #include <string>
 
 namespace {
@@ -12,6 +13,9 @@ std::string difficultyToString(GameDifficulty gameDifficulty) {
     case EASY:
         return "EASY";
     }
+#ifndef __clang__
+    throw std::runtime_error("Unhandled switch value");
+#endif
 }
 } // namespace
 

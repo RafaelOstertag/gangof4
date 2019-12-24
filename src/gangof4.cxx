@@ -67,6 +67,9 @@ gameFactoryForDifficulty(GameDifficulty gameDifficulty, const Window& window,
         return std::shared_ptr<GameFactory>{
             new HardGameFactory{window, fontFactory}};
     }
+#ifndef __clang__
+    throw std::runtime_error("Unhandled switch value");
+#endif
 }
 
 bool showIntro(Window& window, FontFactory& fontFactory) {
