@@ -18,6 +18,7 @@ class Board {
   public:
     static constexpr int HEIGHT_IN_MINOS = 24;
     static constexpr int WIDTH_IN_MINOS = 10;
+    static constexpr int HALF_WIDTH_IN_MINOS = WIDTH_IN_MINOS / 2;
 
     Board(std::shared_ptr<TetriminoStock> tetriminoStock, const Color& color,
           ScorerPtr scorer);
@@ -42,6 +43,7 @@ class Board {
     bool gameOver;
 
     bool drawTetrimino();
+    void centerCurrentTetrimino();
     bool willCurrentTetriminoCollideBottom() const;
     bool willTetriminosCollideBottom(TetriminoPtr tetrimino) const;
     bool willTetriminosCollideLeft() const;
