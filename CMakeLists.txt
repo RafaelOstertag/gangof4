@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
 
-# set the project name
 project(GangOf4 VERSION 1.2.2)
 
 set(CMAKE_CXX_STANDARD 14)
