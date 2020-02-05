@@ -11,7 +11,7 @@ class MinoRenderer : public Renderable {
                  const MinoTextureStore& minoTextureStore)
         : referenceX{referenceX}, referenceY{referenceY}, width{width},
           mino{mino}, minoTextureStore{minoTextureStore} {}
-    virtual ~MinoRenderer() {}
+    virtual ~MinoRenderer() = default;
 
     virtual void render(const Renderer& renderer);
 

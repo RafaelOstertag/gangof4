@@ -6,7 +6,7 @@
 class MediumGameFactory : public GameFactory {
   public:
     MediumGameFactory(const Window& window, FontFactory& fontFactory);
-    virtual ~MediumGameFactory() {}
+    virtual ~MediumGameFactory() = default;
     virtual GamePtr create();
 
   private:

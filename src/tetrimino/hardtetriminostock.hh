@@ -16,7 +16,7 @@
 class HardTetriminoStock : public TetriminoStock {
   public:
     HardTetriminoStock();
-    virtual ~HardTetriminoStock() {}
+    virtual ~HardTetriminoStock() = default;
 
     virtual TetriminoPtr draw();
     virtual TetriminoPtr preview();

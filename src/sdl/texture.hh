@@ -5,7 +5,7 @@
 
 class Texture {
   public:
-    virtual ~Texture() {}
+    virtual ~Texture() = default;
 
     virtual SDL_Texture* getTexture() = 0;
 };

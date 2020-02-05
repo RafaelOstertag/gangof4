@@ -7,7 +7,7 @@
 class CircularTetriminoStock : public TetriminoStock {
   public:
     CircularTetriminoStock();
-    virtual ~CircularTetriminoStock() {}
+    virtual ~CircularTetriminoStock() = default;
 
     virtual TetriminoPtr draw();
     virtual TetriminoPtr preview();

@@ -8,7 +8,7 @@
 class PauseText : public Renderable {
   public:
     PauseText(FontFactory& fontFactory);
-    virtual ~PauseText() {}
+    virtual ~PauseText() = default;
 
     constexpr void reset() { rendered = false; }
 

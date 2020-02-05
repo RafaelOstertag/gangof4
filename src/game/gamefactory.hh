@@ -5,7 +5,7 @@
 
 class GameFactory {
   public:
-    virtual ~GameFactory() {}
+    virtual ~GameFactory() = default;
     virtual GamePtr create() = 0;
 };
 

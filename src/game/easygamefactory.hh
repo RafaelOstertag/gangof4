@@ -6,7 +6,7 @@
 class EasyGameFactory : public GameFactory {
   public:
     EasyGameFactory(const Window& window, FontFactory& fontFactory);
-    virtual ~EasyGameFactory() {}
+    virtual ~EasyGameFactory() = default;
     virtual GamePtr create();
 
   private:

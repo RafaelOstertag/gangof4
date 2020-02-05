@@ -9,7 +9,7 @@ class Board;
 
 class BoardCallback {
   public:
-    virtual ~BoardCallback() {}
+    virtual ~BoardCallback() = default;
     virtual void call(BoardEvent event, const Board& board) = 0;
 };
 

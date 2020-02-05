@@ -12,7 +12,7 @@ class BoardRenderer : public Renderable {
   public:
     BoardRenderer(int referenceX, int referenceY, std::shared_ptr<Board> board,
                   const MinoTextureStore& minoTextureStore);
-    virtual ~BoardRenderer() {}
+    virtual ~BoardRenderer() = default;
 
     virtual void render(const Renderer& renderer);
 

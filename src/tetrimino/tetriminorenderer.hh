@@ -14,7 +14,7 @@ class TetriminoRenderer : public Renderable {
                       TetriminoPtr tetrimino)
         : referenceX{referenceX}, referenceY{referenceY},
           minoTextureStore{minoTextureStore}, tetrimino{tetrimino} {}
-    virtual ~TetriminoRenderer() {}
+    virtual ~TetriminoRenderer() = default;
 
     virtual void render(const Renderer& renderer);
 

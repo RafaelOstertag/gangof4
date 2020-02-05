@@ -13,7 +13,7 @@ class DifficultySelector : public Renderable {
   public:
     DifficultySelector(const Window& window, FontFactory& fontFactory);
     DifficultySelector(const Window& window, FontFactory& fontFactory, GameDifficulty initialDifficulty);
-    virtual ~DifficultySelector() {}
+    virtual ~DifficultySelector() = default;
 
     virtual void render(const Renderer& renderer);
 

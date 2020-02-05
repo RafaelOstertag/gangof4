@@ -10,7 +10,7 @@
 class DifficultyText : public Renderable {
   public:
     DifficultyText(GameDifficulty gameDifficulty, FontFactory& fontFactory);
-    virtual ~DifficultyText() {}
+    virtual ~DifficultyText() = default;
 
     virtual void render(const Renderer& renderer);
 
