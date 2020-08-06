@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include <stdexcept>
+#include <string>
 
 Font::Font(void* ptr, int memsize, int size)
     : memoryFont{ptr, memsize}, ttfFont{nullptr} {
