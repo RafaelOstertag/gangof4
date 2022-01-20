@@ -1,8 +1,18 @@
 pipeline {
     agent {
-        node {
-            label "freebsd&&amd64"
-        }
+      label "freebsd&&amd64"
+    }
+
+    triggers {
+        pollSCM '@hourly'
+        cron '@daily'
+    }
+
+    options {
+        ansiColor('xterm')
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '15')
+        timestamps()
+        disableConcurrentBuilds()
     }
 
     stages {

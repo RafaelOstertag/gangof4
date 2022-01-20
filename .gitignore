@@ -1,3 +1,7 @@
 build/
 Testing/
 *~
+cmake-build-debug
+.idea
+CMakeCache.txt
+CMakeFiles
