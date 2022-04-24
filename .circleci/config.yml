@@ -1,0 +1,27 @@
+version: 2.1
+
+executors:
+  machine-executor:
+    machine:
+      image: ubuntu-2004:current
+    resource_class: medium
+
+jobs:
+  build:
+    executor: machine-executor
+    steps:
+      - checkout
+      - run:
+          name: Setup
+          command: |
+            sudo apt update
+            sudo apt install cmake libsdl2-dev libsdl2-ttf-dev libsdl2-mixer-dev libcppunit-dev && mkdir -p build
+      - run:
+          name: Configure
+          command: cd build && cmake .. -DCMAKE_BUILD_TYPE=Release
+      - run:
+          name: Build
+          command: cd build && cmake --build . --verbose
+      - run:
+          name: Test
+          command: cd build/tests && ctest
